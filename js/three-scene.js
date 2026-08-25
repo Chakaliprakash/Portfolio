@@ -214,10 +214,10 @@
   const spreadZ = 90;
 
   const colorPalette = [
-    new THREE.Color(0x6366f1),
-    new THREE.Color(0x00f2fe),
-    new THREE.Color(0xa855f7),
-    new THREE.Color(0x10b981)
+    new THREE.Color(0x6366f1), // Indigo
+    new THREE.Color(0x00f2fe), // Cyan
+    new THREE.Color(0xa855f7), // Violet
+    new THREE.Color(0x10b981)  // Emerald
   ];
 
   for (let i = 0; i < particleCount; i++) {
