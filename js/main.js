@@ -556,29 +556,84 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
       }
     }
   });
-
-  function escapeHtml(text) {
-    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-    return text.replace(/[&<>"']/g, m => map[m]);
-  }
 });
 
-// Contact Form Handler
-window.handleContactSubmit = function () {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
+// Contact Form Handler (Web3Forms Direct Email Integration)
+window.handleContactSubmit = async function () {
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
   const feedback = document.getElementById('form-feedback');
   const submitBtn = document.getElementById('submit-btn');
+  const contactForm = document.getElementById('contact-form');
+
+  const name = nameInput ? nameInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const message = messageInput ? messageInput.value.trim() : '';
+
+  if (!name || !email || !message) return;
 
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
+  feedback.className = 'form-feedback';
+  feedback.style.display = 'none';
 
-  setTimeout(() => {
+  const accessKeyInput = document.getElementById('web3forms-access-key');
+  const accessKey = accessKeyInput ? accessKeyInput.value.trim() : 'YOUR_ACCESS_KEY_HERE';
+
+  // If user hasn't added their custom Web3Forms access key yet, provide direct fallback
+  if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+      feedback.className = 'form-feedback success';
+      feedback.style.display = 'block';
+      feedback.innerHTML = `Thank you, <strong>${escapeHtml(name)}</strong>! Please insert your free Web3Forms Access Key to auto-deliver to Gmail, or click <a href="mailto:prakashchakali6216@gmail.com?subject=Portfolio%20Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}" style="color:var(--accent-cyan); text-decoration:underline;">here to send immediately via email</a>.`;
+      contactForm.reset();
+    }, 700);
+    return;
+  }
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        access_key: accessKey,
+        name: name,
+        email: email,
+        message: message,
+        subject: `New Portfolio Message from ${name}`,
+        from_name: 'Prakash Portfolio Contact Form'
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.status === 200 && result.success) {
+      feedback.className = 'form-feedback success';
+      feedback.style.display = 'block';
+      feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Thank you, <strong>${escapeHtml(name)}</strong>! Your message has been sent directly to Prakash's inbox.`;
+      contactForm.reset();
+    } else {
+      feedback.className = 'form-feedback error';
+      feedback.style.display = 'block';
+      feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${result.message || 'Submission error. Please email directly to prakashchakali6216@gmail.com'}`;
+    }
+  } catch (err) {
+    feedback.className = 'form-feedback error';
+    feedback.style.display = 'block';
+    feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Network error. Please email directly to <a href="mailto:prakashchakali6216@gmail.com" style="color:var(--accent-cyan);">prakashchakali6216@gmail.com</a>`;
+  } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-    feedback.className = 'form-feedback success';
-    feedback.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received. I will respond to <strong>${email}</strong> promptly.`;
-    document.getElementById('contact-form').reset();
-  }, 900);
+  }
 };
+
+function escapeHtml(text) {
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}

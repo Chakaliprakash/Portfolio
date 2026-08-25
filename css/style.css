@@ -1463,6 +1463,13 @@ body.cursor-hover .cursor-trailer {
   color: var(--accent-emerald);
 }
 
+.form-feedback.error {
+  display: block;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fb7185;
+}
+
 /* ARCHITECTURE MODAL */
 .modal-backdrop {
   display: none;
