@@ -1,72 +1,67 @@
-# 🌐 3D Responsive Portfolio - Prakash Chakali
+# 🌐 3D Responsive Java Developer Portfolio — Prakash Chakali
 
-An interactive, responsive 3D developer portfolio website built for **Prakash Chakali** (Software Engineer — Java Developer & AI Engineer).
-
----
-
-## ✨ Features
-
-- **Interactive 3D WebGL Canvas**: Powered by **Three.js** featuring a dynamic particle constellation, floating wireframe geometries (icosahedron, octahedron, torus ring), and mouse parallax tracking.
-- **3D Tilt Cards**: Glassmorphism cards with realistic perspective hover physics and glow effects.
-- **Interactive Developer CLI Terminal**: Built-in modal terminal simulator (`help`, `skills`, `projects`, `education`, `contact`, `whoami`).
-- **Synthesizer Sound Feedback**: Built using the native Web Audio API (no external sound files required) with sound mute/enable toggle.
-- **Comprehensive Resume Showcase**:
-  - **Education**: B.Tech CS at Sri Indu College of Engineering & Technology (CGPA: 7.6 / 10).
-  - **Featured Projects**:
-    1. *AI Email Generator* (Spring Boot, LLM API, Chrome Extension, Render Cloud).
-    2. *Ecommerce Web Application* (Spring Boot REST APIs, React, MySQL, JWT Auth, AI Chatbot).
-  - **Skill Matrix**: Java, SQL, Spring Boot, Spring AI, Lang4j, LLMs & Agents, React, Chrome Extension APIs.
-  - **Certifications**: GeeksforGeeks (SQL + Java Backend), Smart Interviews (DSA in Java).
-- **Responsive & Accessible**: Optimized for mobile, tablet, laptop, and ultra-wide screens.
+An interactive, production-grade 3D developer portfolio website built for **Prakash Chakali** (Java Software Engineer & Backend Developer) using the **UI/UX Pro Max** design system.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features & Architecture
+
+- **3D Java Backend Architecture**: Powered by **Three.js** with a central glowing Java core, MySQL database cylinder, Spring AI agent node, API gateway torus ring, and dynamic data stream constellation.
+- **Interactive Architecture Modals**: Real-time data pipeline diagrams for *Personal AI Agent*, *Ecommerce Web App*, and *AI Email Generator*.
+- **Personal Brand & Resume Integration**: Strict alignment with verified resume details (Sri Indu College of Eng & Tech, CGPA 7.6, XII 80.8%, X 100%, Smart Interviews DSA, GeeksforGeeks SQL+Java Backend).
+- **Interactive Developer CLI Terminal**: Modal terminal with commands (`help`, `about`, `skills`, `projects`, `dsa`, `education`, `certifications`, `contact`, `whoami`).
+- **Custom Desktop Cursor**: Physics-based magnetic glowing cursor and trailer.
+- **Synthesizer Sound Feedback**: Native Web Audio API sound effects with mute toggle.
+- **Automated GitHub Pages Deployment**: Pre-configured CI/CD workflow (`.github/workflows/deploy.yml`).
+
+---
+
+## 📁 Repository Structure
 
 ```
 Portfolio/
-├── index.html            # Main HTML5 semantic structure
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # Automated GitHub Pages deployment pipeline
+├── index.html            # Main semantic HTML structure
 ├── css/
-│   └── style.css         # Glassmorphism, 3D CSS transforms, cyber-aurora theme
+│   └── style.css         # UI/UX Pro Max dark cyber design system
 ├── js/
-│   ├── three-scene.js    # Three.js 3D WebGL background & particle network
-│   └── main.js           # Typing animation, 3D tilt, terminal CLI & UI logic
+│   ├── three-scene.js    # Three.js 3D Java backend architecture scene
+│   └── main.js           # Typing animation, 3D tilt, modals & terminal logic
 ├── src/
-│   └── Main.java         # Hello World Java starter application
+│   └── Main.java         # Starter Java application
 └── README.md             # Project documentation
 ```
 
 ---
 
-## 🚀 How to View & Run
+## 🚀 How to Push to GitHub & Deploy
 
-### 1. View the 3D Portfolio Website
-Simply double-click or open `index.html` in any web browser:
-- Direct file path: `C:/Users/vicky/.gemini/antigravity/scratch/Portfolio/index.html`
+### Step 1: Create a new repository on GitHub
+1. Go to [github.com/new](https://github.com/new)
+2. Name your repository: `Portfolio` (or `prakash-portfolio`)
+3. Choose **Public** and leave "Initialize this repository with a README" **unchecked** (since we already initialized it).
+4. Click **Create repository**.
 
-Or serve it with any lightweight HTTP server:
+### Step 2: Link and Push to GitHub
+Open your terminal in `C:\Users\vicky\.gemini\antigravity\scratch\Portfolio\` and run:
+
 ```powershell
-# Python
-python -m http.server 8000
-
-# Or Node npx
-npx serve .
+git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/Portfolio.git
+git push -u origin main
 ```
 
-### 2. Run the Java Program
-From the `Portfolio` root folder:
-```powershell
-# Quick Run (Java 11+)
-java src/Main.java
+*(Replace `<YOUR_GITHUB_USERNAME>` with your GitHub username).*
 
-# Or compile and run
-javac -d bin src/Main.java
-java -cp bin Main
-```
+### Step 3: Automated Live Deployment
+Once pushed, the automated GitHub Actions workflow will build and deploy your live portfolio:
+- **Live URL**: `https://<YOUR_GITHUB_USERNAME>.github.io/Portfolio/`
+- *(Go to your repository's **Settings** $\rightarrow$ **Pages** $\rightarrow$ Build and deployment Source: **GitHub Actions**)*.
 
 ---
 
-## 📬 Contact Details
+## 📬 Contact Information
 - **Developer**: Prakash Chakali
 - **Email**: `prakashchakali6216@gmail.com`
 - **Phone**: `+91 6302714896`
