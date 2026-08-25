@@ -579,20 +579,7 @@ window.handleContactSubmit = async function () {
   feedback.style.display = 'none';
 
   const accessKeyInput = document.getElementById('web3forms-access-key');
-  const accessKey = accessKeyInput ? accessKeyInput.value.trim() : 'YOUR_ACCESS_KEY_HERE';
-
-  // If user hasn't added their custom Web3Forms access key yet, provide direct fallback
-  if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-      feedback.className = 'form-feedback success';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `Thank you, <strong>${escapeHtml(name)}</strong>! Please insert your free Web3Forms Access Key to auto-deliver to Gmail, or click <a href="mailto:prakashchakali6216@gmail.com?subject=Portfolio%20Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}" style="color:var(--accent-cyan); text-decoration:underline;">here to send immediately via email</a>.`;
-      contactForm.reset();
-    }, 700);
-    return;
-  }
+  const accessKey = accessKeyInput && accessKeyInput.value.trim() ? accessKeyInput.value.trim() : 'c8a15ed7-da53-4630-bb9c-9f17f0313d1c';
 
   try {
     const response = await fetch('https://api.web3forms.com/submit', {
