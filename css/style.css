@@ -1847,3 +1847,70 @@ body.cursor-hover .cursor-trailer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
+/* Print Stylesheet for Resume Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #1e293b !important;
+  }
+
+  #webgl-canvas,
+  .ambient-glow,
+  .custom-cursor,
+  .cursor-trailer,
+  .navbar,
+  .footer,
+  .hero-cta,
+  .hero-3d-visual,
+  .scroll-indicator,
+  .modal-backdrop,
+  .terminal-modal,
+  .toast,
+  .view-arch-btn,
+  .btn-terminal,
+  #sound-toggle {
+    display: none !important;
+  }
+
+  .section {
+    padding: 20px 0 !important;
+  }
+
+  .glass-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
+  }
+
+  .section-title,
+  .hero-title,
+  h1, h2, h3, h4 {
+    color: #0f172a !important;
+  }
+
+  .gradient-text {
+    background: none !important;
+    -webkit-text-fill-color: #2563eb !important;
+    color: #2563eb !important;
+  }
+
+  .hero-bio,
+  .pillar-desc,
+  .project-summary,
+  .stat-desc,
+  p {
+    color: #334155 !important;
+  }
+}
+

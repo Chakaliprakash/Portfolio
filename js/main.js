@@ -489,9 +489,19 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
 1. SQL + Java Backend Course – GeeksforGeeks
 2. Smart Interviews – Data Structures & Algorithms in Java`,
 
+    github: () => `<strong>GitHub Profile:</strong> <a href="https://github.com/Chakaliprakash" target="_blank" style="color:var(--accent-cyan);">https://github.com/Chakaliprakash</a>`,
+
+    repo: () => `<strong>Portfolio Repository:</strong> <a href="https://github.com/Chakaliprakash/Portfolio" target="_blank" style="color:var(--accent-cyan);">https://github.com/Chakaliprakash/Portfolio</a>`,
+
+    resume: () => {
+      window.print();
+      return `Opening print-optimized resume dialog...`;
+    },
+
     contact: () => `<strong>Contact Details:</strong>
-• Email: prakashchakali6216@gmail.com
-• Phone: +91 6302714896
+• Email: <a href="mailto:prakashchakali6216@gmail.com" style="color:var(--accent-cyan);">prakashchakali6216@gmail.com</a>
+• Phone: <a href="tel:+916302714896" style="color:var(--accent-cyan);">+91 6302714896</a>
+• GitHub: <a href="https://github.com/Chakaliprakash" target="_blank" style="color:var(--accent-cyan);">@Chakaliprakash</a>
 • Location: Hyderabad, Telangana, India`,
 
     whoami: () => `prakash_chakali (Java Backend Software Engineer)`,
@@ -534,6 +544,18 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
       }
     });
   }
+
+  // Global Escape key listener to dismiss modals
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (terminalModal && terminalModal.classList.contains('open')) {
+        closeTerminal();
+      }
+      if (archModal && archModal.classList.contains('open')) {
+        archModal.classList.remove('open');
+      }
+    }
+  });
 
   function escapeHtml(text) {
     const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
