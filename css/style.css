@@ -1,8 +1,4 @@
-/* ==========================================================================
-   PORTFOLIO STYLESHEET - PRAKASH CHAKALI (JAVA SOFTWARE ENGINEER)
-   Design System: UI/UX Pro Max - Deep Cyber & Enterprise Backend Theme
-   ========================================================================== */
-
+﻿
 :root {
   --bg-dark: #060813;
   --bg-surface: rgba(13, 17, 36, 0.78);
@@ -36,7 +32,6 @@
   --shadow-glow: 0 12px 35px -10px rgba(99, 102, 241, 0.35);
 }
 
-/* Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -58,7 +53,6 @@ body {
   min-height: 100vh;
 }
 
-/* 3D WebGL Background Canvas */
 #webgl-canvas {
   position: fixed;
   top: 0;
@@ -69,7 +63,6 @@ body {
   pointer-events: none;
 }
 
-/* Custom Cursor (Desktop) */
 .custom-cursor {
   position: fixed;
   top: 0;
@@ -119,7 +112,6 @@ body.cursor-hover .cursor-trailer {
   }
 }
 
-/* Ambient Glow Orbs */
 .ambient-glow {
   position: fixed;
   border-radius: 50%;
@@ -159,7 +151,6 @@ body.cursor-hover .cursor-trailer {
   100% { transform: translate(-30px, 70px) scale(0.95); }
 }
 
-/* Containers & Layout */
 .container {
   width: 100%;
   max-width: 1240px;
@@ -210,7 +201,6 @@ body.cursor-hover .cursor-trailer {
   margin: 0 auto;
 }
 
-/* Typography Utilities */
 .gradient-text {
   background: linear-gradient(135deg, var(--accent-cyan), var(--primary) 50%, var(--accent-purple));
   -webkit-background-clip: text;
@@ -221,7 +211,6 @@ body.cursor-hover .cursor-trailer {
   filter: drop-shadow(0 0 25px rgba(99, 102, 241, 0.45));
 }
 
-/* Glassmorphic Cards */
 .glass-card {
   background: var(--bg-surface);
   backdrop-filter: var(--glass-blur);
@@ -252,13 +241,11 @@ body.cursor-hover .cursor-trailer {
   transform: translateY(-4px);
 }
 
-/* 3D Tilt Card Effects */
 .tilt-card {
   transform-style: preserve-3d;
   perspective: 1000px;
 }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -343,7 +330,6 @@ body.cursor-hover .cursor-trailer {
   background: rgba(0, 242, 254, 0.1);
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -483,7 +469,6 @@ body.cursor-hover .cursor-trailer {
   transition: var(--transition-smooth);
 }
 
-/* HERO SECTION */
 .hero-section {
   padding-top: calc(var(--nav-height) + 60px);
   min-height: 100vh;
@@ -639,7 +624,6 @@ body.cursor-hover .cursor-trailer {
   text-decoration: underline;
 }
 
-/* 3D Hero Code Card */
 .hero-3d-visual {
   perspective: 1200px;
   display: flex;
@@ -722,7 +706,6 @@ body.cursor-hover .cursor-trailer {
   gap: 5px;
 }
 
-/* Scroll indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 24px;
@@ -762,7 +745,6 @@ body.cursor-hover .cursor-trailer {
   100% { transform: translateY(12px); opacity: 0; }
 }
 
-/* CAREER STATS */
 .section-stats {
   padding: 30px 0 60px;
   position: relative;
@@ -800,7 +782,6 @@ body.cursor-hover .cursor-trailer {
   color: var(--text-muted);
 }
 
-/* ABOUT SECTION & PILLARS */
 .about-pillars-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -856,7 +837,6 @@ body.cursor-hover .cursor-trailer {
   color: var(--text-sub);
 }
 
-/* SKILLS MATRIX */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -938,7 +918,6 @@ body.cursor-hover .cursor-trailer {
   box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
 }
 
-/* FEATURED PROJECTS */
 .projects-container {
   display: flex;
   flex-direction: column;
@@ -1068,7 +1047,6 @@ body.cursor-hover .cursor-trailer {
   gap: 6px;
 }
 
-/* DSA & PROBLEM SOLVING SECTION */
 .dsa-layout {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -1183,7 +1161,6 @@ body.cursor-hover .cursor-trailer {
   gap: 6px;
 }
 
-/* EDUCATION & CERTIFICATIONS */
 .edu-cert-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1318,7 +1295,6 @@ body.cursor-hover .cursor-trailer {
   line-height: 1.5;
 }
 
-/* CONTACT SECTION */
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -1414,7 +1390,6 @@ body.cursor-hover .cursor-trailer {
   box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
 }
 
-/* Contact Form */
 .form-group {
   margin-bottom: 20px;
 }
@@ -1470,7 +1445,6 @@ body.cursor-hover .cursor-trailer {
   color: #fb7185;
 }
 
-/* ARCHITECTURE MODAL */
 .modal-backdrop {
   display: none;
   position: fixed;
@@ -1589,7 +1563,6 @@ body.cursor-hover .cursor-trailer {
   50% { transform: translateY(4px); }
 }
 
-/* INTERACTIVE TERMINAL CLI MODAL */
 .terminal-modal {
   display: none;
   position: fixed;
@@ -1706,7 +1679,6 @@ body.cursor-hover .cursor-trailer {
   font-size: 0.9rem;
 }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 30px;
@@ -1735,7 +1707,6 @@ body.cursor-hover .cursor-trailer {
   color: var(--accent-emerald);
 }
 
-/* Footer */
 .footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 34px 0;
@@ -1770,7 +1741,6 @@ body.cursor-hover .cursor-trailer {
   color: var(--accent-cyan);
 }
 
-/* Responsive Media Queries */
 @media (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -1855,7 +1825,6 @@ body.cursor-hover .cursor-trailer {
   }
 }
 
-/* Accessibility Focus States */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -1864,7 +1833,6 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
-/* Print Stylesheet for Resume Export */
 @media print {
   body {
     background: #ffffff !important;

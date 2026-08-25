@@ -1,22 +1,6 @@
-/**
- * MAIN INTERACTIVITY & ARCHITECTURE ENGINE - PRAKASH CHAKALI PORTFOLIO
- * Features:
- * - Custom Glowing Cursor with Magnetic Effect
- * - Typing Animation
- * - 3D Card Physics Tilt
- * - Animated Stats Counters (Intersection Observer)
- * - Interactive System Architecture Modals
- * - Full Developer CLI Terminal Simulator
- * - Synthesizer Sound Feedback (Web Audio API)
- * - Copy-to-Clipboard & Toast Alerts
- */
-
+﻿
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
-
-  // -----------------------------------------------------------------
-  // 1. CUSTOM GLOWING CURSOR (Desktop)
-  // -----------------------------------------------------------------
   const cursor = document.getElementById('custom-cursor');
   const trailer = document.getElementById('cursor-trailer');
 
@@ -47,10 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
   }
-
-  // -----------------------------------------------------------------
-  // 2. TYPING TEXT ANIMATION
-  // -----------------------------------------------------------------
   const typedTextEl = document.getElementById('typed-text');
   const phrases = [
     'Enterprise Java & Spring Boot Systems',
@@ -93,10 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeEffect, delta);
   }
   typeEffect();
-
-  // -----------------------------------------------------------------
-  // 3. 3D CARD TILT EFFECT (Vanilla JS Physics)
-  // -----------------------------------------------------------------
   const tiltCards = document.querySelectorAll('[data-tilt], .tech-card-hero');
 
   tiltCards.forEach(card => {
@@ -118,10 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
   });
-
-  // -----------------------------------------------------------------
-  // 4. ANIMATED STAT COUNTERS (Intersection Observer)
-  // -----------------------------------------------------------------
   const statNumbers = document.querySelectorAll('.stat-num');
   let statsAnimated = false;
 
@@ -151,10 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const statsSection = document.querySelector('.section-stats');
   if (statsSection) statsObserver.observe(statsSection);
-
-  // -----------------------------------------------------------------
-  // 5. SYSTEM ARCHITECTURE MODALS ("VIEW ARCHITECTURE")
-  // -----------------------------------------------------------------
   const archModal = document.getElementById('arch-modal');
   const archModalTitle = document.getElementById('arch-modal-title');
   const archModalBody = document.getElementById('arch-modal-body');
@@ -283,10 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === archModal) archModal.classList.remove('open');
     });
   }
-
-  // -----------------------------------------------------------------
-  // 6. SYNTHESIZER SOUND FEEDBACK (Web Audio API)
-  // -----------------------------------------------------------------
   let soundEnabled = false;
   let audioCtx = null;
   const soundToggleBtn = document.getElementById('sound-toggle');
@@ -339,10 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('mouseenter', () => playBeep(450, 'sine', 0.04));
     el.addEventListener('click', () => playBeep(880, 'triangle', 0.08));
   });
-
-  // -----------------------------------------------------------------
-  // 7. COPY TO CLIPBOARD & TOAST NOTIFICATION
-  // -----------------------------------------------------------------
   const toast = document.getElementById('toast');
   const toastMsg = document.getElementById('toast-message');
 
@@ -368,10 +328,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-  // -----------------------------------------------------------------
-  // 8. NAVBAR SCROLL & ACTIVE LINK SPY
-  // -----------------------------------------------------------------
   const navbar = document.getElementById('navbar');
   const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -415,10 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // -----------------------------------------------------------------
-  // 9. INTERACTIVE DEVELOPER CLI TERMINAL
-  // -----------------------------------------------------------------
   const terminalModal = document.getElementById('terminal-modal');
   const terminalTrigger = document.getElementById('terminal-trigger');
   const termCloseBtn = document.getElementById('term-close-btn');
@@ -544,8 +496,6 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
       }
     });
   }
-
-  // Global Escape key listener to dismiss modals
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (terminalModal && terminalModal.classList.contains('open')) {
@@ -557,8 +507,6 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
     }
   });
 });
-
-// Contact Form Handler (Web3Forms Direct Email Integration)
 window.handleContactSubmit = async function () {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
