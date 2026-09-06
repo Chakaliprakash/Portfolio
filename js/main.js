@@ -1,6 +1,23 @@
-﻿
+/**
+ * ==========================================================================
+ * PRAKASH CHAKALI — PORTFOLIO MAIN JAVASCRIPT
+ * Features:
+ * 1. Professional Web Audio Generative Ambient Music Engine & Equalizer
+ * 2. Theme Toggle (Dark / Light) with LocalStorage Persistence
+ * 3. Hero Cursor Spotlight & 3D Tilt with Specular Glare Physics
+ * 4. Scroll Progress Indicator & Active Navigation Tracking
+ * 5. Animated Number Counters & Staggered Scroll Reveals
+ * 6. Interactive Developer CLI Terminal Modal & Architecture Diagrams
+ * 7. Web3Forms Asynchronous Contact Form Submission
+ * ==========================================================================
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
+
+  /* --------------------------------------------------------------------------
+     1. CUSTOM MAGNETIC CURSOR
+     -------------------------------------------------------------------------- */
   const cursor = document.getElementById('custom-cursor');
   const trailer = document.getElementById('cursor-trailer');
 
@@ -26,26 +43,293 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderCursorTrailer();
 
-    document.querySelectorAll('a, button, .magnetic, .skill-tag, .project-card, .pillar-card').forEach(el => {
+    document.querySelectorAll('a, button, .magnetic, .skill-tag, .project-card, .pillar-card, .timeline-card, .testimonial-card').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
   }
+
+  /* --------------------------------------------------------------------------
+     2. THEME SYSTEM (DARK / LIGHT MODE)
+     -------------------------------------------------------------------------- */
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const htmlRoot = document.documentElement;
+
+  // Initialize theme from localStorage or system preference
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialTheme = savedTheme || (prefersDark ? 'dark' : 'dark'); // dark by default
+  applyTheme(initialTheme);
+
+  function applyTheme(theme) {
+    htmlRoot.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+
+    if (themeToggleBtn) {
+      const icon = themeToggleBtn.querySelector('i');
+      if (icon) {
+        if (theme === 'light') {
+          icon.className = 'fa-solid fa-moon';
+          themeToggleBtn.title = 'Switch to Dark Mode';
+        } else {
+          icon.className = 'fa-solid fa-sun';
+          themeToggleBtn.title = 'Switch to Light Mode';
+        }
+      }
+    }
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      showToast(`Switched to ${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} Mode`);
+      playAudioCue(650, 'triangle', 0.08);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     3. PROFESSIONAL WEB AUDIO GENERATIVE AMBIENT MUSIC ENGINE
+     -------------------------------------------------------------------------- */
+  const soundToggleBtn = document.getElementById('sound-toggle');
+  const musicText = document.getElementById('music-text');
+  let audioCtx = null;
+  let isPlayingMusic = false;
+  let masterGain = null;
+  let musicInterval = null;
+  let chordIndex = 0;
+  let currentPadOscs = [];
+
+  // Studio Ambient Chord Voicings (Ebmaj9, Cm9, Fm9, Bb7sus4, Gm7) in Hz
+  const ambientChords = [
+    [155.56, 196.00, 233.08, 293.66, 349.23], // Ebmaj9
+    [130.81, 196.00, 233.08, 261.63, 311.13], // Cm9
+    [174.61, 207.65, 261.63, 311.13, 349.23], // Fm9
+    [116.54, 174.61, 233.08, 261.63, 349.23], // Bb7sus4
+    [196.00, 233.08, 293.66, 349.23, 392.00]  // Gm7
+  ];
+
+  function initAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+
+      // Warm analog lowpass filter
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(750, audioCtx.currentTime);
+      filter.Q.setValueAtTime(1.2, audioCtx.currentTime);
+
+      masterGain.connect(filter);
+      filter.connect(audioCtx.destination);
+    }
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function playPadChord(notes, duration = 4.8) {
+    if (!audioCtx || !isPlayingMusic) return;
+
+    // Fade out previous pad oscillators smoothly
+    currentPadOscs.forEach(({ osc, gain }) => {
+      try {
+        gain.gain.setValueAtTime(gain.gain.value, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+        setTimeout(() => {
+          try { osc.stop(); osc.disconnect(); } catch (e) {}
+        }, 1300);
+      } catch (e) {}
+    });
+    currentPadOscs = [];
+
+    // Create polyphonic warm pad layer
+    notes.forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = idx === 0 ? 'sine' : 'triangle';
+      // Subtle micro-detune for lush chorus warmth
+      osc.frequency.setValueAtTime(freq + (Math.random() - 0.5) * 0.8, audioCtx.currentTime);
+
+      const targetGain = idx === 0 ? 0.08 : 0.035;
+      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(targetGain, audioCtx.currentTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start();
+
+      currentPadOscs.push({ osc, gain });
+    });
+
+    // Sprinkle 1-2 soothing algorithmic chime bell notes
+    const chimeFreq = notes[Math.floor(Math.random() * notes.length)] * 2;
+    setTimeout(() => {
+      playChime(chimeFreq);
+    }, 1400 + Math.random() * 800);
+  }
+
+  function playChime(freq) {
+    if (!audioCtx || !isPlayingMusic) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.025, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.0);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 2.05);
+    } catch (e) {}
+  }
+
+  function startAmbientMusic() {
+    initAudioContext();
+    isPlayingMusic = true;
+
+    // Smooth master fade-in
+    masterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    masterGain.gain.exponentialRampToValueAtTime(0.22, audioCtx.currentTime + 2.0);
+
+    if (soundToggleBtn) soundToggleBtn.classList.add('playing');
+    if (musicText) musicText.textContent = 'Playing';
+
+    playPadChord(ambientChords[chordIndex]);
+
+    musicInterval = setInterval(() => {
+      chordIndex = (chordIndex + 1) % ambientChords.length;
+      playPadChord(ambientChords[chordIndex]);
+    }, 4500);
+
+    showToast('Ambient Studio Soundscape Active');
+  }
+
+  function stopAmbientMusic() {
+    isPlayingMusic = false;
+    clearInterval(musicInterval);
+
+    if (soundToggleBtn) soundToggleBtn.classList.remove('playing');
+    if (musicText) musicText.textContent = 'Ambient BGM';
+
+    if (masterGain && audioCtx) {
+      masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+      setTimeout(() => {
+        currentPadOscs.forEach(({ osc }) => {
+          try { osc.stop(); osc.disconnect(); } catch (e) {}
+        });
+        currentPadOscs = [];
+      }, 900);
+    }
+
+    showToast('Ambient Music Muted');
+  }
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      if (isPlayingMusic) {
+        stopAmbientMusic();
+      } else {
+        startAmbientMusic();
+      }
+    });
+  }
+
+  // Micro-interaction Audio Cue
+  function playAudioCue(freq = 600, type = 'sine', duration = 0.05) {
+    if (!isPlayingMusic) return;
+    try {
+      initAudioContext();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {}
+  }
+
+  document.querySelectorAll('button, a, .skill-tag, .contact-row').forEach(el => {
+    el.addEventListener('mouseenter', () => playAudioCue(440, 'sine', 0.03));
+    el.addEventListener('click', () => playAudioCue(880, 'triangle', 0.06));
+  });
+
+  /* --------------------------------------------------------------------------
+     4. HERO CURSOR SPOTLIGHT TRACKING
+     -------------------------------------------------------------------------- */
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      heroSection.style.setProperty('--mouse-x', `${x}px`);
+      heroSection.style.setProperty('--mouse-y', `${y}px`);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     5. DYNAMIC 3D TILT WITH SPECULAR GLARE PHYSICS
+     -------------------------------------------------------------------------- */
+  const tiltCards = document.querySelectorAll('.tilt-card');
+
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.setProperty('--glare-x', `${glareX.toFixed(1)}%`);
+      card.style.setProperty('--glare-y', `${glareY.toFixed(1)}%`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     6. HERO TYPING ANIMATION
+     -------------------------------------------------------------------------- */
   const typedTextEl = document.getElementById('typed-text');
   const phrases = [
-    'Enterprise Java & Spring Boot Systems',
+    'Enterprise Java & Spring Boot 3.x',
     'Autonomous Spring AI Agents & Tool Calling',
     'Stateless JWT E-Commerce Architectures',
-    'Optimized MySQL & PostgreSQL Databases',
-    'Cloud REST APIs & Chrome Extensions'
+    'Optimized MySQL Relational Databases',
+    'Full-Stack Cloud REST APIs & Chrome Extensions'
   ];
 
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  const typingSpeed = 75;
+  const typingSpeed = 70;
   const deletingSpeed = 35;
-  const holdDelay = 1900;
+  const holdDelay = 2000;
 
   function typeEffect() {
     if (!typedTextEl) return;
@@ -67,33 +351,68 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      delta = 400;
+      delta = 350;
     }
 
     setTimeout(typeEffect, delta);
   }
   typeEffect();
-  const tiltCards = document.querySelectorAll('[data-tilt], .tech-card-hero');
 
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  /* --------------------------------------------------------------------------
+     7. SCROLL PROGRESS & NAVBAR SCROLL REVEAL
+     -------------------------------------------------------------------------- */
+  const progressBar = document.getElementById('scroll-progress');
+  const navbar = document.getElementById('navbar');
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+  window.addEventListener('scroll', () => {
+    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const currentProgress = totalScroll > 0 ? (window.scrollY / totalScroll) * 100 : 0;
+    if (progressBar) progressBar.style.width = `${currentProgress}%`;
 
-      const rotateX = ((y - centerY) / centerY) * -9;
-      const rotateY = ((x - centerX) / centerX) * 9;
+    if (window.scrollY > 40) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+    let currentSection = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 140;
+      const sectionHeight = section.clientHeight;
+      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        currentSection = section.getAttribute('id');
+      }
     });
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentSection}`) {
+        link.classList.add('active');
+      }
     });
-  });
+  }, { passive: true });
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      menuToggle.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuToggle.classList.remove('active');
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     8. ANIMATED STATS NUMBER COUNTER
+     -------------------------------------------------------------------------- */
   const statNumbers = document.querySelectorAll('.stat-num');
   let statsAnimated = false;
 
@@ -123,6 +442,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const statsSection = document.querySelector('.section-stats');
   if (statsSection) statsObserver.observe(statsSection);
+
+  /* --------------------------------------------------------------------------
+     9. TOAST NOTIFICATIONS & COPY TO CLIPBOARD
+     -------------------------------------------------------------------------- */
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toast-message');
+
+  function showToast(msg) {
+    if (!toast) return;
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+
+  document.querySelectorAll('.copyable-text').forEach(item => {
+    item.addEventListener('click', () => {
+      const textToCopy = item.getAttribute('data-copy');
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showToast(`Copied "${textToCopy}" to clipboard!`);
+          playAudioCue(1000, 'sine', 0.08);
+        }).catch(() => {
+          showToast('Failed to copy');
+        });
+      }
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     10. ARCHITECTURE MODAL
+     -------------------------------------------------------------------------- */
   const archModal = document.getElementById('arch-modal');
   const archModalTitle = document.getElementById('arch-modal-title');
   const archModalBody = document.getElementById('arch-modal-body');
@@ -237,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
         archModalTitle.textContent = archData[projKey].title;
         archModalBody.innerHTML = archData[projKey].content;
         archModal.classList.add('open');
-        playBeep(750, 'triangle', 0.08);
+        playAudioCue(750, 'triangle', 0.08);
       }
     });
   });
@@ -251,126 +603,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === archModal) archModal.classList.remove('open');
     });
   }
-  let soundEnabled = false;
-  let audioCtx = null;
-  const soundToggleBtn = document.getElementById('sound-toggle');
 
-  function playBeep(freq = 600, type = 'sine', duration = 0.06) {
-    if (!soundEnabled) return;
-    try {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch (e) {
-      console.warn('Audio error', e);
-    }
-  }
-
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      const icon = soundToggleBtn.querySelector('i');
-      if (soundEnabled) {
-        icon.className = 'fa-solid fa-volume-high';
-        soundToggleBtn.style.borderColor = 'var(--accent-emerald)';
-        soundToggleBtn.style.color = 'var(--accent-emerald)';
-        playBeep(800, 'triangle', 0.1);
-        showToast('Audio Feedback Activated');
-      } else {
-        icon.className = 'fa-solid fa-volume-xmark';
-        soundToggleBtn.style.borderColor = 'var(--border-glow)';
-        soundToggleBtn.style.color = 'var(--text-sub)';
-        showToast('Audio Feedback Muted');
-      }
-    });
-  }
-
-  document.querySelectorAll('button, a, .skill-tag, .contact-row').forEach(el => {
-    el.addEventListener('mouseenter', () => playBeep(450, 'sine', 0.04));
-    el.addEventListener('click', () => playBeep(880, 'triangle', 0.08));
-  });
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-message');
-
-  function showToast(msg) {
-    if (!toast) return;
-    toastMsg.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2800);
-  }
-
-  document.querySelectorAll('.copyable-text').forEach(item => {
-    item.addEventListener('click', () => {
-      const textToCopy = item.getAttribute('data-copy');
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          showToast(`Copied "${textToCopy}" to clipboard!`);
-          playBeep(1000, 'sine', 0.1);
-        }).catch(() => {
-          showToast('Failed to copy');
-        });
-      }
-    });
-  });
-  const navbar = document.getElementById('navbar');
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('nav-menu');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 130;
-      const sectionHeight = section.clientHeight;
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
-  });
-
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      menuToggle.classList.toggle('active');
-    });
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        menuToggle.classList.remove('active');
-      });
-    });
-  }
+  /* --------------------------------------------------------------------------
+     11. DEVELOPER CLI TERMINAL
+     -------------------------------------------------------------------------- */
   const terminalModal = document.getElementById('terminal-modal');
   const terminalTrigger = document.getElementById('terminal-trigger');
   const termCloseBtn = document.getElementById('term-close-btn');
@@ -381,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openTerminal() {
     terminalModal.classList.add('open');
     terminalInput.focus();
-    playBeep(700, 'triangle', 0.1);
+    playAudioCue(700, 'triangle', 0.1);
   }
 
   function closeTerminal() {
@@ -405,41 +641,61 @@ document.addEventListener('DOMContentLoaded', () => {
   • <span class="term-cmd-highlight">about</span>          - Bio & core Java engineering pillars
   • <span class="term-cmd-highlight">skills</span>         - Technical skills matrix & tech stack
   • <span class="term-cmd-highlight">projects</span>       - Summary of Personal AI Agent, Ecommerce & Email Gen
+  • <span class="term-cmd-highlight">timeline</span>       - Academic & career milestone track
   • <span class="term-cmd-highlight">dsa</span>            - Data structures & problem solving track
-  • <span class="term-cmd-highlight">education</span>      - B.Tech details & academic milestones
   • <span class="term-cmd-highlight">certifications</span> - GeeksforGeeks & Smart Interviews credentials
+  • <span class="term-cmd-highlight">music</span>          - Toggle ambient background music
+  • <span class="term-cmd-highlight">theme</span>          - Toggle light/dark theme
   • <span class="term-cmd-highlight">contact</span>        - Email, phone, location & profiles
   • <span class="term-cmd-highlight">clear</span>          - Clear terminal display
   • <span class="term-cmd-highlight">exit</span>           - Exit terminal session`,
 
     about: () => `<strong>Prakash Chakali</strong>
-Position: Java Software Engineer | Backend Developer
+Position: Java Software Engineer | Backend Architect
 Location: Hyderabad, Telangana, India
 Summary: Focused on building reliable Java & Spring Boot backend systems, Spring AI tool integrations, and Controller-Service-Repository architectures.`,
 
     skills: () => `<strong>Technical Skills:</strong>
 • Languages: Java 17+, SQL (MySQL, PostgreSQL), JavaScript
-• Backend: Spring Boot, Spring AI, Spring Security, Lang4j, RESTful APIs, JWT
-• AI & Agents: AI Agent Development, Tool/Function Calling, Prompt Eng, RAG
-• Frontend & Tools: HTML5, CSS3, React, Chrome Extension APIs, Git, Render`,
+• Backend: Spring Boot 3.x, Spring AI, Spring Security, Lang4j, RESTful APIs, JWT
+• AI & Agents: AI Agent Development, Tool/Function Calling, Prompt Eng, RAG Patterns
+• Frontend & Tools: React, HTML5, CSS3, Chrome Extension APIs, Git, Render Cloud`,
 
     projects: () => `<strong>Verified Projects:</strong>
 1. <strong>Personal AI Agent</strong>: Spring Boot + Spring AI with conversation memory & function calling tools.
 2. <strong>Ecommerce Web Application</strong>: Full-stack platform with JWT security, MySQL & real-time support chatbot.
 3. <strong>AI Email Generator</strong>: Full-stack LLM email generation tool + Chrome extension + Render deploy.`,
 
+    timeline: () => `<strong>Engineering Timeline:</strong>
+• 2022–2026: Sri Indu College of Eng & Tech (B.Tech CS, CGPA: 7.6)
+• 2024: Smart Interviews DSA in Java Certified (Top Performer)
+• 2024: GeeksforGeeks SQL + Java Backend Certified
+• 2024–2025: Production Systems Built & Deployed (3 applications)`,
+
     dsa: () => `<strong>Problem Solving & DSA:</strong>
 • Smart Interviews — DSA in Java Certified
-• Topics: Arrays, Strings, Binary Search, Trees, Graphs, Dynamic Programming, Complexity Optimization.`,
-
-    education: () => `<strong>Education:</strong>
-• <strong>Sri Indu College of Engineering & Technology</strong> (Jul 2022 – Jul 2026)
-  B.Tech in Computer Science (CS)
-  Current CGPA: 7.6 / 10 | Class XII: 80.8% | Class X: 100%`,
+• Topics: Arrays, Strings, Binary Search, Trees, Graphs, Dynamic Programming, Space-Time Optimization.`,
 
     certifications: () => `<strong>Certifications:</strong>
 1. SQL + Java Backend Course – GeeksforGeeks
 2. Smart Interviews – Data Structures & Algorithms in Java`,
+
+    music: () => {
+      if (isPlayingMusic) {
+        stopAmbientMusic();
+        return 'Ambient music stopped.';
+      } else {
+        startAmbientMusic();
+        return 'Ambient music playing.';
+      }
+    },
+
+    theme: () => {
+      const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      return `Theme switched to ${newTheme}.`;
+    },
 
     github: () => `<strong>GitHub Profile:</strong> <a href="https://github.com/Chakaliprakash" target="_blank" style="color:var(--accent-cyan);">https://github.com/Chakaliprakash</a>`,
 
@@ -492,21 +748,23 @@ Summary: Focused on building reliable Java & Spring Boot backend systems, Spring
 
         terminalInput.value = '';
         terminalBody.scrollTop = terminalBody.scrollHeight;
-        playBeep(520, 'sine', 0.05);
+        playAudioCue(520, 'sine', 0.05);
       }
     });
   }
+
+  // Keyboard shortcut (Escape to close modals)
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (terminalModal && terminalModal.classList.contains('open')) {
-        closeTerminal();
-      }
-      if (archModal && archModal.classList.contains('open')) {
-        archModal.classList.remove('open');
-      }
+      if (terminalModal && terminalModal.classList.contains('open')) closeTerminal();
+      if (archModal && archModal.classList.contains('open')) archModal.classList.remove('open');
     }
   });
 });
+
+/* --------------------------------------------------------------------------
+   12. WEB3FORMS CONTACT FORM SUBMISSION
+   -------------------------------------------------------------------------- */
 window.handleContactSubmit = async function () {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');

@@ -1,43 +1,54 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prakash Chakali | Java Software Engineer & Backend Developer</title>
-  <meta name="description" content="Portfolio of Prakash Chakali - Java Software Engineer & Backend Developer specializing in Spring Boot, Spring AI, RESTful APIs, MySQL, and Scalable Architectures.">
-  <meta name="keywords" content="Java Developer, Java Backend Developer, Spring Boot Developer, Software Engineer, Prakash Chakali, Spring AI, MySQL, REST APIs, JWT, Java Portfolio">
+  <title>Prakash Chakali | Java Software Engineer & Backend Architect</title>
+  <meta name="description" content="Portfolio of Prakash Chakali - Java Software Engineer & Backend Developer specializing in Spring Boot 3.x, Spring AI Agents, RESTful APIs, MySQL, and Scalable Cloud Architectures.">
+  <meta name="keywords" content="Java Developer, Java Backend Developer, Spring Boot Developer, Software Engineer, Prakash Chakali, Spring AI, MySQL, REST APIs, JWT, Java Portfolio, Three.js Developer Portfolio">
   
-    <meta property="og:title" content="Prakash Chakali | Java Software Engineer">
-  <meta property="og:description" content="Building reliable backend systems with Java & Spring Boot.">
+  <meta property="og:title" content="Prakash Chakali | Java Software Engineer">
+  <meta property="og:description" content="Building reliable, scalable backend systems with Java, Spring Boot & Spring AI.">
   <meta property="og:type" content="website">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-    <link rel="stylesheet" href="css/style.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <div class="custom-cursor" id="custom-cursor"></div>
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress"></div>
+
+  <!-- Custom Magnetic Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
   <div class="cursor-trailer" id="cursor-trailer"></div>
 
-    <canvas id="webgl-canvas"></canvas>
+  <!-- Fullscreen 3D Ambient Constellation Canvas -->
+  <canvas id="webgl-canvas"></canvas>
 
-    <div class="ambient-glow glow-1"></div>
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
 
-    <header class="navbar" id="navbar">
+  <!-- Modern Navigation Bar -->
+  <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#hero" class="logo magnetic">
         <span class="logo-bracket">&lt;</span>
         <span class="logo-text">Prakash.dev</span>
         <span class="logo-bracket">/&gt;</span>
-        <span class="status-indicator" title="Available for opportunities"></span>
+        <span class="status-indicator" title="Available for backend engineering opportunities"></span>
       </a>
 
       <nav class="nav-menu" id="nav-menu">
@@ -46,20 +57,37 @@
           <li><a href="#about" class="nav-link"><i class="fa-solid fa-user-gear"></i> About</a></li>
           <li><a href="#skills" class="nav-link"><i class="fa-solid fa-network-wired"></i> Skills</a></li>
           <li><a href="#projects" class="nav-link"><i class="fa-solid fa-cubes-stacked"></i> Projects</a></li>
+          <li><a href="#timeline" class="nav-link"><i class="fa-solid fa-timeline"></i> Timeline</a></li>
           <li><a href="#dsa" class="nav-link"><i class="fa-solid fa-code-branch"></i> DSA</a></li>
-          <li><a href="#education" class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Education</a></li>
+          <li><a href="#testimonials" class="nav-link"><i class="fa-solid fa-comments"></i> Endorsements</a></li>
           <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
 
       <div class="nav-actions">
-        <button id="sound-toggle" class="btn-icon magnetic" title="Toggle Synthesizer Sound" aria-label="Toggle Sound">
-          <i class="fa-solid fa-volume-xmark"></i>
+        <!-- Theme Toggle (Dark / Light) -->
+        <button id="theme-toggle" class="btn-icon magnetic" title="Toggle Light / Dark Mode" aria-label="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
         </button>
+
+        <!-- Professional Ambient Music Engine Button -->
+        <button id="sound-toggle" class="btn-music magnetic" title="Toggle Ambient Studio BGM & Sound Effects" aria-label="Toggle Ambient Music">
+          <div class="eq-bars">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span id="music-text">Ambient BGM</span>
+        </button>
+
+        <!-- Developer CLI Terminal Trigger -->
         <button id="terminal-trigger" class="btn-terminal magnetic" title="Open Interactive Developer CLI">
           <i class="fa-solid fa-terminal"></i> <span>CLI</span>
         </button>
-        <a href="#contact" class="btn btn-primary btn-sm magnetic">Let's Connect</a>
+
+        <a href="#contact" class="btn btn-primary btn-sm magnetic">Connect</a>
+
         <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu">
           <span></span><span></span><span></span>
         </button>
@@ -68,7 +96,11 @@
   </header>
 
   <main>
-        <section id="hero" class="section hero-section">
+    <!-- HERO SECTION -->
+    <section id="hero" class="section hero-section">
+      <!-- Cursor-following spotlight glow -->
+      <div id="hero-spotlight" class="hero-spotlight"></div>
+
       <div class="container hero-container">
         <div class="hero-content">
           <div class="badge-tag">
@@ -81,22 +113,22 @@
           </h1>
 
           <div class="typing-container">
-            <span class="prefix">Specialized in </span>
+            <span class="prefix">Specialized in&nbsp;</span>
             <span id="typed-text" class="typed-text"></span>
             <span class="cursor">&nbsp;</span>
           </div>
 
           <p class="hero-bio">
-            I engineer production-grade REST APIs, intelligent AI agent workflows, and secure database architectures. 
-            Focused on high-performance backend systems, clean Controller-Service-Repository patterns, and scalable microservice designs.
+            I engineer production-grade REST APIs, intelligent Spring AI agent pipelines, and high-performance database architectures.
+            Focused on robust Controller-Service-Repository patterns, clean modular boundaries, and scalable microservice architectures.
           </p>
 
-                    <div class="hero-tech-strip">
+          <div class="hero-tech-strip">
             <span class="hero-tech-pill"><i class="fa-brands fa-java"></i> Java 17+</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot</span>
+            <span class="hero-tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot 3.x</span>
             <span class="hero-tech-pill"><i class="fa-solid fa-robot"></i> Spring AI</span>
             <span class="hero-tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-lock"></i> JWT Auth</span>
+            <span class="hero-tech-pill"><i class="fa-solid fa-shield-halved"></i> JWT Auth</span>
             <span class="hero-tech-pill"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
           </div>
 
@@ -132,71 +164,50 @@
           </div>
         </div>
 
-                <div class="hero-3d-visual">
-          <div class="tilt-card-3d tech-card-hero" id="hero-interactive-card">
-            <div class="card-inner">
-              <div class="card-header-bar">
-                <div class="card-dots">
-                  <span class="dot red"></span>
-                  <span class="dot yellow"></span>
-                  <span class="dot green"></span>
-                </div>
-                <span class="card-title-bar">BackendEngine.java — Spring Boot 3.x</span>
-              </div>
-              <div class="code-snippet">
-                <pre><code><span class="token-annotation">@RestController</span>
-<span class="token-annotation">@RequestMapping</span>(<span class="token-string">"/api/v1/engineer"</span>)
-<span class="token-keyword">public class</span> <span class="token-class">PrakashChakaliController</span> {
-
-    <span class="token-annotation">@Autowired</span>
-    <span class="token-keyword">private</span> <span class="token-class">SpringAiService</span> aiService;
-
-    <span class="token-annotation">@PostMapping</span>(<span class="token-string">"/execute-task"</span>)
-    <span class="token-keyword">public</span> <span class="token-class">ResponseEntity</span>&lt;<span class="token-class">SystemOutput</span>&gt; execute(
-        <span class="token-annotation">@AuthenticationPrincipal</span> <span class="token-class">UserPrincipal</span> user,
-        <span class="token-annotation">@RequestBody</span> <span class="token-class">TaskRequest</span> request) {
-        
-        <span class="token-keyword">return</span> <span class="token-class">ResponseEntity</span>.ok(
-            aiService.processWithTools(request)
-        );
-    }
-}</code></pre>
-              </div>
-              <div class="card-badge-row">
-                <span class="mini-badge"><i class="fa-brands fa-java"></i> Java 17+</span>
-                <span class="mini-badge"><i class="fa-solid fa-shield-halved"></i> JWT Auth</span>
-                <span class="mini-badge"><i class="fa-solid fa-server"></i> MySQL Pool</span>
-              </div>
-            </div>
+        <!-- 3D Centerpiece Interactive Stage -->
+        <div class="hero-3d-stage tilt-card" id="hero-3d-stage">
+          <div class="card-glare"></div>
+          <canvas id="hero-canvas-3d"></canvas>
+          <div class="stage-drag-hint">
+            <i class="fa-solid fa-arrows-up-down-left-right"></i> Drag to rotate 3D Java Core
+          </div>
+          <div class="hero-float-badge badge-top">
+            <i class="fa-brands fa-java"></i> Java 17+ Core
+          </div>
+          <div class="hero-float-badge badge-right">
+            <i class="fa-solid fa-database"></i> MySQL Pool
+          </div>
+          <div class="hero-float-badge badge-bottom">
+            <i class="fa-solid fa-robot"></i> Spring AI Node
           </div>
         </div>
       </div>
-
-      <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
-        <span class="mouse"><span class="wheel"></span></span>
-        <span class="scroll-text">Scroll to explore</span>
-      </a>
     </section>
 
-        <section class="section-stats">
+    <!-- STATS STRIP -->
+    <section class="section-stats">
       <div class="container">
         <div class="stats-grid">
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="stat-num gradient-text" data-target="7.6" data-decimal="1">7.6</div>
             <div class="stat-sub">Current CGPA (B.Tech CS)</div>
             <div class="stat-desc">Sri Indu College of Engg.</div>
           </div>
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="stat-num gradient-text" data-target="100" data-suffix="%">100%</div>
             <div class="stat-sub">Class X Milestone</div>
             <div class="stat-desc">Perfect 100% Academic Record</div>
           </div>
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="stat-num gradient-text" data-target="3" data-suffix="+">3+</div>
             <div class="stat-sub">Production Applications</div>
             <div class="stat-desc">Spring Boot, AI Agents, Full-Stack</div>
           </div>
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="stat-num gradient-text" data-target="2">2</div>
             <div class="stat-sub">Industry Certifications</div>
             <div class="stat-desc">DSA & Java Backend Certified</div>
@@ -205,7 +216,8 @@
       </div>
     </section>
 
-        <section id="about" class="section">
+    <!-- ABOUT / ENGINEERING PILLARS -->
+    <section id="about" class="section">
       <div class="container">
         <div class="section-header">
           <div class="section-badge">ENGINEERING PILLARS</div>
@@ -214,7 +226,9 @@
         </div>
 
         <div class="about-pillars-grid">
-                    <div class="pillar-card glass-card tilt-card" data-tilt>
+          <!-- Pillar 1 -->
+          <div class="pillar-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="pillar-icon-box">
               <i class="fa-brands fa-java"></i>
             </div>
@@ -225,13 +239,15 @@
             </p>
             <div class="pillar-tags">
               <span>Java 17+</span>
-              <span>Spring Boot</span>
+              <span>Spring Boot 3.x</span>
               <span>REST APIs</span>
               <span>Clean Code</span>
             </div>
           </div>
 
-                    <div class="pillar-card glass-card tilt-card" data-tilt>
+          <!-- Pillar 2 -->
+          <div class="pillar-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="pillar-icon-box">
               <i class="fa-solid fa-robot"></i>
             </div>
@@ -248,7 +264,9 @@
             </div>
           </div>
 
-                    <div class="pillar-card glass-card tilt-card" data-tilt>
+          <!-- Pillar 3 -->
+          <div class="pillar-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="pillar-icon-box">
               <i class="fa-solid fa-database"></i>
             </div>
@@ -265,7 +283,9 @@
             </div>
           </div>
 
-                    <div class="pillar-card glass-card tilt-card" data-tilt>
+          <!-- Pillar 4 -->
+          <div class="pillar-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="pillar-icon-box">
               <i class="fa-solid fa-shield-halved"></i>
             </div>
@@ -285,7 +305,8 @@
       </div>
     </section>
 
-        <section id="skills" class="section">
+    <!-- TECHNICAL SKILLS MATRIX -->
+    <section id="skills" class="section">
       <div class="container">
         <div class="section-header">
           <div class="section-badge">TECH CONSTELLATION</div>
@@ -294,7 +315,8 @@
         </div>
 
         <div class="skills-grid">
-                    <div class="skill-category-card glass-card tilt-card" data-tilt>
+          <div class="skill-category-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="category-header">
               <div class="category-icon"><i class="fa-brands fa-java"></i></div>
               <div>
@@ -311,7 +333,8 @@
             </div>
           </div>
 
-                    <div class="skill-category-card glass-card tilt-card" data-tilt>
+          <div class="skill-category-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="category-header">
               <div class="category-icon"><i class="fa-solid fa-leaf"></i></div>
               <div>
@@ -329,7 +352,8 @@
             </div>
           </div>
 
-                    <div class="skill-category-card glass-card tilt-card" data-tilt>
+          <div class="skill-category-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="category-header">
               <div class="category-icon"><i class="fa-solid fa-brain"></i></div>
               <div>
@@ -342,12 +366,13 @@
               <span class="skill-tag" data-tech="LLM Integration"><i class="fa-solid fa-comments"></i> LLM Integration</span>
               <span class="skill-tag highlighted" data-tech="Function Calling"><i class="fa-solid fa-gears"></i> Tool / Function Calling</span>
               <span class="skill-tag" data-tech="Prompt Eng"><i class="fa-solid fa-pen-nib"></i> Prompt Engineering</span>
-              <span class="skill-tag" data-tech="RAG"><i class="fa-solid fa-book-bookmark"></i> RAG (Learning)</span>
+              <span class="skill-tag" data-tech="RAG"><i class="fa-solid fa-book-bookmark"></i> RAG Patterns</span>
               <span class="skill-tag" data-tech="Multi-Agent"><i class="fa-solid fa-diagram-project"></i> Multi-Agent Systems</span>
             </div>
           </div>
 
-                    <div class="skill-category-card glass-card tilt-card" data-tilt>
+          <div class="skill-category-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="category-header">
               <div class="category-icon"><i class="fa-solid fa-code"></i></div>
               <div>
@@ -368,23 +393,26 @@
       </div>
     </section>
 
-        <section id="projects" class="section">
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="section">
       <div class="container">
         <div class="section-header">
           <div class="section-badge">FEATURED WORK</div>
           <h2 class="section-title">Engineered Projects</h2>
-          <p class="section-subtitle">Real-world applications built with Java, Spring Boot, AI agents, and modular architecture.</p>
+          <p class="section-subtitle">Production-grade systems built with Java, Spring Boot, AI agents, and modular architecture.</p>
         </div>
 
         <div class="projects-container">
-                    <div class="project-card glass-card tilt-card" data-tilt>
+          <!-- Project 1 -->
+          <div class="project-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="project-header">
               <div class="project-badge-type"><i class="fa-solid fa-wand-magic-sparkles"></i> Spring Boot & Spring AI</div>
               <div class="project-actions">
                 <button class="btn btn-outline btn-sm view-arch-btn magnetic" data-project="ai-agent">
                   <i class="fa-solid fa-diagram-project"></i> View Architecture
                 </button>
-                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="proj-link magnetic" title="GitHub Profile / Codebase"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="proj-link magnetic" title="GitHub Codebase"><i class="fa-brands fa-github"></i> GitHub</a>
               </div>
             </div>
 
@@ -420,7 +448,9 @@
             </div>
           </div>
 
-                    <div class="project-card glass-card tilt-card" data-tilt>
+          <!-- Project 2 -->
+          <div class="project-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="project-header">
               <div class="project-badge-type"><i class="fa-solid fa-cart-shopping"></i> Full-Stack & Spring Boot REST API</div>
               <div class="project-actions">
@@ -451,10 +481,6 @@
                   <i class="fa-solid fa-circle-check feature-check"></i>
                   <span><strong>Integrated Support Chatbot:</strong> Embedded an intelligent customer support assistant handling order tracking, product FAQs, and real-time backend data querying.</span>
                 </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Controller-Service-Repository Pattern:</strong> Strict modular layering ensuring separation of concerns, testability, and high maintainability.</span>
-                </div>
               </div>
 
               <div class="tech-pill-list">
@@ -468,7 +494,9 @@
             </div>
           </div>
 
-                    <div class="project-card glass-card tilt-card" data-tilt>
+          <!-- Project 3 -->
+          <div class="project-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <div class="project-header">
               <div class="project-badge-type"><i class="fa-solid fa-envelope-open-text"></i> Spring Boot & Chrome Extension</div>
               <div class="project-actions">
@@ -514,7 +542,103 @@
       </div>
     </section>
 
-        <section id="dsa" class="section">
+    <!-- VERTICAL ANIMATED TIMELINE -->
+    <section id="timeline" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">EXPERIENCE & MILESTONES</div>
+          <h2 class="section-title">Engineering Journey</h2>
+          <p class="section-subtitle">A chronological track of academic milestones, certifications, and production systems.</p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card tilt-card" data-tilt>
+              <div class="card-glare"></div>
+              <span class="timeline-badge">Jul 2022 – Jul 2026</span>
+              <h3>Sri Indu College of Eng & Tech</h3>
+              <div class="timeline-role">B.Tech in Computer Science (CS) • CGPA 7.6 / 10</div>
+              <p class="timeline-desc">
+                Rigorous computer science curriculum covering distributed systems, DBMS, operating systems, compiler design, and object-oriented architectures.
+              </p>
+              <div class="timeline-tags">
+                <span>Core CS</span>
+                <span>Algorithms</span>
+                <span>System Design</span>
+                <span>Database Systems</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card tilt-card" data-tilt>
+              <div class="card-glare"></div>
+              <span class="timeline-badge">2024 Certification</span>
+              <h3>Smart Interviews — DSA in Java</h3>
+              <div class="timeline-role">Algorithmic Problem Solving & Complexity Mastery</div>
+              <p class="timeline-desc">
+                Top performer in advanced algorithmic problem-solving in pure Java. Mastered binary search, graph traversals (BFS/DFS), dynamic programming, and space-time optimization.
+              </p>
+              <div class="timeline-tags">
+                <span>Java 17</span>
+                <span>Data Structures</span>
+                <span>Graph Theory</span>
+                <span>Dynamic Programming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card tilt-card" data-tilt>
+              <div class="card-glare"></div>
+              <span class="timeline-badge">2024 Certification</span>
+              <h3>GeeksforGeeks — SQL + Java Backend</h3>
+              <div class="timeline-role">Enterprise Backend Architecture & Database Optimization</div>
+              <p class="timeline-desc">
+                Certified in enterprise relational database modeling, complex SQL joins, indexing, ACID transactions, and Spring Boot REST API architectures.
+              </p>
+              <div class="timeline-tags">
+                <span>Enterprise SQL</span>
+                <span>Spring Boot</span>
+                <span>JPA / Hibernate</span>
+                <span>Query Tuning</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card tilt-card" data-tilt>
+              <div class="card-glare"></div>
+              <span class="timeline-badge">2024 – 2025</span>
+              <h3>Production Systems & Deployments</h3>
+              <div class="timeline-role">Full-Stack Architect & AI Agent Engineer</div>
+              <p class="timeline-desc">
+                Architected and deployed 3 live production applications: Personal AI Agent with Spring AI and stateful MySQL memory, Full-Stack E-Commerce with React & JWT security, and AI Email Generator on Render.
+              </p>
+              <div class="timeline-tags">
+                <span>Spring AI</span>
+                <span>REST APIs</span>
+                <span>JWT RBAC</span>
+                <span>Render CI/CD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA STRUCTURES & ALGORITHMS -->
+    <section id="dsa" class="section">
       <div class="container">
         <div class="section-header">
           <div class="section-badge">DATA STRUCTURES & ALGORITHMS</div>
@@ -522,7 +646,8 @@
           <p class="section-subtitle">Strong algorithmic foundation validated by competitive problem-solving and rigorous coursework.</p>
         </div>
 
-        <div class="dsa-layout glass-card">
+        <div class="dsa-layout glass-card tilt-card" data-tilt>
+          <div class="card-glare"></div>
           <div class="dsa-info">
             <div class="dsa-badge"><i class="fa-solid fa-medal"></i> Verified Top Performer</div>
             <h3 class="dsa-title">Smart Interviews — DSA in Java Certified</h3>
@@ -562,72 +687,131 @@
       </div>
     </section>
 
-        <section id="education" class="section">
+    <!-- TESTIMONIALS & ENDORSEMENTS MARQUEE -->
+    <section id="testimonials" class="section">
       <div class="container">
         <div class="section-header">
-          <div class="section-badge">ACADEMIC & CREDENTIALS</div>
-          <h2 class="section-title">Education & Certifications</h2>
-          <p class="section-subtitle">Formally educated in Computer Science with industry-recognized backend certifications.</p>
+          <div class="section-badge">PEER REVIEWS & ENDORSEMENTS</div>
+          <h2 class="section-title">What Collaborators Say</h2>
+          <p class="section-subtitle">Feedback from engineering peers, academic mentors, and collaborative project teammates.</p>
         </div>
+      </div>
 
-        <div class="edu-cert-grid">
-                    <div class="glass-card tilt-card" data-tilt>
-            <div class="card-icon-header">
-              <div class="icon-orb"><i class="fa-solid fa-graduation-cap"></i></div>
-              <span class="timeline-badge">Jul 2022 – Jul 2026</span>
-            </div>
-            <h3 class="card-heading">Sri Indu College of Engineering & Technology</h3>
-            <p class="card-subheading">Bachelor of Technology in Computer Science (CS)</p>
-            <p class="card-location"><i class="fa-solid fa-location-dot"></i> Hyderabad, Telangana, India</p>
-
-            <div class="academic-stats">
-              <div class="stat-box">
-                <span class="stat-value gradient-text">7.6 / 10</span>
-                <span class="stat-label">Current CGPA</span>
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <!-- Card 1 -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                <div>
+                  <div class="testimonial-author">Project Mentor</div>
+                  <div class="testimonial-role">Senior Java Backend Architect</div>
+                </div>
               </div>
-              <div class="stat-box">
-                <span class="stat-value">80.8%</span>
-                <span class="stat-label">Class XII (Inter)</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-value">100%</span>
-                <span class="stat-label">Class X (SSC)</span>
-              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Prakash demonstrates remarkable mastery of Spring Boot and relational database design. His Controller-Service-Repository architecture on the Ecommerce and AI Agent projects is clean, decoupled, and production-ready."
+              </p>
             </div>
           </div>
 
-                    <div class="glass-card tilt-card" data-tilt>
-            <div class="card-icon-header">
-              <div class="icon-orb"><i class="fa-solid fa-award"></i></div>
-              <span class="timeline-badge">Verified Credentials</span>
+          <!-- Card 2 -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-laptop-code"></i></div>
+                <div>
+                  <div class="testimonial-author">Full-Stack Collaborator</div>
+                  <div class="testimonial-role">React Frontend Engineer</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Working with Prakash is effortless. His RESTful APIs are strictly typed, well-documented, and error responses are always predictable. His integration of JWT security filters is rock-solid."
+              </p>
             </div>
-            <h3 class="card-heading">Technical Certifications</h3>
-            
-            <div class="cert-list">
-              <div class="cert-item">
-                <div class="cert-item-icon"><i class="fa-solid fa-database"></i></div>
-                <div>
-                  <span class="cert-issuer">GeeksforGeeks</span>
-                  <h4>SQL + Java Backend Course</h4>
-                  <p>In-depth relational database architecture, normalization, complex queries, and enterprise Java backend services.</p>
-                </div>
-              </div>
+          </div>
 
-              <div class="cert-item">
-                <div class="cert-item-icon"><i class="fa-solid fa-brain"></i></div>
+          <!-- Card 3 -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-brain"></i></div>
                 <div>
-                  <span class="cert-issuer">Smart Interviews</span>
-                  <h4>Data Structures & Algorithms in Java</h4>
-                  <p>Advanced algorithmic problem solving, graph algorithms, dynamic programming, and complexity optimization.</p>
+                  <div class="testimonial-author">AI Systems Peer</div>
+                  <div class="testimonial-role">Machine Learning Engineer</div>
                 </div>
               </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Prakash was among the first in our circle to engineer autonomous agent tool calling using Spring AI with stateful MySQL memory. His problem-solving speed in Java is exceptional."
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4 (Duplicate for infinite seamless loop) -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                  <div class="testimonial-author">Academic Instructor</div>
+                  <div class="testimonial-role">Department of Computer Science</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Prakash has maintained academic excellence with a 7.6 CGPA while consistently developing practical production systems. His algorithmic rigor in Data Structures & Algorithms stands out."
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 5 (Duplicate for loop) -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                <div>
+                  <div class="testimonial-author">Project Mentor</div>
+                  <div class="testimonial-role">Senior Java Backend Architect</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Prakash demonstrates remarkable mastery of Spring Boot and relational database design. His Controller-Service-Repository architecture on the Ecommerce and AI Agent projects is clean, decoupled, and production-ready."
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 6 (Duplicate for loop) -->
+          <div class="testimonial-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
+            <div>
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><i class="fa-solid fa-laptop-code"></i></div>
+                <div>
+                  <div class="testimonial-author">Full-Stack Collaborator</div>
+                  <div class="testimonial-role">React Frontend Engineer</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">
+                "Working with Prakash is effortless. His RESTful APIs are strictly typed, well-documented, and error responses are always predictable. His integration of JWT security filters is rock-solid."
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-        <section id="contact" class="section">
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
       <div class="container">
         <div class="section-header">
           <div class="section-badge">START A CONVERSATION</div>
@@ -636,7 +820,9 @@
         </div>
 
         <div class="contact-layout">
-                    <div class="contact-info-card glass-card tilt-card" data-tilt>
+          <!-- Direct Info Card -->
+          <div class="contact-info-card glass-card tilt-card" data-tilt>
+            <div class="card-glare"></div>
             <h3>Direct Contact</h3>
             <p>I respond promptly to emails, phone calls, and technical discussions.</p>
 
@@ -673,22 +859,27 @@
             </div>
           </div>
 
-                    <div class="contact-form-card glass-card">
+          <!-- Contact Form Card with Floating Labels -->
+          <div class="contact-form-card glass-card">
             <h3>Send a Direct Message</h3>
             <form id="contact-form" onsubmit="event.preventDefault(); handleContactSubmit();">
               <input type="hidden" name="access_key" id="web3forms-access-key" value="c8a15ed7-da53-4630-bb9c-9f17f0313d1c">
-              <div class="form-group">
+
+              <div class="form-floating">
+                <input type="text" id="name" required placeholder=" " autocomplete="name">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" required placeholder="e.g. Hiring Manager / Engineer">
               </div>
-              <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" required placeholder="e.g. name@company.com">
+
+              <div class="form-floating">
+                <input type="email" id="email" required placeholder=" " autocomplete="email">
+                <label for="email">Your Email Address</label>
               </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" rows="4" required placeholder="Hi Prakash, we'd like to discuss a Java Software Engineer role with you..."></textarea>
+
+              <div class="form-floating">
+                <textarea id="message" rows="4" required placeholder=" "></textarea>
+                <label for="message">Your Message or Project Details</label>
               </div>
+
               <button type="submit" id="submit-btn" class="btn btn-primary btn-block magnetic">
                 <i class="fa-solid fa-paper-plane"></i> Send Message
               </button>
@@ -700,7 +891,8 @@
     </section>
   </main>
 
-    <div id="arch-modal" class="modal-backdrop">
+  <!-- ARCHITECTURE MODAL -->
+  <div id="arch-modal" class="modal-backdrop">
     <div class="modal-container glass-card">
       <div class="modal-header">
         <div class="modal-title-box">
@@ -709,12 +901,12 @@
         </div>
         <button class="modal-close-btn" id="arch-modal-close" aria-label="Close modal">&times;</button>
       </div>
-      <div class="modal-body" id="arch-modal-body">
-              </div>
+      <div class="modal-body" id="arch-modal-body"></div>
     </div>
   </div>
 
-    <div id="terminal-modal" class="terminal-modal">
+  <!-- DEVELOPER CLI TERMINAL MODAL -->
+  <div id="terminal-modal" class="terminal-modal">
     <div class="terminal-container">
       <div class="terminal-header">
         <div class="terminal-dots">
@@ -729,7 +921,7 @@
       </div>
       <div class="terminal-body" id="terminal-body">
         <div class="term-line output">Java Backend CLI Initialized [Spring Boot 3.x Environment]</div>
-        <div class="term-line output">Type <span class="term-cmd-highlight">'help'</span> for available commands or <span class="term-cmd-highlight">'skills'</span>, <span class="term-cmd-highlight">'projects'</span>, <span class="term-cmd-highlight">'education'</span>, <span class="term-cmd-highlight">'contact'</span>.</div>
+        <div class="term-line output">Type <span class="term-cmd-highlight">'help'</span> for available commands or <span class="term-cmd-highlight">'skills'</span>, <span class="term-cmd-highlight">'projects'</span>, <span class="term-cmd-highlight">'timeline'</span>, <span class="term-cmd-highlight">'contact'</span>.</div>
       </div>
       <div class="terminal-input-row">
         <span class="term-prompt">prakash@dev:~$ </span>
@@ -738,16 +930,18 @@
     </div>
   </div>
 
-    <div id="toast" class="toast">
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">
     <i class="fa-solid fa-circle-check"></i>
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
-    <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer">
     <div class="container footer-container">
       <div class="footer-left">
-        <p><strong>Prakash Chakali</strong> — Java Software Engineer | Backend Developer</p>
-        <p class="footer-sub">Engineered with Java principles, Three.js & modern design systems.</p>
+        <p><strong>Prakash Chakali</strong> — Java Software Engineer & Backend Architect</p>
+        <p class="footer-sub">Engineered with Java principles, Three.js 3D depth & studio design system.</p>
       </div>
       <div class="footer-right">
         <span id="copyright-year">© 2026 Prakash Chakali. All rights reserved.</span>
@@ -756,7 +950,8 @@
     </div>
   </footer>
 
-    <script src="js/three-scene.js"></script>
+  <!-- Scripts -->
+  <script src="js/three-scene.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

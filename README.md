@@ -1,17 +1,22 @@
-# 🌐 3D Responsive Java Developer Portfolio — Prakash Chakali
+# 🌐 Modern Creative Studio & 3D Java Developer Portfolio — Prakash Chakali
 
-An interactive, production-grade 3D developer portfolio website built for **Prakash Chakali** (Java Software Engineer & Backend Developer) using the **UI/UX Pro Max** design system.
+An interactive, production-grade 3D developer portfolio website engineered for **Prakash Chakali** (Java Software Engineer & Backend Architect). Built with **Three.js**, **Web Audio API**, and a modern design studio aesthetic.
 
 ---
 
 ## ✨ Features & Architecture
 
-- **3D Java Backend Architecture**: Powered by **Three.js** with a central glowing Java core, MySQL database cylinder, Spring AI agent node, API gateway torus ring, and dynamic data stream constellation.
+- **Dedicated Interactive 3D Hero Centerpiece**: Powered by **Three.js** featuring a faceted geometric polyhedron with an inner pulsating energy sphere, intersecting orbital rings, and satellite data nodes that respond interactively to mouse drag and inertia.
+- **Ambient Background Constellation**: Real-time particle field with dynamic line connections and smooth scroll/cursor parallax.
+- **Professional Generative Ambient Music Engine**: Native **Web Audio API** synthesizer delivering warm analog chord voicings (Ebmaj9, Cm9, Fm9 progressions), gentle ambient chime bells, and an animated audio equalizer in the navbar with zero external audio file latency.
+- **Dark & Light Mode System**: Dark mode by default (`#07090e`) with a subtle, high-contrast Light Mode (`#f8fafc`) switcher persisted via `localStorage`.
+- **Studio Typography**: Bold **Space Grotesk** display typography for headings paired with **Inter** for readable body text and **JetBrains Mono** for code and technical badges.
+- **Vertical Animated Timeline**: Chronological track of academic milestones (B.Tech CS @ Sri Indu, CGPA 7.6), certifications (Smart Interviews DSA, GeeksforGeeks SQL+Java Backend), and production deployments.
+- **Endorsements Sliding Marquee**: Smooth infinite CSS marquee showcasing feedback from mentors, engineering peers, and collaborators.
+- **Dynamic 3D Tilt & Specular Glare**: Physics-based 3D perspective transforms with cursor-following specular light reflections across project cards.
 - **Interactive Architecture Modals**: Real-time data pipeline diagrams for *Personal AI Agent*, *Ecommerce Web App*, and *AI Email Generator*.
-- **Personal Brand & Resume Integration**: Strict alignment with verified resume details (Sri Indu College of Eng & Tech, CGPA 7.6, XII 80.8%, X 100%, Smart Interviews DSA, GeeksforGeeks SQL+Java Backend).
-- **Interactive Developer CLI Terminal**: Modal terminal with commands (`help`, `about`, `skills`, `projects`, `dsa`, `education`, `certifications`, `contact`, `whoami`).
-- **Custom Desktop Cursor**: Physics-based magnetic glowing cursor and trailer.
-- **Synthesizer Sound Feedback**: Native Web Audio API sound effects with mute toggle.
+- **Interactive Developer CLI Terminal**: Modal terminal with commands (`help`, `about`, `skills`, `projects`, `timeline`, `dsa`, `music`, `theme`, `contact`, `whoami`).
+- **Floating Label Contact Form**: Modern floating labels with real-time validation and asynchronous Web3Forms delivery.
 - **Automated GitHub Pages Deployment**: Pre-configured CI/CD workflow (`.github/workflows/deploy.yml`).
 
 ---
@@ -25,10 +30,10 @@ Portfolio/
 │       └── deploy.yml    # Automated GitHub Pages deployment pipeline
 ├── index.html            # Main semantic HTML structure
 ├── css/
-│   └── style.css         # UI/UX Pro Max dark cyber design system
+│   └── style.css         # Modern design system, themes, typography & animations
 ├── js/
-│   ├── three-scene.js    # Three.js 3D Java backend architecture scene
-│   └── main.js           # Typing animation, 3D tilt, modals & terminal logic
+│   ├── three-scene.js    # Three.js background constellation & interactive 3D centerpiece
+│   └── main.js           # Ambient music engine, theme toggle, 3D tilt, terminal & forms
 ├── src/
 │   └── Main.java         # Starter Java application
 └── README.md             # Project documentation
@@ -38,24 +43,15 @@ Portfolio/
 
 ## 🚀 How to Push to GitHub & Deploy
 
-### Step 1: Create a new repository on GitHub
-1. Go to [github.com/new](https://github.com/new)
-2. Name your repository: `Portfolio` (or `prakash-portfolio`)
-3. Choose **Public** and leave "Initialize this repository with a README" **unchecked** (since we already initialized it).
-4. Click **Create repository**.
-
-### Step 2: Link and Push to GitHub
-Open your terminal in `C:\Users\vicky\.gemini\antigravity\scratch\Portfolio\` and run:
-
+### Step 1: Push Changes
 ```powershell
-git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/Portfolio.git
-git push -u origin main
+git add .
+git commit -m "feat: overhaul portfolio to modern design studio specifications with 3D centerpiece and ambient music"
+git push
 ```
 
-*(Replace `<YOUR_GITHUB_USERNAME>` with your GitHub username).*
-
-### Step 3: Automated Live Deployment
-Once pushed, the automated GitHub Actions workflow will build and deploy your live portfolio:
+### Step 2: Live Deployment
+The automated GitHub Actions workflow will build and deploy your live portfolio:
 - **Live URL**: `https://<YOUR_GITHUB_USERNAME>.github.io/Portfolio/`
 - *(Go to your repository's **Settings** $\rightarrow$ **Pages** $\rightarrow$ Build and deployment Source: **GitHub Actions**)*.
 
@@ -65,4 +61,5 @@ Once pushed, the automated GitHub Actions workflow will build and deploy your li
 - **Developer**: Prakash Chakali
 - **Email**: `prakashchakali6216@gmail.com`
 - **Phone**: `+91 6302714896`
+- **GitHub**: [@Chakaliprakash](https://github.com/Chakaliprakash)
 - **Location**: Hyderabad, Telangana, India
