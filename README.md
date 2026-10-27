@@ -19,20 +19,17 @@ An interactive portfolio website that presents my projects and software developm
 ## Highlights
 
 - Interactive 3D visuals.
-- Responsive portfolio presentation.
+- Portfolio and project presentation.
 - Browser-based visual and audio effects.
-- Project and developer information in one place.
 
 ## Run Locally
 
 1. Clone the repository.
 2. Review the project files and package configuration.
-3. Install the dependencies specified by the project.
+3. Install the listed dependencies.
 4. Run the development or build command defined in the package scripts.
 
-## Deployment
-
-See the repository configuration for the current deployment setup.
+See the repository configuration for current deployment details.
 
 ## Author
 
