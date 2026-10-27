@@ -1,3 +1,19 @@
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=venom&height=190&color=0:020617,50:1e293b,100:38bdf8&text=Developer%20Portfolio&fontColor=ffffff&fontSize=40&fontAlignY=42&desc=Three.js%20%7C%20JavaScript%20%7C%20GitHub%20Pages&descAlignY=65&descSize=15" width="100%" alt="Developer Portfolio banner"/>
+
+![Three.js](https://img.shields.io/badge/Three.js-Enabled-334155)
+![JavaScript](https://img.shields.io/badge/JavaScript-Project-0f766e)
+![Portfolio](https://img.shields.io/badge/Portfolio-Built%20with%20care-64748b)
+
+**Interactive portfolio and project showcase.**
+
+[Repository](https://github.com/Chakaliprakash/Portfolio) · [Issues](https://github.com/Chakaliprakash/Portfolio/issues)
+
+</div>
+
+---
+
 # 🌐 Modern Creative Studio & 3D Java Developer Portfolio — Prakash Chakali
 
 An interactive, production-grade 3D developer portfolio website engineered for **Prakash Chakali** (Java Software Engineer & Backend Architect). Built with **Three.js**, **Web Audio API**, and a modern design studio aesthetic.
