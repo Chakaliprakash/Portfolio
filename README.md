@@ -14,22 +14,33 @@
 
 # Developer Portfolio
 
-An interactive portfolio website that presents my projects and software development work. The project uses Three.js and browser APIs to create a visual web experience.
+A responsive personal portfolio showcasing my software projects, technical skills, and development experience. The site combines a custom interface with interactive 3D visuals.
 
 ## Highlights
 
-- Interactive 3D visuals.
-- Portfolio and project presentation.
-- Browser-based visual and audio effects.
+- Responsive portfolio layout and project showcase.
+- Three.js animated background and interactive 3D scene.
+- Dark/light theme toggle.
+- Scroll-based navigation and content animations.
+- Interactive terminal-style panel.
+- Contact form integration.
+
+## Technology Stack
+
+- HTML5, CSS3, and JavaScript
+- Three.js
+- Web Audio API
+- GitHub Pages deployment workflow
 
 ## Run Locally
 
-1. Clone the repository.
-2. Review the project files and package configuration.
-3. Install the listed dependencies.
-4. Run the development or build command defined in the package scripts.
+Clone the repository and open `index.html` in a modern browser. For consistent local hosting, use the static server of your choice.
 
-See the repository configuration for current deployment details.
+Some external features, such as the contact form, require their corresponding service configuration.
+
+## Deployment
+
+The repository includes a GitHub Actions workflow for GitHub Pages. Review `.github/workflows/deploy.yml` for deployment details.
 
 ## Author
 
