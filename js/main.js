@@ -1,832 +1,865 @@
 /**
- * ==========================================================================
- * PRAKASH CHAKALI — PORTFOLIO MAIN JAVASCRIPT
- * Features:
- * 1. Professional Web Audio Generative Ambient Music Engine & Equalizer
- * 2. Theme Toggle (Dark / Light) with LocalStorage Persistence
- * 3. Hero Cursor Spotlight & 3D Tilt with Specular Glare Physics
- * 4. Scroll Progress Indicator & Active Navigation Tracking
- * 5. Animated Number Counters & Staggered Scroll Reveals
- * 6. Interactive Developer CLI Terminal Modal & Architecture Diagrams
- * 7. Web3Forms Asynchronous Contact Form Submission
- * ==========================================================================
+ * PRAKASH CHAKALI — PORTFOLIO CORE CONTROLLER
+ * Architecture & Interactions:
+ * 1. Kinetic Concurrency Topology Canvas (Hero Centerpiece)
+ * 2. MysteryStay Interactive Concurrency & Double-Booking Prevention Lab
+ * 3. MysteryStay DSA Top-K Bounded Min-Heap Benchmark Engine
+ * 4. In-Memory MiniDB SQL Sandbox Terminal
+ * 5. Theme Switcher (Editorial Light / Studio Dark)
+ * 6. Native Web Audio Generative Soundscape
+ * 7. Live IST Telemetry & Scrollspy Navigation
+ * 8. Asynchronous Web3Forms Integration
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+(function () {
   'use strict';
 
   /* --------------------------------------------------------------------------
-     1. CUSTOM MAGNETIC CURSOR
+     1. THEME CONTROLLER & SYSTEM INITIALIZATION
      -------------------------------------------------------------------------- */
-  const cursor = document.getElementById('custom-cursor');
-  const trailer = document.getElementById('cursor-trailer');
+  const THEME_STORAGE_KEY = 'prakash_portfolio_theme';
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeLabel = document.getElementById('theme-label');
 
-  if (cursor && trailer && window.innerWidth > 1024) {
+  function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeLabel(savedTheme);
+    } else {
+      // Default is light editorial
+      document.documentElement.setAttribute('data-theme', 'light');
+      updateThemeLabel('light');
+    }
+  }
+
+  function updateThemeLabel(currentTheme) {
+    if (themeLabel) {
+      themeLabel.textContent = currentTheme === 'dark' ? 'Light' : 'Dark';
+    }
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      localStorage.setItem(THEME_STORAGE_KEY, target);
+      updateThemeLabel(target);
+    });
+  }
+
+  initTheme();
+
+  /* --------------------------------------------------------------------------
+     2. LIVE IST TELEMETRY CLOCK
+     -------------------------------------------------------------------------- */
+  const liveClockEl = document.getElementById('live-ist-clock');
+
+  function updateClock() {
+    if (!liveClockEl) return;
+    try {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const timeStr = new Intl.DateTimeFormat('en-GB', options).format(now);
+      liveClockEl.textContent = `IST ${timeStr}`;
+    } catch (e) {
+      liveClockEl.textContent = 'IST active';
+    }
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  /* --------------------------------------------------------------------------
+     3. READING PROGRESS & ACTIVE NAV SCROLLSPY
+     -------------------------------------------------------------------------- */
+  const scrollProgress = document.getElementById('scroll-progress');
+  const navLinks = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('section[id]');
+
+  function handleScroll() {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight > 0 && scrollProgress) {
+      const progress = (window.scrollY / totalHeight) * 100;
+      scrollProgress.style.width = `${progress}%`;
+    }
+
+    // Scrollspy
+    let currentSection = '';
+    const scrollPos = window.scrollY + 140;
+
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href');
+      if (href === `#${currentSection}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  /* --------------------------------------------------------------------------
+     4. EDITORIAL CURSOR (FINE POINTERS ONLY)
+     -------------------------------------------------------------------------- */
+  const cursor = document.getElementById('editorial-cursor');
+  const cursorDot = cursor ? cursor.querySelector('.cursor-dot') : null;
+  const cursorRing = cursor ? cursor.querySelector('.cursor-ring') : null;
+
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-    let trailerX = mouseX;
-    let trailerY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
 
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursor.style.left = `${mouseX}px`;
-      cursor.style.top = `${mouseY}px`;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
     });
 
-    function renderCursorTrailer() {
-      trailerX += (mouseX - trailerX) * 0.15;
-      trailerY += (mouseY - trailerY) * 0.15;
-      trailer.style.left = `${trailerX}px`;
-      trailer.style.top = `${trailerY}px`;
-      requestAnimationFrame(renderCursorTrailer);
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+      requestAnimationFrame(renderCursor);
     }
-    renderCursorTrailer();
+    renderCursor();
 
-    document.querySelectorAll('a, button, .magnetic, .skill-tag, .project-card, .pillar-card, .timeline-card, .testimonial-card').forEach(el => {
+    const interactives = document.querySelectorAll('a, button, input, textarea, select, .preset-btn, .thread-chip');
+    interactives.forEach((el) => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
   }
 
   /* --------------------------------------------------------------------------
-     2. THEME SYSTEM (DARK / LIGHT MODE)
+     5. MOBILE DRAWER NAVIGATION
      -------------------------------------------------------------------------- */
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const htmlRoot = document.documentElement;
+  const menuToggle = document.getElementById('menu-toggle');
+  const drawerClose = document.getElementById('drawer-close');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
 
-  // Initialize theme from localStorage or system preference
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialTheme = savedTheme || (prefersDark ? 'dark' : 'dark'); // dark by default
-  applyTheme(initialTheme);
-
-  function applyTheme(theme) {
-    htmlRoot.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio-theme', theme);
-
-    if (themeToggleBtn) {
-      const icon = themeToggleBtn.querySelector('i');
-      if (icon) {
-        if (theme === 'light') {
-          icon.className = 'fa-solid fa-moon';
-          themeToggleBtn.title = 'Switch to Dark Mode';
-        } else {
-          icon.className = 'fa-solid fa-sun';
-          themeToggleBtn.title = 'Switch to Light Mode';
-        }
-      }
+  function openDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.add('open');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
     }
   }
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      showToast(`Switched to ${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} Mode`);
-      playAudioCue(650, 'triangle', 0.08);
+  function closeDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (menuToggle) menuToggle.addEventListener('click', openDrawer);
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  drawerLinks.forEach((link) => link.addEventListener('click', closeDrawer));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+
+  /* --------------------------------------------------------------------------
+     6. KINETIC CONCURRENCY TOPOLOGY CANVAS (HERO CENTERPIECE)
+     -------------------------------------------------------------------------- */
+  const topologyCanvas = document.getElementById('topology-canvas');
+  if (topologyCanvas) {
+    const ctx = topologyCanvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let animFrameId = null;
+    let isVisible = true;
+    let mouse = { x: -1000, y: -1000, active: false };
+
+    function resizeCanvas() {
+      const rect = topologyCanvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      topologyCanvas.width = width * window.devicePixelRatio;
+      topologyCanvas.height = height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    topologyCanvas.addEventListener('mousemove', (e) => {
+      const rect = topologyCanvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+
+    topologyCanvas.addEventListener('mouseleave', () => {
+      mouse.active = false;
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    // Architecture Topology Nodes: HTTP Gateway -> JWT Filter -> Spring Dispatcher -> Service Mesh -> DB Lock
+    const nodes = [
+      { id: 'gateway', label: 'HTTP Gateway', xRatio: 0.12, yRatio: 0.5, radius: 18, type: 'entry' },
+      { id: 'security', label: 'Spring Security (JWT)', xRatio: 0.32, yRatio: 0.28, radius: 15, type: 'filter' },
+      { id: 'controller', label: 'REST Controllers', xRatio: 0.34, yRatio: 0.72, radius: 15, type: 'filter' },
+      { id: 'orchestrator', label: 'Service Layer', xRatio: 0.54, yRatio: 0.5, radius: 20, type: 'core' },
+      { id: 'heapRanker', label: 'Min-Heap Top-K', xRatio: 0.74, yRatio: 0.25, radius: 15, type: 'algo' },
+      { id: 'lockManager', label: 'PESSIMISTIC_LOCK', xRatio: 0.74, yRatio: 0.75, radius: 17, type: 'lock' },
+      { id: 'dbLedger', label: 'MySQL 8.4 (InnoDB)', xRatio: 0.90, yRatio: 0.5, radius: 22, type: 'db' }
+    ];
+
+    const links = [
+      ['gateway', 'security'],
+      ['gateway', 'controller'],
+      ['security', 'orchestrator'],
+      ['controller', 'orchestrator'],
+      ['orchestrator', 'heapRanker'],
+      ['orchestrator', 'lockManager'],
+      ['heapRanker', 'dbLedger'],
+      ['lockManager', 'dbLedger']
+    ];
+
+    // Transactional Data Packets
+    const packets = [];
+    const packetColors = ['#DE5326', '#38BDF8', '#10B981', '#F59E0B'];
+
+    for (let i = 0; i < 18; i++) {
+      packets.push({
+        linkIndex: Math.floor(Math.random() * links.length),
+        progress: Math.random(),
+        speed: 0.006 + Math.random() * 0.008,
+        color: packetColors[Math.floor(Math.random() * packetColors.length)],
+        payloadSize: Math.floor(Math.random() * 6) + 1
+      });
+    }
+
+    let tick = 0;
+
+    function renderTopology() {
+      tick++;
+      ctx.clearRect(0, 0, width, height);
+
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const wireColor = isDark ? 'rgba(255, 255, 255, 0.09)' : 'rgba(20, 22, 26, 0.09)';
+      const nodeFill = isDark ? '#141720' : '#FFFFFF';
+      const textColor = isDark ? '#94A3B8' : '#4B5563';
+
+      // 1. Draw Links
+      links.forEach(([fromId, toId]) => {
+        const from = nodes.find(n => n.id === fromId);
+        const to = nodes.find(n => n.id === toId);
+        if (!from || !to) return;
+
+        const x1 = from.xRatio * width;
+        const y1 = from.yRatio * height;
+        const x2 = to.xRatio * width;
+        const y2 = to.yRatio * height;
+
+        ctx.beginPath();
+        ctx.strokeStyle = wireColor;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      });
+
+      // 2. Draw Packets
+      packets.forEach((p) => {
+        p.progress += p.speed;
+        if (p.progress > 1) {
+          p.progress = 0;
+          p.linkIndex = Math.floor(Math.random() * links.length);
+        }
+
+        const [fromId, toId] = links[p.linkIndex];
+        const from = nodes.find(n => n.id === fromId);
+        const to = nodes.find(n => n.id === toId);
+        if (!from || !to) return;
+
+        const x1 = from.xRatio * width;
+        const y1 = from.yRatio * height;
+        const x2 = to.xRatio * width;
+        const y2 = to.yRatio * height;
+
+        const px = x1 + (x2 - x1) * p.progress;
+        const py = y1 + (y2 - y1) * p.progress;
+
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 6;
+        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // 3. Draw Nodes
+      nodes.forEach((n) => {
+        let nx = n.xRatio * width;
+        let ny = n.yRatio * height;
+
+        // Interactive mouse perturbation
+        if (mouse.active) {
+          const dx = mouse.x - nx;
+          const dy = mouse.y - ny;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            const force = (1 - dist / 100) * 8;
+            nx -= (dx / dist) * force;
+            ny -= (dy / dist) * force;
+          }
+        }
+
+        // Pulse ring around Lock and DB
+        if (n.type === 'lock' || n.type === 'core') {
+          const pulse = (Math.sin(tick * 0.05) + 1) * 3;
+          ctx.beginPath();
+          ctx.strokeStyle = n.type === 'lock' ? 'rgba(222, 83, 38, 0.3)' : 'rgba(16, 185, 129, 0.3)';
+          ctx.lineWidth = 1;
+          ctx.arc(nx, ny, n.radius + 4 + pulse, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Node Circle
+        ctx.beginPath();
+        ctx.fillStyle = nodeFill;
+        ctx.strokeStyle = n.type === 'lock' ? '#DE5326' : (n.type === 'db' ? '#3B82F6' : (isDark ? '#4B5563' : '#CBD5E1'));
+        ctx.lineWidth = n.type === 'lock' ? 2.5 : 1.8;
+        ctx.arc(nx, ny, n.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Node Center Core
+        ctx.beginPath();
+        ctx.fillStyle = n.type === 'lock' ? '#DE5326' : (n.type === 'entry' ? '#10B981' : (n.type === 'db' ? '#3B82F6' : '#94A3B8'));
+        ctx.arc(nx, ny, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Label Text
+        ctx.font = '600 9px "JetBrains Mono", monospace';
+        ctx.fillStyle = textColor;
+        ctx.textAlign = 'center';
+        ctx.fillText(n.label, nx, ny + n.radius + 14);
+      });
+
+      animFrameId = requestAnimationFrame(renderTopology);
+    }
+
+    animFrameId = requestAnimationFrame(renderTopology);
+  }
+
+  /* --------------------------------------------------------------------------
+     7. FLAGSHIP LAB A: CONCURRENCY LOCK & DOUBLE-BOOKING SIMULATOR
+     -------------------------------------------------------------------------- */
+  const runSimBtn = document.getElementById('run-concurrency-sim');
+  const resetSimBtn = document.getElementById('reset-concurrency-sim');
+  const threadsContainer = document.getElementById('threads-container');
+  const simTerminal = document.getElementById('sim-terminal');
+  const inventoryCounter = document.getElementById('inventory-counter');
+
+  const THREAD_COUNT = 10;
+  let isSimRunning = false;
+
+  function initThreads() {
+    if (!threadsContainer) return;
+    threadsContainer.innerHTML = '';
+    for (let i = 1; i <= THREAD_COUNT; i++) {
+      const chip = document.createElement('div');
+      chip.className = 'thread-chip';
+      chip.id = `th-chip-${i}`;
+      chip.innerHTML = `
+        <span class="th-name">Thread #${i}</span>
+        <span class="th-state" id="th-state-${i}">READY</span>
+      `;
+      threadsContainer.appendChild(chip);
+    }
+    if (inventoryCounter) inventoryCounter.textContent = '1 Room';
+  }
+
+  initThreads();
+
+  function logTerminal(msg, type = 'prompt') {
+    if (!simTerminal) return;
+    const line = document.createElement('div');
+    line.className = `term-line ${type}`;
+    const timestamp = new Date().toISOString().substring(11, 23);
+    line.textContent = `[${timestamp}] ${msg}`;
+    simTerminal.appendChild(line);
+    simTerminal.scrollTop = simTerminal.scrollHeight;
+  }
+
+  if (runSimBtn) {
+    runSimBtn.addEventListener('click', () => {
+      if (isSimRunning) return;
+      isSimRunning = true;
+      runSimBtn.disabled = true;
+
+      logTerminal('--- SPAWNING 10 CONCURRENT BOOKING THREADS ---', 'prompt');
+      logTerminal('Executing SQL: SELECT * FROM room_inventories WHERE id = 101 FOR UPDATE;', 'prompt');
+
+      // Random winner thread (e.g. Thread #4 or #7)
+      const winnerId = Math.floor(Math.random() * THREAD_COUNT) + 1;
+
+      for (let i = 1; i <= THREAD_COUNT; i++) {
+        const chip = document.getElementById(`th-chip-${i}`);
+        const stateEl = document.getElementById(`th-state-${i}`);
+        if (chip && stateEl) {
+          chip.className = 'thread-chip running';
+          stateEl.textContent = 'ACQUIRING';
+        }
+      }
+
+      // Simulate lock contention resolution after 850ms
+      setTimeout(() => {
+        let conflictCount = 0;
+
+        for (let i = 1; i <= THREAD_COUNT; i++) {
+          const chip = document.getElementById(`th-chip-${i}`);
+          const stateEl = document.getElementById(`th-state-${i}`);
+
+          if (i === winnerId) {
+            if (chip && stateEl) {
+              chip.className = 'thread-chip success';
+              stateEl.textContent = 'LOCK ACQUIRED (200)';
+            }
+            logTerminal(`[Thread-${i}] Lock granted! Reserved Room 101. Decrementing available_rooms -> 0. Status: 200 OK`, 'win');
+          } else {
+            conflictCount++;
+            if (chip && stateEl) {
+              chip.className = 'thread-chip conflict';
+              stateEl.textContent = '409 CONFLICT';
+            }
+          }
+        }
+
+        if (inventoryCounter) inventoryCounter.textContent = '0 Rooms (LOCKED)';
+        logTerminal(`[PESSIMISTIC_WRITE Guard] ${conflictCount} threads rejected with 409 Conflict. Double-booking prevented.`, 'err');
+        logTerminal('--- TRANSACTION SERIALIZATION VERIFIED SUCCESSFULLY ---', 'win');
+
+        isSimRunning = false;
+        runSimBtn.disabled = false;
+      }, 900);
+    });
+  }
+
+  if (resetSimBtn) {
+    resetSimBtn.addEventListener('click', () => {
+      if (isSimRunning) return;
+      initThreads();
+      if (simTerminal) {
+        simTerminal.innerHTML = '<div class="term-line prompt">> System ready. Press "Simulate 10 Concurrent Requests" to trigger parallel transactions.</div>';
+      }
     });
   }
 
   /* --------------------------------------------------------------------------
-     3. PROFESSIONAL WEB AUDIO GENERATIVE AMBIENT MUSIC ENGINE
+     8. FLAGSHIP LAB B: DSA TOP-K VS TIMSORT BENCHMARK CALCULATOR
      -------------------------------------------------------------------------- */
-  const soundToggleBtn = document.getElementById('sound-toggle');
-  const musicText = document.getElementById('music-text');
-  let audioCtx = null;
-  let isPlayingMusic = false;
-  let masterGain = null;
-  let musicInterval = null;
-  let chordIndex = 0;
-  let currentPadOscs = [];
+  const dealCountRange = document.getElementById('deal-count-range');
+  const kCountRange = document.getElementById('k-count-range');
+  const dealCountDisplay = document.getElementById('deal-count-display');
+  const kCountDisplay = document.getElementById('k-count-display');
+  const timsortOps = document.getElementById('timsort-ops');
+  const heapOps = document.getElementById('heap-ops');
+  const heapProgressBar = document.getElementById('heap-progress-bar');
+  const speedupMultiplier = document.getElementById('speedup-multiplier');
+  const memorySavings = document.getElementById('memory-savings');
 
-  // Studio Ambient Chord Voicings (Ebmaj9, Cm9, Fm9, Bb7sus4, Gm7) in Hz
-  const ambientChords = [
-    [155.56, 196.00, 233.08, 293.66, 349.23], // Ebmaj9
-    [130.81, 196.00, 233.08, 261.63, 311.13], // Cm9
-    [174.61, 207.65, 261.63, 311.13, 349.23], // Fm9
-    [116.54, 174.61, 233.08, 261.63, 349.23], // Bb7sus4
-    [196.00, 233.08, 293.66, 349.23, 392.00]  // Gm7
+  function updateDsaBenchmark() {
+    if (!dealCountRange || !kCountRange) return;
+
+    const N = parseInt(dealCountRange.value, 10);
+    const K = parseInt(kCountRange.value, 10);
+
+    if (dealCountDisplay) dealCountDisplay.textContent = N.toLocaleString();
+    if (kCountDisplay) kCountDisplay.textContent = K.toString();
+
+    // Calculate operations:
+    // TimSort = N * log2(N)
+    // Bounded Min-Heap = N * log2(K)
+    const log2N = Math.log2(N);
+    const log2K = Math.log2(K);
+
+    const timsortOperations = Math.round(N * log2N);
+    const heapOperations = Math.round(N * log2K);
+    const speedup = (timsortOperations / heapOperations).toFixed(2);
+    const memRatio = Math.round(N / K);
+
+    if (timsortOps) timsortOps.textContent = `~ ${timsortOperations.toLocaleString()} ops`;
+    if (heapOps) heapOps.textContent = `~ ${heapOperations.toLocaleString()} ops`;
+    if (speedupMultiplier) speedupMultiplier.textContent = `${speedup}× Faster`;
+    if (memorySavings) memorySavings.textContent = `${memRatio.toLocaleString()}× Less Memory`;
+
+    if (heapProgressBar) {
+      const percentage = Math.min(Math.max((heapOperations / timsortOperations) * 100, 8), 100);
+      heapProgressBar.style.width = `${percentage.toFixed(1)}%`;
+    }
+  }
+
+  if (dealCountRange && kCountRange) {
+    dealCountRange.addEventListener('input', updateDsaBenchmark);
+    kCountRange.addEventListener('input', updateDsaBenchmark);
+    updateDsaBenchmark();
+  }
+
+  /* --------------------------------------------------------------------------
+     9. IN-MEMORY MINIDB SQL SANDBOX TERMINAL
+     -------------------------------------------------------------------------- */
+  const minidbForm = document.getElementById('minidb-form');
+  const minidbInput = document.getElementById('minidb-input');
+  const minidbOutput = document.getElementById('minidb-output');
+  const presetBtns = document.querySelectorAll('.preset-btn');
+
+  // Mini in-memory database table mock matching MiniDB's exact implementation
+  let dbRows = [
+    { id: 1, name: 'Alice', age: 22 },
+    { id: 2, name: 'Bob', age: 25 },
+    { id: 3, name: 'Charlie', age: 19 }
   ];
 
-  function initAudioContext() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  function formatAsciiTable(rows, columns = ['id', 'name', 'age']) {
+    if (rows.length === 0) {
+      return '(0 rows returned)';
+    }
 
-      // Warm analog lowpass filter
+    // Calculate max width per column
+    const widths = {};
+    columns.forEach(col => {
+      widths[col] = col.length;
+      rows.forEach(r => {
+        const valStr = String(r[col] ?? '');
+        if (valStr.length > widths[col]) widths[col] = valStr.length;
+      });
+      widths[col] += 2; // padding
+    });
+
+    // Divider
+    const makeDivider = () => '+' + columns.map(col => '-'.repeat(widths[col] + 2)).join('+') + '+';
+    const makeRow = (obj) => '| ' + columns.map(col => String(obj[col] ?? '').padEnd(widths[col])).join(' | ') + ' |';
+
+    let out = [];
+    out.push(makeDivider());
+    const headerObj = {};
+    columns.forEach(c => headerObj[c] = c.toUpperCase());
+    out.push(makeRow(headerObj));
+    out.push(makeDivider());
+    rows.forEach(r => out.push(makeRow(r)));
+    out.push(makeDivider());
+    out.push(`(${rows.length} row${rows.length === 1 ? '' : 's'} in set)`);
+    return out.join('\n');
+  }
+
+  function executeSql(sql) {
+    const raw = sql.trim();
+    if (!raw) return '';
+
+    let res = `\nminidb> ${raw}\n`;
+
+    const clean = raw.replace(/;$/, '').trim();
+
+    // 1. SELECT * FROM users WHERE id = X (PK O(1) Lookup)
+    const selectPkMatch = clean.match(/^SELECT\s+(.+?)\s+FROM\s+users\s+WHERE\s+id\s*=\s*(\d+)$/i);
+    if (selectPkMatch) {
+      const cols = selectPkMatch[1].trim() === '*' ? ['id', 'name', 'age'] : selectPkMatch[1].split(',').map(s => s.trim().toLowerCase());
+      const targetId = parseInt(selectPkMatch[2], 10);
+      const row = dbRows.find(r => r.id === targetId);
+      res += `[MiniDB Engine] Primary Key Hash Index O(1) hit for id = ${targetId}\n`;
+      res += formatAsciiTable(row ? [row] : [], cols);
+      return res;
+    }
+
+    // 2. SELECT with WHERE comparison (e.g. age > 20)
+    const selectWhereMatch = clean.match(/^SELECT\s+(.+?)\s+FROM\s+users\s+WHERE\s+age\s*(>|<|>=|<=|=)\s*(\d+)$/i);
+    if (selectWhereMatch) {
+      const cols = selectWhereMatch[1].trim() === '*' ? ['id', 'name', 'age'] : selectWhereMatch[1].split(',').map(s => s.trim().toLowerCase());
+      const op = selectWhereMatch[2];
+      const targetAge = parseInt(selectWhereMatch[3], 10);
+
+      const filtered = dbRows.filter(r => {
+        if (op === '>') return r.age > targetAge;
+        if (op === '<') return r.age < targetAge;
+        if (op === '>=') return r.age >= targetAge;
+        if (op === '<=') return r.age <= targetAge;
+        if (op === '=') return r.age === targetAge;
+        return false;
+      });
+
+      res += `[MiniDB Engine] Table Scan evaluation for condition 'age ${op} ${targetAge}':\n`;
+      res += formatAsciiTable(filtered, cols);
+      return res;
+    }
+
+    // 3. Simple SELECT * FROM users
+    if (/^SELECT\s+\*\s+FROM\s+users$/i.test(clean)) {
+      res += formatAsciiTable(dbRows, ['id', 'name', 'age']);
+      return res;
+    }
+
+    // 4. INSERT INTO users VALUES (id, 'name', age)
+    const insertMatch = clean.match(/^INSERT\s+INTO\s+users\s+VALUES\s*\(\s*(\d+)\s*,\s*['"](.+?)['"]\s*,\s*(\d+)\s*\)$/i);
+    if (insertMatch) {
+      const id = parseInt(insertMatch[1], 10);
+      const name = insertMatch[2];
+      const age = parseInt(insertMatch[3], 10);
+
+      // Check PK conflict
+      if (dbRows.some(r => r.id === id)) {
+        res += `Error: Duplicate entry '${id}' for key 'PRIMARY'. Insertion aborted.`;
+        return res;
+      }
+
+      dbRows.push({ id, name, age });
+      res += `1 row inserted. Primary Key index updated for id=${id}.`;
+      return res;
+    }
+
+    // 5. DELETE FROM users WHERE id = X
+    const deleteMatch = clean.match(/^DELETE\s+FROM\s+users\s+WHERE\s+id\s*=\s*(\d+)$/i);
+    if (deleteMatch) {
+      const id = parseInt(deleteMatch[1], 10);
+      const initial = dbRows.length;
+      dbRows = dbRows.filter(r => r.id !== id);
+      const removed = initial - dbRows.length;
+      res += `${removed} row${removed === 1 ? '' : 's'} deleted.`;
+      return res;
+    }
+
+    // 6. CREATE TABLE
+    if (/^CREATE\s+TABLE/i.test(clean)) {
+      res += `Table created successfully. Schema registered.`;
+      return res;
+    }
+
+    res += `Supported SQL syntax: CREATE TABLE, INSERT INTO, SELECT [columns] FROM users [WHERE ...], DELETE FROM users WHERE id = X.`;
+    return res;
+  }
+
+  if (minidbForm && minidbInput && minidbOutput) {
+    minidbForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = minidbInput.value;
+      if (!val.trim()) return;
+      const result = executeSql(val);
+      minidbOutput.textContent += result;
+      minidbOutput.scrollTop = minidbOutput.scrollHeight;
+      minidbInput.value = '';
+    });
+  }
+
+  presetBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sql = btn.getAttribute('data-sql');
+      if (minidbInput && sql) {
+        minidbInput.value = sql;
+        if (minidbForm) {
+          const result = executeSql(sql);
+          if (minidbOutput) {
+            minidbOutput.textContent += result;
+            minidbOutput.scrollTop = minidbOutput.scrollHeight;
+          }
+        }
+      }
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     10. GENERATIVE WEB AUDIO AMBIENT SOUNDSCAPE (CALM WARM SYNTH)
+     -------------------------------------------------------------------------- */
+  const soundToggle = document.getElementById('sound-toggle');
+  const soundLabel = document.getElementById('sound-label');
+
+  let audioCtx = null;
+  let isAudioPlaying = false;
+  let synthTimer = null;
+
+  // Pentatonic warm chords (Ebmaj9, Cm9, Fm9)
+  const chordBank = [
+    [155.56, 196.00, 233.08, 293.66], // Ebmaj9
+    [130.81, 196.00, 233.08, 261.63], // Cm7
+    [174.61, 207.65, 261.63, 311.13]  // Fm7
+  ];
+
+  function playAmbientVoice(freq, duration) {
+    if (!audioCtx || !isAudioPlaying) return;
+
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
       const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(750, audioCtx.currentTime);
-      filter.Q.setValueAtTime(1.2, audioCtx.currentTime);
 
-      masterGain.connect(filter);
-      filter.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(450, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.025, audioCtx.currentTime + 1.2);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      // Audio node cleanup
+    }
+  }
+
+  function triggerAmbientChord() {
+    if (!isAudioPlaying) return;
+    const chord = chordBank[Math.floor(Math.random() * chordBank.length)];
+    chord.forEach((noteFreq, idx) => {
+      setTimeout(() => {
+        playAmbientVoice(noteFreq, 4.5);
+      }, idx * 120);
+    });
+
+    synthTimer = setTimeout(triggerAmbientChord, 5200);
+  }
+
+  function toggleAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
     }
 
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
-  }
 
-  function playPadChord(notes, duration = 4.8) {
-    if (!audioCtx || !isPlayingMusic) return;
-
-    // Fade out previous pad oscillators smoothly
-    currentPadOscs.forEach(({ osc, gain }) => {
-      try {
-        gain.gain.setValueAtTime(gain.gain.value, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
-        setTimeout(() => {
-          try { osc.stop(); osc.disconnect(); } catch (e) {}
-        }, 1300);
-      } catch (e) {}
-    });
-    currentPadOscs = [];
-
-    // Create polyphonic warm pad layer
-    notes.forEach((freq, idx) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-
-      osc.type = idx === 0 ? 'sine' : 'triangle';
-      // Subtle micro-detune for lush chorus warmth
-      osc.frequency.setValueAtTime(freq + (Math.random() - 0.5) * 0.8, audioCtx.currentTime);
-
-      const targetGain = idx === 0 ? 0.08 : 0.035;
-      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(targetGain, audioCtx.currentTime + 1.2);
-
-      osc.connect(gain);
-      gain.connect(masterGain);
-      osc.start();
-
-      currentPadOscs.push({ osc, gain });
-    });
-
-    // Sprinkle 1-2 soothing algorithmic chime bell notes
-    const chimeFreq = notes[Math.floor(Math.random() * notes.length)] * 2;
-    setTimeout(() => {
-      playChime(chimeFreq);
-    }, 1400 + Math.random() * 800);
-  }
-
-  function playChime(freq) {
-    if (!audioCtx || !isPlayingMusic) return;
-    try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.025, audioCtx.currentTime + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.0);
-
-      osc.connect(gain);
-      gain.connect(masterGain);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 2.05);
-    } catch (e) {}
-  }
-
-  function startAmbientMusic() {
-    initAudioContext();
-    isPlayingMusic = true;
-
-    // Smooth master fade-in
-    masterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    masterGain.gain.exponentialRampToValueAtTime(0.22, audioCtx.currentTime + 2.0);
-
-    if (soundToggleBtn) soundToggleBtn.classList.add('playing');
-    if (musicText) musicText.textContent = 'Playing';
-
-    playPadChord(ambientChords[chordIndex]);
-
-    musicInterval = setInterval(() => {
-      chordIndex = (chordIndex + 1) % ambientChords.length;
-      playPadChord(ambientChords[chordIndex]);
-    }, 4500);
-
-    showToast('Ambient Studio Soundscape Active');
-  }
-
-  function stopAmbientMusic() {
-    isPlayingMusic = false;
-    clearInterval(musicInterval);
-
-    if (soundToggleBtn) soundToggleBtn.classList.remove('playing');
-    if (musicText) musicText.textContent = 'Ambient BGM';
-
-    if (masterGain && audioCtx) {
-      masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
-      masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
-      setTimeout(() => {
-        currentPadOscs.forEach(({ osc }) => {
-          try { osc.stop(); osc.disconnect(); } catch (e) {}
-        });
-        currentPadOscs = [];
-      }, 900);
-    }
-
-    showToast('Ambient Music Muted');
-  }
-
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      if (isPlayingMusic) {
-        stopAmbientMusic();
-      } else {
-        startAmbientMusic();
-      }
-    });
-  }
-
-  // Micro-interaction Audio Cue
-  function playAudioCue(freq = 600, type = 'sine', duration = 0.05) {
-    if (!isPlayingMusic) return;
-    try {
-      initAudioContext();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch (e) {}
-  }
-
-  document.querySelectorAll('button, a, .skill-tag, .contact-row').forEach(el => {
-    el.addEventListener('mouseenter', () => playAudioCue(440, 'sine', 0.03));
-    el.addEventListener('click', () => playAudioCue(880, 'triangle', 0.06));
-  });
-
-  /* --------------------------------------------------------------------------
-     4. HERO CURSOR SPOTLIGHT TRACKING
-     -------------------------------------------------------------------------- */
-  const heroSection = document.getElementById('hero');
-  if (heroSection) {
-    heroSection.addEventListener('mousemove', (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      heroSection.style.setProperty('--mouse-x', `${x}px`);
-      heroSection.style.setProperty('--mouse-y', `${y}px`);
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     5. DYNAMIC 3D TILT WITH SPECULAR GLARE PHYSICS
-     -------------------------------------------------------------------------- */
-  const tiltCards = document.querySelectorAll('.tilt-card');
-
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      const glareX = (x / rect.width) * 100;
-      const glareY = (y / rect.height) * 100;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.setProperty('--glare-x', `${glareX.toFixed(1)}%`);
-      card.style.setProperty('--glare-y', `${glareY.toFixed(1)}%`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    });
-  });
-
-  /* --------------------------------------------------------------------------
-     6. HERO TYPING ANIMATION
-     -------------------------------------------------------------------------- */
-  const typedTextEl = document.getElementById('typed-text');
-  const phrases = [
-    'Enterprise Java & Spring Boot 3.x',
-    'Autonomous Spring AI Agents & Tool Calling',
-    'Stateless JWT E-Commerce Architectures',
-    'Optimized MySQL Relational Databases',
-    'Full-Stack Cloud REST APIs & Chrome Extensions'
-  ];
-
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typingSpeed = 70;
-  const deletingSpeed = 35;
-  const holdDelay = 2000;
-
-  function typeEffect() {
-    if (!typedTextEl) return;
-    const currentPhrase = phrases[phraseIndex];
-
-    if (isDeleting) {
-      typedTextEl.textContent = currentPhrase.substring(0, charIndex - 1);
-      charIndex--;
+    if (isAudioPlaying) {
+      isAudioPlaying = false;
+      if (synthTimer) clearTimeout(synthTimer);
+      if (soundToggle) soundToggle.classList.remove('playing');
+      if (soundLabel) soundLabel.textContent = 'Audio';
     } else {
-      typedTextEl.textContent = currentPhrase.substring(0, charIndex + 1);
-      charIndex++;
+      isAudioPlaying = true;
+      if (soundToggle) soundToggle.classList.add('playing');
+      if (soundLabel) soundLabel.textContent = 'Mute';
+      triggerAmbientChord();
     }
-
-    let delta = isDeleting ? deletingSpeed : typingSpeed;
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      delta = holdDelay;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      delta = 350;
-    }
-
-    setTimeout(typeEffect, delta);
   }
-  typeEffect();
 
-  /* --------------------------------------------------------------------------
-     7. SCROLL PROGRESS & NAVBAR SCROLL REVEAL
-     -------------------------------------------------------------------------- */
-  const progressBar = document.getElementById('scroll-progress');
-  const navbar = document.getElementById('navbar');
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('nav-menu');
-
-  window.addEventListener('scroll', () => {
-    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const currentProgress = totalScroll > 0 ? (window.scrollY / totalScroll) * 100 : 0;
-    if (progressBar) progressBar.style.width = `${currentProgress}%`;
-
-    if (window.scrollY > 40) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    let currentSection = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 140;
-      const sectionHeight = section.clientHeight;
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        currentSection = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSection}`) {
-        link.classList.add('active');
-      }
-    });
-  }, { passive: true });
-
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      menuToggle.classList.toggle('active');
-    });
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        menuToggle.classList.remove('active');
-      });
-    });
+  if (soundToggle) {
+    soundToggle.addEventListener('click', toggleAudio);
   }
 
   /* --------------------------------------------------------------------------
-     8. ANIMATED STATS NUMBER COUNTER
+     11. ASYNCHRONOUS WEB3FORMS CONTACT FORM
      -------------------------------------------------------------------------- */
-  const statNumbers = document.querySelectorAll('.stat-num');
-  let statsAnimated = false;
-
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !statsAnimated) {
-        statsAnimated = true;
-        statNumbers.forEach(stat => {
-          const target = parseFloat(stat.getAttribute('data-target'));
-          const decimal = parseInt(stat.getAttribute('data-decimal') || '0', 10);
-          const suffix = stat.getAttribute('data-suffix') || '';
-          let current = 0;
-          const increment = target / 35;
-
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              current = target;
-              clearInterval(timer);
-            }
-            stat.textContent = (decimal > 0 ? current.toFixed(decimal) : Math.floor(current)) + suffix;
-          }, 30);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  const statsSection = document.querySelector('.section-stats');
-  if (statsSection) statsObserver.observe(statsSection);
-
-  /* --------------------------------------------------------------------------
-     9. TOAST NOTIFICATIONS & COPY TO CLIPBOARD
-     -------------------------------------------------------------------------- */
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-message');
-
-  function showToast(msg) {
-    if (!toast) return;
-    toastMsg.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2800);
-  }
-
-  document.querySelectorAll('.copyable-text').forEach(item => {
-    item.addEventListener('click', () => {
-      const textToCopy = item.getAttribute('data-copy');
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          showToast(`Copied "${textToCopy}" to clipboard!`);
-          playAudioCue(1000, 'sine', 0.08);
-        }).catch(() => {
-          showToast('Failed to copy');
-        });
-      }
-    });
-  });
-
-  /* --------------------------------------------------------------------------
-     10. ARCHITECTURE MODAL
-     -------------------------------------------------------------------------- */
-  const archModal = document.getElementById('arch-modal');
-  const archModalTitle = document.getElementById('arch-modal-title');
-  const archModalBody = document.getElementById('arch-modal-body');
-  const archModalClose = document.getElementById('arch-modal-close');
-
-  const archData = {
-    'ai-agent': {
-      title: 'Personal AI Agent — Architecture & Tool Pipeline',
-      content: `
-        <p style="color: var(--text-sub); margin-bottom: 16px; font-size: 0.95rem;">
-          A Spring Boot 3.x intelligent agent architecture featuring stateful session context, 
-          MySQL conversation persistence, and autonomous tool calling.
-        </p>
-        <div class="arch-flow-diagram">
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-desktop"></i> Client Chat Interface</div>
-            <span class="arch-node-tech">REST / JSON Payload</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-shield-halved"></i> Spring Boot Controller Layer</div>
-            <span class="arch-node-tech">@RestController / Session Interceptor</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-robot"></i> Spring AI & Tool Calling Engine</div>
-            <span class="arch-node-tech">Weather, Notes, To-Do Function Calling</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-database"></i> MySQL Conversation History Storage</div>
-            <span class="arch-node-tech">Persistent Context Memory / JPA</span>
-          </div>
-        </div>
-        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.82rem; color: #a3e635;">
-          ✓ Verified: Enables LLM to act on tasks rather than just responding with text.
-        </div>
-      `
-    },
-    'ecommerce': {
-      title: 'Ecommerce Platform — Controller-Service-Repository Flow',
-      content: `
-        <p style="color: var(--text-sub); margin-bottom: 16px; font-size: 0.95rem;">
-          Production-style modular 3-tier enterprise architecture with JWT stateless auth, 
-          MySQL transactional data consistency, and an AI Support Chatbot.
-        </p>
-        <div class="arch-flow-diagram">
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-brands fa-react"></i> React Single Page App</div>
-            <span class="arch-node-tech">Client-Side State & JWT Headers</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-lock"></i> Spring Security & JWT Auth Filter</div>
-            <span class="arch-node-tech">Bearer Token Validation / Role Guards</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-leaf"></i> Service Layer & Support Chatbot</div>
-            <span class="arch-node-tech">Business Logic, Cart, Orders & Real-Time AI</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-server"></i> MySQL Database & JPA Repositories</div>
-            <span class="arch-node-tech">ACID Transactions & Catalog Storage</span>
-          </div>
-        </div>
-        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
-          ✓ Architecture: Controller-Service-Repository pattern for maximum scalability and test isolation.
-        </div>
-      `
-    },
-    'ai-email': {
-      title: 'AI Email Generator — Browser Extension & Cloud Pipeline',
-      content: `
-        <p style="color: var(--text-sub); margin-bottom: 16px; font-size: 0.95rem;">
-          End-to-end contextual email generation system integrating a client Chrome extension 
-          with cloud-hosted Spring Boot REST APIs on Render.
-        </p>
-        <div class="arch-flow-diagram">
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-brands fa-chrome"></i> Chrome Browser Extension</div>
-            <span class="arch-node-tech">In-Context UI / Content Scripts</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-network-wired"></i> Spring Boot REST Endpoints</div>
-            <span class="arch-node-tech">Email Context, Tone & Prompt Normalizer</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-wand-magic-sparkles"></i> LLM API Completion Service</div>
-            <span class="arch-node-tech">High-Precision Contextual Draft Generation</span>
-          </div>
-          <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="arch-node-box">
-            <div class="arch-node-title"><i class="fa-solid fa-cloud"></i> Render Cloud Deployment</div>
-            <span class="arch-node-tech">Automated CI/CD via render.yaml</span>
-          </div>
-        </div>
-        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.82rem; color: #a855f7;">
-          ✓ Deployment: Declarative cloud orchestration with Render automated pipelines.
-        </div>
-      `
-    }
-  };
-
-  document.querySelectorAll('.view-arch-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const projKey = btn.getAttribute('data-project');
-      if (archData[projKey]) {
-        archModalTitle.textContent = archData[projKey].title;
-        archModalBody.innerHTML = archData[projKey].content;
-        archModal.classList.add('open');
-        playAudioCue(750, 'triangle', 0.08);
-      }
-    });
-  });
-
-  if (archModalClose) {
-    archModalClose.addEventListener('click', () => archModal.classList.remove('open'));
-  }
-
-  if (archModal) {
-    archModal.addEventListener('click', (e) => {
-      if (e.target === archModal) archModal.classList.remove('open');
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     11. DEVELOPER CLI TERMINAL
-     -------------------------------------------------------------------------- */
-  const terminalModal = document.getElementById('terminal-modal');
-  const terminalTrigger = document.getElementById('terminal-trigger');
-  const termCloseBtn = document.getElementById('term-close-btn');
-  const termClearBtn = document.getElementById('term-clear-btn');
-  const terminalInput = document.getElementById('terminal-input');
-  const terminalBody = document.getElementById('terminal-body');
-
-  function openTerminal() {
-    terminalModal.classList.add('open');
-    terminalInput.focus();
-    playAudioCue(700, 'triangle', 0.1);
-  }
-
-  function closeTerminal() {
-    terminalModal.classList.remove('open');
-  }
-
-  if (terminalTrigger) terminalTrigger.addEventListener('click', openTerminal);
-  if (termCloseBtn) termCloseBtn.addEventListener('click', closeTerminal);
-  if (termClearBtn) {
-    termClearBtn.addEventListener('click', () => {
-      terminalBody.innerHTML = '<div class="term-line output">Terminal cleared. Type <span class="term-cmd-highlight">help</span> for available commands.</div>';
-    });
-  }
-
-  terminalModal.addEventListener('click', (e) => {
-    if (e.target === terminalModal) closeTerminal();
-  });
-
-  const termCommands = {
-    help: () => `Available commands:
-  • <span class="term-cmd-highlight">about</span>          - Bio & core Java engineering pillars
-  • <span class="term-cmd-highlight">skills</span>         - Technical skills matrix & tech stack
-  • <span class="term-cmd-highlight">projects</span>       - Summary of Personal AI Agent, Ecommerce & Email Gen
-  • <span class="term-cmd-highlight">timeline</span>       - Academic & career milestone track
-  • <span class="term-cmd-highlight">dsa</span>            - Data structures & problem solving track
-  • <span class="term-cmd-highlight">certifications</span> - GeeksforGeeks & Smart Interviews credentials
-  • <span class="term-cmd-highlight">music</span>          - Toggle ambient background music
-  • <span class="term-cmd-highlight">theme</span>          - Toggle light/dark theme
-  • <span class="term-cmd-highlight">contact</span>        - Email, phone, location & profiles
-  • <span class="term-cmd-highlight">clear</span>          - Clear terminal display
-  • <span class="term-cmd-highlight">exit</span>           - Exit terminal session`,
-
-    about: () => `<strong>Prakash Chakali</strong>
-Position: Java Software Engineer | Backend Architect
-Location: Hyderabad, Telangana, India
-Summary: Focused on building reliable Java & Spring Boot backend systems, Spring AI tool integrations, and Controller-Service-Repository architectures.`,
-
-    skills: () => `<strong>Technical Skills:</strong>
-• Languages: Java 17+, SQL (MySQL, PostgreSQL), JavaScript
-• Backend: Spring Boot 3.x, Spring AI, Spring Security, Lang4j, RESTful APIs, JWT
-• AI & Agents: AI Agent Development, Tool/Function Calling, Prompt Eng, RAG Patterns
-• Frontend & Tools: React, HTML5, CSS3, Chrome Extension APIs, Git, Render Cloud`,
-
-    projects: () => `<strong>Verified Projects:</strong>
-1. <strong>Personal AI Agent</strong>: Spring Boot + Spring AI with conversation memory & function calling tools.
-2. <strong>Ecommerce Web Application</strong>: Full-stack platform with JWT security, MySQL & real-time support chatbot.
-3. <strong>AI Email Generator</strong>: Full-stack LLM email generation tool + Chrome extension + Render deploy.`,
-
-    timeline: () => `<strong>Engineering Timeline:</strong>
-• 2022–2026: Sri Indu College of Eng & Tech (B.Tech CS, CGPA: 7.6)
-• 2024: Smart Interviews DSA in Java Certified (Top Performer)
-• 2024: GeeksforGeeks SQL + Java Backend Certified
-• 2024–2025: Production Systems Built & Deployed (3 applications)`,
-
-    dsa: () => `<strong>Problem Solving & DSA:</strong>
-• Smart Interviews — DSA in Java Certified
-• Topics: Arrays, Strings, Binary Search, Trees, Graphs, Dynamic Programming, Space-Time Optimization.`,
-
-    certifications: () => `<strong>Certifications:</strong>
-1. SQL + Java Backend Course – GeeksforGeeks
-2. Smart Interviews – Data Structures & Algorithms in Java`,
-
-    music: () => {
-      if (isPlayingMusic) {
-        stopAmbientMusic();
-        return 'Ambient music stopped.';
-      } else {
-        startAmbientMusic();
-        return 'Ambient music playing.';
-      }
-    },
-
-    theme: () => {
-      const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      return `Theme switched to ${newTheme}.`;
-    },
-
-    github: () => `<strong>GitHub Profile:</strong> <a href="https://github.com/Chakaliprakash" target="_blank" style="color:var(--accent-cyan);">https://github.com/Chakaliprakash</a>`,
-
-    repo: () => `<strong>Portfolio Repository:</strong> <a href="https://github.com/Chakaliprakash/Portfolio" target="_blank" style="color:var(--accent-cyan);">https://github.com/Chakaliprakash/Portfolio</a>`,
-
-    resume: () => {
-      window.print();
-      return `Opening print-optimized resume dialog...`;
-    },
-
-    contact: () => `<strong>Contact Details:</strong>
-• Email: <a href="mailto:prakashchakali6216@gmail.com" style="color:var(--accent-cyan);">prakashchakali6216@gmail.com</a>
-• Phone: <a href="tel:+916302714896" style="color:var(--accent-cyan);">+91 6302714896</a>
-• GitHub: <a href="https://github.com/Chakaliprakash" target="_blank" style="color:var(--accent-cyan);">@Chakaliprakash</a>
-• Location: Hyderabad, Telangana, India`,
-
-    whoami: () => `prakash_chakali (Java Backend Software Engineer)`,
-
-    date: () => new Date().toLocaleString(),
-
-    exit: () => {
-      setTimeout(closeTerminal, 300);
-      return 'Terminating session...';
-    }
-  };
-
-  if (terminalInput) {
-    terminalInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const inputVal = terminalInput.value.trim().toLowerCase();
-        if (!inputVal) return;
-
-        const cmdLine = document.createElement('div');
-        cmdLine.className = 'term-line';
-        cmdLine.innerHTML = `<span class="term-prompt">prakash@dev:~$</span> <span>${escapeHtml(inputVal)}</span>`;
-        terminalBody.appendChild(cmdLine);
-
-        const responseLine = document.createElement('div');
-        responseLine.className = 'term-line output';
-
-        if (inputVal === 'clear') {
-          terminalBody.innerHTML = '';
-        } else if (termCommands[inputVal]) {
-          responseLine.innerHTML = termCommands[inputVal]();
-          terminalBody.appendChild(responseLine);
-        } else {
-          responseLine.innerHTML = `<span style="color:#f43f5e;">Command '${escapeHtml(inputVal)}' not recognized. Type <span class="term-cmd-highlight">'help'</span> for list of commands.</span>`;
-          terminalBody.appendChild(responseLine);
-        }
-
-        terminalInput.value = '';
-        terminalBody.scrollTop = terminalBody.scrollHeight;
-        playAudioCue(520, 'sine', 0.05);
-      }
-    });
-  }
-
-  // Keyboard shortcut (Escape to close modals)
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (terminalModal && terminalModal.classList.contains('open')) closeTerminal();
-      if (archModal && archModal.classList.contains('open')) archModal.classList.remove('open');
-    }
-  });
-});
-
-/* --------------------------------------------------------------------------
-   12. WEB3FORMS CONTACT FORM SUBMISSION
-   -------------------------------------------------------------------------- */
-window.handleContactSubmit = async function () {
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
-  const feedback = document.getElementById('form-feedback');
-  const submitBtn = document.getElementById('submit-btn');
   const contactForm = document.getElementById('contact-form');
+  const formFeedback = document.getElementById('form-feedback');
+  const submitBtn = document.getElementById('contact-submit-btn');
+  const submitText = document.getElementById('submit-btn-text');
+  const submitIcon = document.getElementById('submit-btn-icon');
 
-  const name = nameInput ? nameInput.value.trim() : '';
-  const email = emailInput ? emailInput.value.trim() : '';
-  const message = messageInput ? messageInput.value.trim() : '';
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  if (!name || !email || !message) return;
+      const nameInput = document.getElementById('contact-name');
+      const emailInput = document.getElementById('contact-email');
+      const messageInput = document.getElementById('contact-message');
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+      const messageError = document.getElementById('message-error');
 
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
-  feedback.className = 'form-feedback';
-  feedback.style.display = 'none';
+      // Reset errors
+      if (nameError) nameError.textContent = '';
+      if (emailError) emailError.textContent = '';
+      if (messageError) messageError.textContent = '';
+      if (formFeedback) {
+        formFeedback.className = 'form-feedback';
+        formFeedback.style.display = 'none';
+      }
 
-  const accessKeyInput = document.getElementById('web3forms-access-key');
-  const accessKey = accessKeyInput && accessKeyInput.value.trim() ? accessKeyInput.value.trim() : 'c8a15ed7-da53-4630-bb9c-9f17f0313d1c';
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
 
-  try {
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        access_key: accessKey,
-        name: name,
-        email: email,
-        message: message,
-        subject: `New Portfolio Message from ${name}`,
-        from_name: 'Prakash Portfolio Contact Form'
-      })
+      let hasError = false;
+      if (!name) {
+        if (nameError) nameError.textContent = 'Name is required.';
+        hasError = true;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (emailError) emailError.textContent = 'Valid email is required.';
+        hasError = true;
+      }
+      if (!message || message.length < 10) {
+        if (messageError) messageError.textContent = 'Please enter a message (min 10 characters).';
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.textContent = 'Transmitting...';
+      if (submitIcon) submitIcon.className = 'fa-solid fa-spinner fa-spin';
+
+      const formData = new FormData(contactForm);
+      const jsonObject = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(jsonObject)
+        });
+
+        const data = await res.json();
+
+        if (res.status === 200 && data.success) {
+          formFeedback.className = 'form-feedback success';
+          formFeedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Thank you! Your message has been transmitted successfully to prakashchakali6216@gmail.com. I will reply within 24 hours.`;
+          formFeedback.style.display = 'block';
+          contactForm.reset();
+        } else {
+          throw new Error(data.message || 'Transmission failed.');
+        }
+      } catch (err) {
+        formFeedback.className = 'form-feedback error';
+        formFeedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Transmission notice: Webhook delivery could not be completed. Please write directly to <a href="mailto:prakashchakali6216@gmail.com" style="text-decoration:underline; font-weight:700;">prakashchakali6216@gmail.com</a>.`;
+        formFeedback.style.display = 'block';
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.textContent = 'Transmit Message';
+        if (submitIcon) submitIcon.className = 'fa-solid fa-paper-plane';
+      }
     });
-
-    const result = await response.json();
-
-    if (response.status === 200 && result.success) {
-      feedback.className = 'form-feedback success';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Thank you, <strong>${escapeHtml(name)}</strong>! Your message has been sent directly to Prakash's inbox.`;
-      contactForm.reset();
-    } else {
-      feedback.className = 'form-feedback error';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${result.message || 'Submission error. Please email directly to prakashchakali6216@gmail.com'}`;
-    }
-  } catch (err) {
-    feedback.className = 'form-feedback error';
-    feedback.style.display = 'block';
-    feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Network error. Please email directly to <a href="mailto:prakashchakali6216@gmail.com" style="color:var(--accent-cyan);">prakashchakali6216@gmail.com</a>`;
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
   }
-};
 
-function escapeHtml(text) {
-  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-  return text.replace(/[&<>"']/g, m => map[m]);
-}
+})();

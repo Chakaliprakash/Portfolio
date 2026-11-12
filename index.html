@@ -1,635 +1,1064 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prakash Chakali | Java Software Engineer & Backend Architect</title>
-  <meta name="description" content="Portfolio of Prakash Chakali - Java Software Engineer & Backend Developer specializing in Spring Boot 3.x, Spring AI Agents, RESTful APIs, MySQL, and Scalable Cloud Architectures.">
-  <meta name="keywords" content="Java Developer, Java Backend Developer, Spring Boot Developer, Software Engineer, Prakash Chakali, Spring AI, MySQL, REST APIs, JWT, Java Portfolio, Three.js Developer Portfolio">
-  
-  <meta property="og:title" content="Prakash Chakali | Java Software Engineer">
-  <meta property="og:description" content="Building reliable, scalable backend systems with Java, Spring Boot & Spring AI.">
-  <meta property="og:type" content="website">
+  <title>Prakash Chakali — Java Backend Developer &amp; Software Engineer</title>
+  <meta name="description" content="Portfolio of Prakash Chakali — Java Backend Developer, Software Engineer &amp; Full Stack Developer specializing in Java 21, Spring Boot 3.x, MySQL, Concurrency, and Scalable Backend Architectures. Hyderabad, India.">
+  <meta name="keywords" content="Prakash Chakali, Java Developer, Spring Boot, Backend Engineer, Full Stack Developer, Hyderabad, MysteryStay, MiniDB, Java 21, MySQL, REST API, WebSockets">
+  <meta name="author" content="Prakash Chakali">
 
-  <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code) -->
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chakaliprakash.github.io/Portfolio/">
+  <meta property="og:title" content="Prakash Chakali — Java Backend Developer &amp; Software Engineer">
+  <meta property="og:description" content="Engineering ideas into systems that scale. Backend applications, intelligent architectures and reliable software in Java &amp; Spring Boot.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Prakash Chakali — Java Backend Developer">
+  <meta property="twitter:description" content="Engineering ideas into systems that scale.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23141518'/><text x='16' y='21' font-size='15' font-family='sans-serif' font-weight='bold' fill='%23DE5326' text-anchor='middle'>PC</text></svg>">
+
+  <!-- Typography: Syne (Display), Instrument Serif (Editorial Accent), Plus Jakarta Sans (Body & UI), JetBrains Mono (Technical Spec) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Main Stylesheet -->
+
+  <!-- Primary Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  
-  <!-- Three.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-  <!-- Scroll Progress Indicator -->
-  <div id="scroll-progress"></div>
+  <!-- Reading Progress Bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Custom Magnetic Cursor -->
-  <div class="custom-cursor" id="custom-cursor"></div>
-  <div class="cursor-trailer" id="cursor-trailer"></div>
+  <!-- Custom Architectural Cursor (Enabled on fine pointers) -->
+  <div class="editorial-cursor" id="editorial-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
 
-  <!-- Fullscreen 3D Ambient Constellation Canvas -->
-  <canvas id="webgl-canvas"></canvas>
-
-  <!-- Ambient Light Orbs -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
-
-  <!-- Modern Navigation Bar -->
-  <header class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="logo magnetic">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">Prakash.dev</span>
-        <span class="logo-bracket">/&gt;</span>
-        <span class="status-indicator" title="Available for backend engineering opportunities"></span>
+  <!-- SITE HEADER / EDITORIAL NAVBAR -->
+  <header class="editorial-nav" id="site-header">
+    <div class="nav-inner">
+      <!-- Identity Brandmark -->
+      <a href="#hero" class="brandmark" aria-label="Prakash Chakali — Back to top">
+        <span class="brand-monogram">PC</span>
+        <span class="brand-details">
+          <span class="brand-name">Prakash Chakali</span>
+          <span class="brand-sub">Backend Engineer · Hyderabad</span>
+        </span>
       </a>
 
-      <nav class="nav-menu" id="nav-menu">
-        <ul class="nav-list">
-          <li><a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
-          <li><a href="#about" class="nav-link"><i class="fa-solid fa-user-gear"></i> About</a></li>
-          <li><a href="#skills" class="nav-link"><i class="fa-solid fa-network-wired"></i> Skills</a></li>
-          <li><a href="#projects" class="nav-link"><i class="fa-solid fa-cubes-stacked"></i> Projects</a></li>
-          <li><a href="#timeline" class="nav-link"><i class="fa-solid fa-timeline"></i> Timeline</a></li>
-          <li><a href="#dsa" class="nav-link"><i class="fa-solid fa-code-branch"></i> DSA</a></li>
-          <li><a href="#testimonials" class="nav-link"><i class="fa-solid fa-comments"></i> Endorsements</a></li>
-          <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-        </ul>
+      <!-- Telemetry Status Pill (Desktop) -->
+      <div class="telemetry-pill" title="Live status and timezone">
+        <span class="pulse-dot"></span>
+        <span class="pill-text">AVAILABLE FOR ROLES</span>
+        <span class="pill-divider">/</span>
+        <span class="live-clock" id="live-ist-clock">IST --:--:--</span>
+      </div>
+
+      <!-- Navigation Index -->
+      <nav class="nav-links" id="nav-links" aria-label="Main Navigation">
+        <a href="#flagship" class="nav-item"><span class="item-num">01</span><span class="item-label">MysteryStay</span></a>
+        <a href="#systems" class="nav-item"><span class="item-num">02</span><span class="item-label">Projects</span></a>
+        <a href="#competencies" class="nav-item"><span class="item-num">03</span><span class="item-label">Skills &amp; DSA</span></a>
+        <a href="#experience" class="nav-item"><span class="item-num">04</span><span class="item-label">Experience</span></a>
+        <a href="#about" class="nav-item"><span class="item-num">05</span><span class="item-label">About</span></a>
+        <a href="#contact" class="nav-item"><span class="item-num">06</span><span class="item-label">Contact</span></a>
       </nav>
 
+      <!-- Nav Controls -->
       <div class="nav-actions">
-        <!-- Theme Toggle (Dark / Light) -->
-        <button id="theme-toggle" class="btn-icon magnetic" title="Toggle Light / Dark Mode" aria-label="Toggle Theme">
-          <i class="fa-solid fa-sun"></i>
+        <!-- Theme Switcher (Editorial Light / Studio Dark) -->
+        <button id="theme-toggle" class="control-btn" title="Toggle Light / Dark mode" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon theme-icon-dark" aria-hidden="true"></i>
+          <i class="fa-solid fa-sun theme-icon-light" aria-hidden="true"></i>
+          <span class="btn-label" id="theme-label">Dark</span>
         </button>
 
-        <!-- Professional Ambient Music Engine Button -->
-        <button id="sound-toggle" class="btn-music magnetic" title="Toggle Ambient Studio BGM & Sound Effects" aria-label="Toggle Ambient Music">
-          <div class="eq-bars">
-            <span class="eq-bar"></span>
-            <span class="eq-bar"></span>
-            <span class="eq-bar"></span>
-            <span class="eq-bar"></span>
-          </div>
-          <span id="music-text">Ambient BGM</span>
+        <!-- Ambient Sound Toggle (Subtle Web Audio) -->
+        <button id="sound-toggle" class="control-btn sound-btn" title="Toggle ambient synthesizer soundscape" aria-label="Toggle ambient sound">
+          <span class="sound-wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span class="btn-label" id="sound-label">Audio</span>
         </button>
 
-        <!-- Developer CLI Terminal Trigger -->
-        <button id="terminal-trigger" class="btn-terminal magnetic" title="Open Interactive Developer CLI">
-          <i class="fa-solid fa-terminal"></i> <span>CLI</span>
-        </button>
+        <!-- Resume Download CTA -->
+        <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-primary btn-sm" id="nav-resume-btn" title="Download Official Resume PDF">
+          <span>Resume</span>
+          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+        </a>
 
-        <a href="#contact" class="btn btn-primary btn-sm magnetic">Connect</a>
-
-        <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu">
-          <span></span><span></span><span></span>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
         </button>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section id="hero" class="section hero-section">
-      <!-- Cursor-following spotlight glow -->
-      <div id="hero-spotlight" class="hero-spotlight"></div>
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="brand-monogram">PC</span>
+        <span class="brand-name">Prakash Chakali</span>
+      </div>
+      <button id="drawer-close" class="drawer-close-btn" aria-label="Close navigation menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-telemetry">
+        <span class="pulse-dot"></span>
+        <span>Available for Software Engineering &amp; Backend Opportunities</span>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#flagship" class="drawer-link"><span class="drawer-num">01</span><span>Flagship: MysteryStay</span></a>
+        <a href="#systems" class="drawer-link"><span class="drawer-num">02</span><span>Production Projects</span></a>
+        <a href="#competencies" class="drawer-link"><span class="drawer-num">03</span><span>Technical Skills &amp; DSA</span></a>
+        <a href="#experience" class="drawer-link"><span class="drawer-num">04</span><span>Experience &amp; Education</span></a>
+        <a href="#about" class="drawer-link"><span class="drawer-num">05</span><span>About &amp; Philosophy</span></a>
+        <a href="#contact" class="drawer-link"><span class="drawer-num">06</span><span>Initiate Contact</span></a>
+      </nav>
+      <div class="drawer-footer">
+        <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download Resume (PDF)</span>
+        </a>
+        <div class="drawer-socials">
+          <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/prakash-chakali-753b82292/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:prakashchakali6216@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </aside>
 
-      <div class="container hero-container">
-        <div class="hero-content">
-          <div class="badge-tag">
-            <span class="pulse-dot"></span>
-            <span class="badge-text">JAVA SOFTWARE ENGINEER</span>
+  <main id="main-content">
+    <!-- =====================================================================
+         HERO SECTION: MONUMENTAL EDITORIAL COMPOSITION
+         ===================================================================== -->
+    <section id="hero" class="hero-section">
+      <!-- Background Grid & Micro Coordinates -->
+      <div class="hero-grid-canvas" aria-hidden="true"></div>
+
+      <div class="hero-container">
+        <!-- Top Editorial Meta Bar -->
+        <div class="hero-meta-strip">
+          <div class="meta-tag">
+            <span class="meta-label">ROLE</span>
+            <span class="meta-val">Java Backend Developer · Software Engineer · Full Stack</span>
+          </div>
+          <div class="meta-tag">
+            <span class="meta-label">LOCATION</span>
+            <span class="meta-val">Hyderabad, India (17.3850° N, 78.4867° E)</span>
+          </div>
+          <div class="meta-tag hide-mobile">
+            <span class="meta-label">FOCUS</span>
+            <span class="meta-val">Spring Boot 3.x · Distributed Systems · ACID &amp; Concurrency</span>
+          </div>
+        </div>
+
+        <!-- Asymmetrical Hero Grid: Left Typography, Right Interactive Topology -->
+        <div class="hero-editorial-grid">
+          <!-- Left Column: Typography & Narrative -->
+          <div class="hero-narrative">
+            <div class="hero-identity-tag">
+              <span class="tag-accent">//</span>
+              <span>ENGINEERING PORTFOLIO — 2026</span>
+            </div>
+
+            <h1 class="hero-headline">
+              Engineering <span class="headline-serif">ideas</span> into <span class="headline-contrast">systems</span> that <span class="headline-accent">scale.</span>
+            </h1>
+
+            <p class="hero-description">
+              I build backend applications, intelligent experiences and reliable software using <strong>Java</strong>, <strong>Spring Boot</strong> and modern technologies. Specializing in high-concurrency transaction safety, algorithmic optimization, and clean modular architecture.
+            </p>
+
+            <!-- Hero Action Cluster -->
+            <div class="hero-actions">
+              <a href="#flagship" class="btn btn-primary">
+                <span>Inspect Flagship Project</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+              <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-outline" id="hero-resume-btn">
+                <i class="fa-regular fa-file-pdf" aria-hidden="true"></i>
+                <span>Download Resume</span>
+              </a>
+              <a href="#contact" class="btn btn-ghost">
+                <span>Get in Touch</span>
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <!-- Verified Tech Ticker -->
+            <div class="hero-stack-index">
+              <span class="stack-index-label">CORE TECHNOLOGIES</span>
+              <div class="stack-badges">
+                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java 21</span>
+                <span class="tech-pill">Spring Boot 3.3.5</span>
+                <span class="tech-pill">Spring Security</span>
+                <span class="tech-pill">Hibernate/JPA</span>
+                <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
+                <span class="tech-pill">Redis</span>
+                <span class="tech-pill"><i class="fa-brands fa-react"></i> React 18</span>
+                <span class="tech-pill">WebSockets</span>
+                <span class="tech-pill">Spring AI</span>
+              </div>
+            </div>
           </div>
 
-          <h1 class="hero-title">
-            Building reliable backend systems with <span class="gradient-text glow-text">Java & Spring Boot.</span>
-          </h1>
+          <!-- Right Column: Interactive Kinetic Topology Centerpiece -->
+          <div class="hero-centerpiece" aria-label="Interactive Reactive Concurrency Topology">
+            <div class="topology-frame">
+              <div class="topology-header">
+                <div class="topology-status">
+                  <span class="topology-indicator active"></span>
+                  <span class="topology-title">CONCURRENCY &amp; TRANSACTION TOPOLOGY</span>
+                </div>
+                <div class="topology-mode">
+                  <span class="topology-chip">ACID: STRICT</span>
+                  <span class="topology-chip">WORKERS: 8</span>
+                </div>
+              </div>
 
-          <div class="typing-container">
-            <span class="prefix">Specialized in&nbsp;</span>
-            <span id="typed-text" class="typed-text"></span>
-            <span class="cursor">&nbsp;</span>
+              <!-- Interactive Topology Canvas -->
+              <div class="canvas-wrapper">
+                <canvas id="topology-canvas" width="600" height="420" aria-label="Interactive transactional nodes and concurrent packets simulation"></canvas>
+                <div class="canvas-hint">
+                  <i class="fa-solid fa-hand-pointer"></i> Move cursor across canvas to modulate thread pressure
+                </div>
+              </div>
+
+              <!-- Live Architecture Telemetry Strip -->
+              <div class="topology-telemetry">
+                <div class="telemetry-stat">
+                  <span class="t-stat-label">LOCK STRATEGY</span>
+                  <span class="t-stat-val accent">PESSIMISTIC_WRITE</span>
+                </div>
+                <div class="telemetry-stat">
+                  <span class="t-stat-label">TOP-K HEAP</span>
+                  <span class="t-stat-val">O(N log K)</span>
+                </div>
+                <div class="telemetry-stat">
+                  <span class="t-stat-label">EVENT STREAM</span>
+                  <span class="t-stat-val">STOMP / WS</span>
+                </div>
+                <div class="telemetry-stat">
+                  <span class="t-stat-label">DB CONSTRAINTS</span>
+                  <span class="t-stat-val">SERIALIZED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Invitation Indicator -->
+      <div class="hero-scroll-cue">
+        <a href="#flagship" class="scroll-cue-link" aria-label="Scroll to Flagship Project">
+          <span class="cue-text">EXPLORE ARCHITECTURE</span>
+          <span class="cue-line"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 01: FLAGSHIP PROJECT — MYSTERYSTAY (CINEMATIC DARK PRESENTATION)
+         ===================================================================== -->
+    <section id="flagship" class="flagship-section">
+      <div class="flagship-container">
+        <!-- Section Identity Header -->
+        <div class="flagship-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">01</span>
+            <span class="tag-sep">//</span>
+            <span>FLAGSHIP ARCHITECTURE CASE STUDY</span>
+          </div>
+          <div class="flagship-meta-action">
+            <a href="https://github.com/ChakaliPrakash/MysteryStay.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm">
+              <i class="fa-brands fa-github"></i>
+              <span>View Source on GitHub</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Flagship Hero Banner -->
+        <div class="flagship-hero-banner">
+          <div class="banner-content">
+            <div class="flagship-badge-row">
+              <span class="flagship-kicker">FEATURED FULL-STACK PLATFORM</span>
+              <span class="pill-dark"><i class="fa-brands fa-java"></i> Java 21 LTS</span>
+              <span class="pill-dark">Spring Boot 3.3.5</span>
+              <span class="pill-dark">Modular Monolith</span>
+              <span class="pill-dark">MySQL 8.4</span>
+              <span class="pill-dark">React 18</span>
+            </div>
+
+            <h2 class="flagship-title">
+              MysteryStay <span class="title-em">— Intelligent Mystery Hotel Booking Platform</span>
+            </h2>
+
+            <p class="flagship-tagline">
+              “Discover Hidden Stays. Unlock Better Deals.”
+            </p>
+
+            <p class="flagship-lead">
+              A high-performance modular monolith platform engineered to solve the online travel agency (OTA) rate-parity dilemma. MysteryStay enables premium hotels to monetize unsold room inventory at steep discounts (20%–70%) through an <strong>identity-masking pipeline</strong> that keeps hotel brands confidential until booking confirmation, protecting brand pricing power while delivering travelers unmatched luxury rates.
+            </p>
+          </div>
+        </div>
+
+        <!-- Architecture Breakdown & Deep Dive Grid -->
+        <div class="flagship-spec-grid">
+          <!-- Column A: The Problem & Market Dilemma -->
+          <div class="spec-card">
+            <div class="card-eyebrow">THE ARCHITECTURAL PROBLEM</div>
+            <h3 class="card-title">OTA Rate Parity vs. Unsold Capacity</h3>
+            <p class="card-text">
+              Hotels operate under strict rate parity agreements with global OTAs (e.g., Booking.com, Expedia). Offering public discounts directly breaches contracts. Unsold rooms, however, spoil at midnight with 100% margin loss.
+            </p>
+            <div class="card-callout">
+              <div class="callout-label">ENGINEERED SOLUTION</div>
+              <p>
+                <strong>Identity Masking Pipeline:</strong> Deals are indexed and searched solely by luxury amenity clues, micro-neighborhoods, and verified star ratings. Hotel brand names and exact GPS coordinates are cryptographically guarded until an HMAC-verified Razorpay payment hook executes.
+              </p>
+            </div>
           </div>
 
-          <p class="hero-bio">
-            I engineer production-grade REST APIs, intelligent Spring AI agent pipelines, and high-performance database architectures.
-            Focused on robust Controller-Service-Repository patterns, clean modular boundaries, and scalable microservice architectures.
+          <!-- Column B: Concurrency & Lock Engineering -->
+          <div class="spec-card">
+            <div class="card-eyebrow">CONCURRENCY &amp; TRANSACTION SAFETY</div>
+            <h3 class="card-title">Pessimistic Row Locking (<code>SELECT ... FOR UPDATE</code>)</h3>
+            <p class="card-text">
+              Flash sales on limited luxury inventory trigger intense concurrent booking spikes. Standard optimistic locking causes high abort rates and poor traveler UX.
+            </p>
+            <div class="card-callout">
+              <div class="callout-label">DATABASE LEVEL SERIALIZATION</div>
+              <p>
+                Executed via <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code> on daily room inventory ledgers. Rigorously verified with <strong>10 concurrent competing threads</strong> for 1 available room: exactly 1 acquires the lock, 9 receive structured <code>409 Conflict</code>. Zero double-bookings.
+              </p>
+            </div>
+          </div>
+
+          <!-- Column C: Background Maintenance & Resilience -->
+          <div class="spec-card">
+            <div class="card-eyebrow">STATE RECOVERY &amp; REVENUE ENGINE</div>
+            <h3 class="card-title">15-Minute Expiration Hold Sweeper</h3>
+            <p class="card-text">
+              When a booking is initiated, inventory is locked in a <code>PENDING_PAYMENT</code> state. If a user abandons the checkout funnel, locked rooms would remain unavailable.
+            </p>
+            <div class="card-callout">
+              <div class="callout-label">AUTOMATED INVENTORY RESTORATION</div>
+              <p>
+                A background worker running <code>@Scheduled(fixedDelay = 60000)</code> sweeps stale pending transactions exceeding 15 minutes, marks the booking <code>EXPIRED</code>, and atomically restores room capacity to the live availability ledger.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Architecture Context Diagram -->
+        <div class="flagship-architecture-module">
+          <div class="module-header">
+            <div>
+              <span class="module-tag">MODULAR MONOLITH BOUNDED CONTEXTS</span>
+              <h3 class="module-title">Zero Premature Microservice Overhead</h3>
+            </div>
+            <p class="module-desc">
+              Designed as a single deployable unit with strict domain boundary isolation. Modules communicate solely through public service contracts, ensuring atomic local database transactions and zero network partition failures.
+            </p>
+          </div>
+
+          <!-- Contexts Visual Grid -->
+          <div class="contexts-grid">
+            <div class="context-node">
+              <div class="node-id">01 / auth &amp; user</div>
+              <div class="node-tech">JWT · BCrypt (Cost 12) · Refresh Rotation</div>
+              <p class="node-summary">Stateless token authentication, role validation (CUSTOMER, HOTEL_MANAGER, ADMIN), and session revocation.</p>
+            </div>
+
+            <div class="context-node">
+              <div class="node-id">02 / hotel &amp; inventory</div>
+              <div class="node-tech">Spring Data JPA · Daily Availability Ledger</div>
+              <p class="node-summary">Hotel onboarding, room type definitions, rate calendars, and atomic capacity counters.</p>
+            </div>
+
+            <div class="context-node highlight">
+              <div class="node-id">03 / deal &amp; search</div>
+              <div class="node-tech">Bounded Min-Heap Top-K · Inverted Index</div>
+              <p class="node-summary">Identity masking engine, dynamic multi-factor value scoring, and sub-millisecond set intersection search.</p>
+            </div>
+
+            <div class="context-node highlight">
+              <div class="node-id">04 / booking engine</div>
+              <div class="node-tech">PESSIMISTIC_WRITE · 15-Min Expiration Sweeper</div>
+              <p class="node-summary">Strict transactional state machine (PENDING, CONFIRMED, EXPIRED, CANCELLED) with DB row locking.</p>
+            </div>
+
+            <div class="context-node">
+              <div class="node-id">05 / payment gateway</div>
+              <div class="node-tech">Razorpay Sandbox · HMAC-SHA256 · Idempotency</div>
+              <p class="node-summary">Constant-time signature verification (<code>MessageDigest.isEqual</code>), webhook captures, and idempotency keys.</p>
+            </div>
+
+            <div class="context-node">
+              <div class="node-id">06 / admin &amp; audit</div>
+              <div class="node-tech">Audit Logging · Velocity Ledger</div>
+              <p class="node-summary">Partner compliance verification, booking volume tracking, and revenue distribution audits.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             INTERACTIVE FLAGSHIP LABS: CONCURRENCY & DSA BENCHMARK
+             ================================================================= -->
+        <div class="flagship-interactive-labs">
+          <!-- LAB 1: CONCURRENCY LOCK SIMULATOR -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-tag"><i class="fa-solid fa-shield-halved"></i> LIVE INTERACTIVE LAB A</div>
+              <h4 class="lab-title">Concurrency &amp; Double-Booking Prevention Simulator</h4>
+              <p class="lab-desc">
+                Simulate 10 concurrent customer threads competing in parallel to book the <strong>last remaining room (Inventory: 1)</strong>. Watch how MySQL row-level locking (<code>SELECT ... FOR UPDATE</code>) executes in real-time.
+              </p>
+            </div>
+
+            <div class="concurrency-simulation-stage">
+              <div class="sim-controls">
+                <div class="sim-status-box">
+                  <span class="sim-status-label">INITIAL INVENTORY</span>
+                  <span class="sim-status-val" id="inventory-counter">1 Room</span>
+                </div>
+                <div class="sim-status-box">
+                  <span class="sim-status-label">ISOLATION LEVEL</span>
+                  <span class="sim-status-val">READ_COMMITTED</span>
+                </div>
+                <button id="run-concurrency-sim" class="btn btn-accent btn-sm">
+                  <i class="fa-solid fa-play"></i>
+                  <span>Simulate 10 Concurrent Requests</span>
+                </button>
+                <button id="reset-concurrency-sim" class="btn btn-ghost-light btn-sm">
+                  <i class="fa-solid fa-rotate-right"></i>
+                  <span>Reset</span>
+                </button>
+              </div>
+
+              <!-- Visual Thread Lane Display -->
+              <div class="threads-lane-container" id="threads-container">
+                <!-- Dynamically populated 10 threads -->
+              </div>
+
+              <!-- Simulation Output Console -->
+              <div class="sim-terminal" id="sim-terminal" aria-live="polite">
+                <div class="term-line prompt">&gt; System ready. Press "Simulate 10 Concurrent Requests" to trigger parallel transactions.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LAB 2: DSA TOP-K VS TIMSORT BENCHMARK -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-tag"><i class="fa-solid fa-bolt"></i> LIVE INTERACTIVE LAB B</div>
+              <h4 class="lab-title">DSA Top-K Value Ranker: Bounded Min-Heap vs Full Sort</h4>
+              <p class="lab-desc">
+                MysteryStay ranks high-volume deals using a <code>PriorityQueue&lt;ScoredDeal&gt;</code> bounded to size $K$, achieving <strong>$O(N \log K)$</strong> complexity versus standard TimSort <strong>$O(N \log N)$</strong>. Adjust parameters to inspect comparison metrics.
+              </p>
+            </div>
+
+            <div class="dsa-benchmark-stage">
+              <div class="dsa-inputs-row">
+                <div class="dsa-input-group">
+                  <label for="deal-count-range">
+                    <span>CANDIDATE DEALS (N):</span>
+                    <strong id="deal-count-display">10,000</strong>
+                  </label>
+                  <input type="range" id="deal-count-range" min="500" max="50000" step="500" value="10000">
+                </div>
+
+                <div class="dsa-input-group">
+                  <label for="k-count-range">
+                    <span>TOP DEALS RETURNED (K):</span>
+                    <strong id="k-count-display">10</strong>
+                  </label>
+                  <input type="range" id="k-count-range" min="3" max="50" step="1" value="10">
+                </div>
+              </div>
+
+              <!-- Benchmark Comparison Results -->
+              <div class="benchmark-results-grid">
+                <div class="benchmark-result-card standard">
+                  <div class="res-eyebrow">BRUTE FORCE / TIMSORT</div>
+                  <div class="res-complexity">O(N log N)</div>
+                  <div class="res-ops" id="timsort-ops">~ 132,900 ops</div>
+                  <div class="res-memory">Memory: Allocates O(N) array buffer</div>
+                  <div class="res-bar-track">
+                    <div class="res-bar full" style="width: 100%;"></div>
+                  </div>
+                </div>
+
+                <div class="benchmark-result-card optimal">
+                  <div class="res-eyebrow">MYSTERYSTAY BOUNDED MIN-HEAP</div>
+                  <div class="res-complexity highlight">O(N log K)</div>
+                  <div class="res-ops highlight" id="heap-ops">~ 33,200 ops</div>
+                  <div class="res-memory">Memory: Strict O(K) heap allocations</div>
+                  <div class="res-bar-track">
+                    <div class="res-bar optimal" id="heap-progress-bar" style="width: 25%;"></div>
+                  </div>
+                </div>
+
+                <div class="benchmark-result-card summary">
+                  <div class="res-eyebrow">PERFORMANCE EFFICIENCY</div>
+                  <div class="res-speedup" id="speedup-multiplier">4.00× Faster</div>
+                  <div class="res-memory-reduction" id="memory-savings">1,000× Less Memory</div>
+                  <div class="res-status-note">Zero garbage collection pressure on high concurrency search surges.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MysteryStay Tech Verification Sheet -->
+        <div class="flagship-tech-footer">
+          <div class="tech-spec-row">
+            <div class="spec-item">
+              <span class="spec-label">RUNTIME &amp; LANGUAGE</span>
+              <span class="spec-value">Java 21 LTS (Oracle OpenJDK)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">FRAMEWORK</span>
+              <span class="spec-value">Spring Boot 3.3.5 / Spring Security 6</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">PERSISTENCE</span>
+              <span class="spec-value">Hibernate 6 / Spring Data JPA / MySQL 8.4</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">FRONTEND</span>
+              <span class="spec-value">React 18.3, Vite 5.4, Tailwind CSS 3.4</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">PAYMENT GATEWAY</span>
+              <span class="spec-value">Razorpay Sandbox / HMAC-SHA256 Webhook</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">SOURCE REPOSITORY</span>
+              <span class="spec-value"><a href="https://github.com/ChakaliPrakash/MysteryStay.git" target="_blank" rel="noopener noreferrer">github.com/ChakaliPrakash/MysteryStay</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 02: OTHER PRODUCTION PROJECTS & TECHNICAL CASE STUDIES
+         ===================================================================== -->
+    <section id="systems" class="systems-section">
+      <div class="section-container">
+        <!-- Section Header -->
+        <div class="section-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">02</span>
+            <span class="tag-sep">//</span>
+            <span>PRODUCTION SYSTEMS &amp; ENGINES</span>
+          </div>
+          <h2 class="section-title">
+            Engineering Case Studies <span class="title-serif">&amp; Architectures</span>
+          </h2>
+          <p class="section-subtitle">
+            Each project is engineered to solve a distinct technical challenge: real-time synchronization, concurrency safety under transactional contention, or zero-dependency systems programming.
           </p>
-
-          <div class="hero-tech-strip">
-            <span class="hero-tech-pill"><i class="fa-brands fa-java"></i> Java 17+</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot 3.x</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-robot"></i> Spring AI</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-shield-halved"></i> JWT Auth</span>
-            <span class="hero-tech-pill"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
-          </div>
-
-          <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary btn-glow magnetic">
-              <i class="fa-solid fa-laptop-code"></i> Explore Projects
-            </a>
-            <a href="#contact" class="btn btn-outline magnetic">
-              <i class="fa-solid fa-paper-plane"></i> Contact Me
-            </a>
-            <button id="resume-download-btn" class="btn btn-glass magnetic" onclick="window.print()">
-              <i class="fa-solid fa-file-arrow-down"></i> Download Resume
-            </button>
-          </div>
-
-          <div class="hero-meta">
-            <div class="meta-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Hyderabad, Telangana, India</span>
-            </div>
-            <div class="meta-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span class="copyable-text magnetic" data-copy="prakashchakali6216@gmail.com" title="Click to copy email">
-                prakashchakali6216@gmail.com <i class="fa-regular fa-copy"></i>
-              </span>
-            </div>
-            <div class="meta-item">
-              <i class="fa-solid fa-phone"></i>
-              <span class="copyable-text magnetic" data-copy="+916302714896" title="Click to copy phone">
-                +91 6302714896 <i class="fa-regular fa-copy"></i>
-              </span>
-            </div>
-          </div>
         </div>
 
-        <!-- 3D Centerpiece Interactive Stage -->
-        <div class="hero-3d-stage tilt-card" id="hero-3d-stage">
-          <div class="card-glare"></div>
-          <canvas id="hero-canvas-3d"></canvas>
-          <div class="stage-drag-hint">
-            <i class="fa-solid fa-arrows-up-down-left-right"></i> Drag to rotate 3D Java Core
+        <!-- Project Cards Grid -->
+        <div class="projects-editorial-list">
+          <!-- ==========================================
+               PROJECT 1: REAL-TIME COLLABORATIVE KANBAN
+               ========================================== -->
+          <article class="project-editorial-card">
+            <div class="project-header-row">
+              <div class="project-index">02.1 / EVENT-DRIVEN COLLABORATION</div>
+              <div class="project-period">Aug – Sep 2026</div>
+            </div>
+
+            <div class="project-body-grid">
+              <div class="project-main-narrative">
+                <h3 class="project-name">Real-Time Collaborative Kanban Board (Trello Clone)</h3>
+                <p class="project-positioning">
+                  Full-stack collaborative task management platform engineered with bidirectional real-time synchronization across distributed clients.
+                </p>
+
+                <!-- Technical Problem & Architectural Solution -->
+                <div class="case-study-breakdown">
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-triangle-exclamation"></i> ENGINEERING CHALLENGE</span>
+                    <p>
+                      Traditional REST polling creates massive HTTP overhead and stale board views during multi-user collaboration. Furthermore, updating task order positions in a database column normally requires shifting all subsequent rows ($O(N)$ write operations), creating severe database lock contention when multiple users drag and drop cards simultaneously.
+                    </p>
+                  </div>
+
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-lightbulb"></i> IMPLEMENTATION &amp; DESIGN DECISION</span>
+                    <p>
+                      Implemented <strong>WebSocket communication using STOMP protocol</strong> over Spring Boot, broadcasting state changes instantly to subscribed room channels without HTTP polling. Solved the reordering bottleneck by engineering a <strong>floating-point position indexing schema</strong>: moving a card between position 2.0 and 3.0 computes a simple midpoint assignment of 2.5, transforming an $O(N)$ row cascade into an <strong>$O(1)$ single-row update</strong>.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Verified Project Specs -->
+                <div class="project-specs-list">
+                  <div class="spec-badge"><i class="fa-brands fa-java"></i> Java</div>
+                  <div class="spec-badge">Spring Boot</div>
+                  <div class="spec-badge"><i class="fa-brands fa-react"></i> React</div>
+                  <div class="spec-badge">WebSockets (STOMP)</div>
+                  <div class="spec-badge">MySQL</div>
+                  <div class="spec-badge">Event-Driven Pub/Sub</div>
+                </div>
+              </div>
+
+              <!-- Architecture Diagram Box -->
+              <div class="project-side-card">
+                <div class="side-card-header">
+                  <span class="sc-title">REAL-TIME DATA FLOW</span>
+                  <span class="sc-badge">WEBSOCKET / STOMP</span>
+                </div>
+                <div class="arch-flow-diagram">
+                  <div class="flow-step">
+                    <span class="step-num">1</span>
+                    <div class="step-detail">
+                      <strong>Client Card Drag-and-Drop</strong>
+                      <span>React UI calculates midpoint floating position (e.g. 2.5).</span>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                  <div class="flow-step">
+                    <span class="step-num">2</span>
+                    <div class="step-detail">
+                      <strong>STOMP Payload via WebSocket</strong>
+                      <span>Spring WebSocket MessageBroker receives destination frame.</span>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                  <div class="flow-step highlight">
+                    <span class="step-num">3</span>
+                    <div class="step-detail">
+                      <strong>O(1) Atomic Single-Row Update</strong>
+                      <span>MySQL persists exact floating coordinate without table locks.</span>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                  <div class="flow-step">
+                    <span class="step-num">4</span>
+                    <div class="step-detail">
+                      <strong>Topic Broadcast to Clients</strong>
+                      <span>Simultaneous peer browsers update DOM without page reloads.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ==========================================
+               PROJECT 2: SECURE E-BIDDING & AUCTION REST API
+               ========================================== -->
+          <article class="project-editorial-card">
+            <div class="project-header-row">
+              <div class="project-index">02.2 / CONCURRENT FINANCIAL TRANSACTIONS</div>
+              <div class="project-period">Jul 2026</div>
+            </div>
+
+            <div class="project-body-grid">
+              <div class="project-main-narrative">
+                <h3 class="project-name">Secure E-Bidding &amp; Auction REST API</h3>
+                <p class="project-positioning">
+                  High-throughput, role-based backend engine for real-time auctioning with concurrent bidding integrity and cryptographic token authentication.
+                </p>
+
+                <!-- Technical Problem & Architectural Solution -->
+                <div class="case-study-breakdown">
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-triangle-exclamation"></i> ENGINEERING CHALLENGE</span>
+                    <p>
+                      Auction systems face extreme concurrency in the final minutes before auction close. When hundreds of users place bids at the exact same millisecond, standard database transactions can suffer from the <em>lost update anomaly</em> (where two bids overwrite each other, recording a lower price as winner), while excessive table locks degrade latency.
+                    </p>
+                  </div>
+
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-lightbulb"></i> IMPLEMENTATION &amp; DESIGN DECISION</span>
+                    <p>
+                      Engineered role-based access control (RBAC) via <strong>stateless JWT authentication</strong> with granular authorization. Implemented <strong>JPA Optimistic Locking (<code>@Version</code>)</strong> on auction entities: concurrent bid collisions trigger clean version mismatch retries without blocking read throughput. Architected an automated auction expiration scheduler that marks auctions resolved and executes winner validation with centralized global exception handling via <code>@RestControllerAdvice</code>.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Verified Project Specs -->
+                <div class="project-specs-list">
+                  <div class="spec-badge"><i class="fa-brands fa-java"></i> Java 21</div>
+                  <div class="spec-badge">Spring Boot</div>
+                  <div class="spec-badge">Spring Security</div>
+                  <div class="spec-badge">JWT Authentication</div>
+                  <div class="spec-badge">JPA Optimistic Locking (@Version)</div>
+                  <div class="spec-badge">MySQL</div>
+                </div>
+              </div>
+
+              <!-- Concurrency Logic Visualizer -->
+              <div class="project-side-card">
+                <div class="side-card-header">
+                  <span class="sc-title">TRANSACTION INTEGRITY SPEC</span>
+                  <span class="sc-badge">OPTIMISTIC LOCKING</span>
+                </div>
+                <div class="code-spec-snippet">
+                  <pre><code><span class="tok-kw">@Entity</span>
+<span class="tok-kw">public class</span> <span class="tok-type">AuctionItem</span> {
+  <span class="tok-kw">@Id</span> <span class="tok-kw">@GeneratedValue</span>
+  <span class="tok-kw">private</span> <span class="tok-type">Long</span> id;
+
+  <span class="tok-kw">private</span> <span class="tok-type">BigDecimal</span> currentHighestBid;
+
+  <span class="tok-cmt">// Prevents lost updates under concurrency</span>
+  <span class="tok-kw">@Version</span>
+  <span class="tok-kw">private</span> <span class="tok-type">Long</span> version;
+}
+
+<span class="tok-cmt">// Centralized Exception Trap</span>
+<span class="tok-kw">@ExceptionHandler</span>(<span class="tok-type">OptimisticLockException</span>.class)
+<span class="tok-kw">public</span> <span class="tok-type">ResponseEntity</span>&lt;?&gt; handleConflict() {
+  <span class="tok-kw">return</span> ResponseEntity.status(409)
+    .body(<span class="tok-str">"Bid outpaced by competing transaction. Retry."</span>);
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ==========================================
+               PROJECT 3: IN-MEMORY RELATIONAL DATABASE ENGINE (mini-DBMS)
+               ========================================== -->
+          <article class="project-editorial-card">
+            <div class="project-header-row">
+              <div class="project-index">02.3 / SYSTEMS PROGRAMMING &amp; COMPILER PARSING</div>
+              <div class="project-period">May 2026</div>
+            </div>
+
+            <div class="project-body-grid">
+              <div class="project-main-narrative">
+                <h3 class="project-name">In-Memory Relational Database Engine (mini-DBMS)</h3>
+                <p class="project-positioning">
+                  A terminal-based relational database management system architected in pure Java 21 from scratch without external SQL parsing libraries or frameworks.
+                </p>
+
+                <!-- Technical Problem & Architectural Solution -->
+                <div class="case-study-breakdown">
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-triangle-exclamation"></i> MOTIVATION &amp; SYSTEMS CHALLENGE</span>
+                    <p>
+                      Built from first principles to deeply master database internals: how SQL statements are tokenized and parsed, how schemas enforce type safety, how WHERE clauses evaluate logical expressions, and how internal indexes achieve $O(1)$ query speed. No ANTLR, no Apache Calcite, zero external libraries.
+                    </p>
+                  </div>
+
+                  <div class="cs-block">
+                    <span class="cs-label"><i class="fa-solid fa-lightbulb"></i> IMPLEMENTATION &amp; DESIGN DECISION</span>
+                    <p>
+                      Engineered a hand-crafted SQL tokenizer and parser using regex and character stream scanning, supporting <code>CREATE TABLE</code>, <code>INSERT INTO</code>, <code>SELECT</code>, and <code>DELETE</code>. Implemented primary key indexing using an internal <code>HashMap&lt;Key, Row&gt;</code> that delivers <strong>$O(1)$ equality lookups</strong> (<code>WHERE id = X</code>), automatically falling back to full table scans for comparison operators (<code>=, !=, &gt;, &lt;, &gt;=, &lt;=</code>) and combined <code>AND</code> clauses. Utilized modern Java 21 <code>record</code> types for immutable row modeling with pattern matching.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Verified Project Specs & Link -->
+                <div class="project-specs-list">
+                  <div class="spec-badge"><i class="fa-brands fa-java"></i> Core Java 21</div>
+                  <div class="spec-badge">Hand-Rolled SQL Lexer</div>
+                  <div class="spec-badge">HashMap O(1) Indexing</div>
+                  <div class="spec-badge">Java Records</div>
+                  <div class="spec-badge">Zero 3rd-Party Dependencies</div>
+                  <a href="https://github.com/Chakaliprakash/MiniDB.git" target="_blank" rel="noopener noreferrer" class="spec-badge link">
+                    <i class="fa-brands fa-github"></i> MiniDB Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Interactive MiniDB SQL Sandbox Terminal -->
+              <div class="project-side-card">
+                <div class="side-card-header">
+                  <span class="sc-title">INTERACTIVE MINIDB SQL SANDBOX</span>
+                  <span class="sc-badge live">LIVE CLI</span>
+                </div>
+                
+                <div class="minidb-terminal">
+                  <div class="minidb-toolbar">
+                    <span class="tb-label">SELECT A QUERY PRESET:</span>
+                    <div class="tb-presets">
+                      <button class="preset-btn" data-sql="SELECT * FROM users">SELECT *</button>
+                      <button class="preset-btn" data-sql="SELECT name, age FROM users WHERE age > 20">WHERE age > 20</button>
+                      <button class="preset-btn" data-sql="SELECT * FROM users WHERE id = 1">WHERE id = 1 (PK O(1))</button>
+                      <button class="preset-btn" data-sql="INSERT INTO users VALUES (4, 'Diana', 27)">INSERT Diana</button>
+                    </div>
+                  </div>
+
+                  <!-- Terminal Screen -->
+                  <div class="minidb-output" id="minidb-output" aria-live="polite">
+======================================================
+  MiniDB v1.0 - In-Memory Relational DBMS (Java 21)
+  Supports: CREATE TABLE, INSERT, SELECT, DELETE
+======================================================
+minidb&gt; Table 'users' initialized (id INT PK, name STRING, age INT)
+minidb&gt; 3 sample rows seeded (Alice: 22, Bob: 25, Charlie: 19)
+Type or choose a query above to execute against MiniDB engine.</div>
+
+                  <!-- Terminal Input Form -->
+                  <form class="minidb-input-form" id="minidb-form">
+                    <span class="cli-prompt">minidb&gt;</span>
+                    <input type="text" id="minidb-input" placeholder="Type SQL query or pick preset..." value="SELECT * FROM users" autocomplete="off" spellcheck="false">
+                    <button type="submit" class="btn btn-sm btn-accent">Execute</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 03: TECHNICAL COMPETENCIES & DSA SPECIFICATION
+         ===================================================================== -->
+    <section id="competencies" class="competencies-section">
+      <div class="section-container">
+        <!-- Section Header -->
+        <div class="section-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">03</span>
+            <span class="tag-sep">//</span>
+            <span>CORE TECHNICAL MATRIX</span>
           </div>
-          <div class="hero-float-badge badge-top">
-            <i class="fa-brands fa-java"></i> Java 17+ Core
+          <h2 class="section-title">
+            Skills &amp; Algorithmic <span class="title-serif">Foundations</span>
+          </h2>
+          <p class="section-subtitle">
+            Grounded in rigorous core Java engineering, relational database constraints, and scalable backend design patterns.
+          </p>
+        </div>
+
+        <!-- Competencies Matrix Grid -->
+        <div class="competencies-grid">
+          <!-- Category 1: Languages & Runtime -->
+          <div class="comp-col">
+            <div class="comp-header">
+              <span class="comp-num">01</span>
+              <h3 class="comp-name">Languages &amp; Runtimes</h3>
+            </div>
+            <ul class="comp-items">
+              <li>
+                <div class="item-title">Java &amp; Core Java (Java 21 LTS)</div>
+                <div class="item-desc">Object-Oriented Design, Generics, Collections Framework, Multithreading &amp; Concurrency, Records, Sealed Classes, Pattern Matching.</div>
+              </li>
+              <li>
+                <div class="item-title">SQL (MySQL &amp; PostgreSQL)</div>
+                <div class="item-desc">Complex Joins, ACID Transactions, Indexing strategies (B-Tree, Hash), Locking mechanisms, Flyway database migrations.</div>
+              </li>
+              <li>
+                <div class="item-title">JavaScript &amp; TypeScript Fundamentals</div>
+                <div class="item-desc">Modern ES6+ syntax, asynchronous programming (Promises, async/await), DOM manipulation.</div>
+              </li>
+            </ul>
           </div>
-          <div class="hero-float-badge badge-right">
-            <i class="fa-solid fa-database"></i> MySQL Pool
+
+          <!-- Category 2: Backend Frameworks & Architecture -->
+          <div class="comp-col">
+            <div class="comp-header">
+              <span class="comp-num">02</span>
+              <h3 class="comp-name">Backend &amp; Enterprise Frameworks</h3>
+            </div>
+            <ul class="comp-items">
+              <li>
+                <div class="item-title">Spring Boot 3.x</div>
+                <div class="item-desc">Dependency Injection, Auto-configuration, Spring Web, Actuator, Profiles, Application Lifecycle.</div>
+              </li>
+              <li>
+                <div class="item-title">Spring Security &amp; JWT</div>
+                <div class="item-desc">Stateless filter chains, BCrypt hashing (strength 12), Role-Based Access Control (RBAC), token rotation.</div>
+              </li>
+              <li>
+                <div class="item-title">Hibernate / Spring Data JPA</div>
+                <div class="item-desc">Entity relationships (@OneToMany, @ManyToMany), dirty checking, 1st/2nd level cache, Pessimistic &amp; Optimistic Locking.</div>
+              </li>
+              <li>
+                <div class="item-title">RESTful APIs &amp; WebSockets</div>
+                <div class="item-desc">API contract design, Richardson Maturity Model, STOMP protocol, bidirectional real-time event broadcasting.</div>
+              </li>
+            </ul>
           </div>
-          <div class="hero-float-badge badge-bottom">
-            <i class="fa-solid fa-robot"></i> Spring AI Node
+
+          <!-- Category 3: DSA & Architecture -->
+          <div class="comp-col">
+            <div class="comp-header">
+              <span class="comp-num">03</span>
+              <h3 class="comp-name">Data Structures, Algorithms &amp; AI</h3>
+            </div>
+            <ul class="comp-items">
+              <li>
+                <div class="item-title">Data Structures &amp; Algorithms (DSA)</div>
+                <div class="item-desc">Bounded Min-Heaps (PriorityQueue), Inverted Indexing, HashMaps, Sliding Window algorithms, Two-Pointers, Graph Traversals (BFS/DFS), Binary Search. Certified by Smart Interviews.</div>
+              </li>
+              <li>
+                <div class="item-title">Concurrency &amp; Locking Paradigms</div>
+                <div class="item-desc">Race condition prevention, Pessimistic Write Locking (<code>SELECT ... FOR UPDATE</code>), Optimistic Locking (<code>@Version</code>), thread synchronization.</div>
+              </li>
+              <li>
+                <div class="item-title">Generative AI &amp; Spring AI Basics</div>
+                <div class="item-desc">Google Cloud GenAI participant, LLM integration into Java applications, prompt engineering, Gemini APIs, context grounding.</div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STATS STRIP -->
-    <section class="section-stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="stat-num gradient-text" data-target="7.6" data-decimal="1">7.6</div>
-            <div class="stat-sub">Current CGPA (B.Tech CS)</div>
-            <div class="stat-desc">Sri Indu College of Engg.</div>
+    <!-- =====================================================================
+         SECTION 04: EXPERIENCE, EDUCATION & CERTIFICATIONS
+         ===================================================================== -->
+    <section id="experience" class="experience-section">
+      <div class="section-container">
+        <!-- Section Header -->
+        <div class="section-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">04</span>
+            <span class="tag-sep">//</span>
+            <span>TRAJECTORY &amp; CREDENTIALS</span>
           </div>
-          <div class="stat-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="stat-num gradient-text" data-target="100" data-suffix="%">100%</div>
-            <div class="stat-sub">Class X Milestone</div>
-            <div class="stat-desc">Perfect 100% Academic Record</div>
-          </div>
-          <div class="stat-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="stat-num gradient-text" data-target="3" data-suffix="+">3+</div>
-            <div class="stat-sub">Production Applications</div>
-            <div class="stat-desc">Spring Boot, AI Agents, Full-Stack</div>
-          </div>
-          <div class="stat-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="stat-num gradient-text" data-target="2">2</div>
-            <div class="stat-sub">Industry Certifications</div>
-            <div class="stat-desc">DSA & Java Backend Certified</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT / ENGINEERING PILLARS -->
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">ENGINEERING PILLARS</div>
-          <h2 class="section-title">Architectural Foundation</h2>
-          <p class="section-subtitle">How I design, structure, and deliver production-ready software systems.</p>
+          <h2 class="section-title">
+            Experience &amp; Verified <span class="title-serif">Certifications</span>
+          </h2>
+          <p class="section-subtitle">
+            Factual engineering timeline and credentials documented from verified academic and industry records.
+          </p>
         </div>
 
-        <div class="about-pillars-grid">
-          <!-- Pillar 1 -->
-          <div class="pillar-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="pillar-icon-box">
-              <i class="fa-brands fa-java"></i>
-            </div>
-            <h3 class="pillar-title">Java Backend Engineering</h3>
-            <p class="pillar-desc">
-              Strong foundation in core Java (OOP, Multithreading, Streams, Collections) and Spring Boot framework. 
-              Designing robust RESTful endpoints with layered Controller-Service-Repository architecture.
-            </p>
-            <div class="pillar-tags">
-              <span>Java 17+</span>
-              <span>Spring Boot 3.x</span>
-              <span>REST APIs</span>
-              <span>Clean Code</span>
-            </div>
-          </div>
+        <div class="experience-layout-grid">
+          <!-- Left Column: Work & Academic Timeline -->
+          <div class="timeline-column">
+            <h3 class="timeline-group-heading">PROFESSIONAL &amp; ACADEMIC TRACK</h3>
 
-          <!-- Pillar 2 -->
-          <div class="pillar-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="pillar-icon-box">
-              <i class="fa-solid fa-robot"></i>
-            </div>
-            <h3 class="pillar-title">AI Agents & Spring AI</h3>
-            <p class="pillar-desc">
-              Building autonomous AI agents using Spring AI and Lang4j. Integrating LLM Tool/Function Calling, 
-              persisting conversational context to MySQL, and architecting RAG pipelines.
-            </p>
-            <div class="pillar-tags">
-              <span>Spring AI</span>
-              <span>Lang4j</span>
-              <span>Tool Calling</span>
-              <span>Prompt Eng.</span>
-            </div>
-          </div>
-
-          <!-- Pillar 3 -->
-          <div class="pillar-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="pillar-icon-box">
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <h3 class="pillar-title">Relational Databases & SQL</h3>
-            <p class="pillar-desc">
-              Designing normalized relational schemas in MySQL and PostgreSQL. Proficient in complex joins, query optimization, 
-              indexing, transaction isolation, and secure JPA/Hibernate mappings.
-            </p>
-            <div class="pillar-tags">
-              <span>MySQL</span>
-              <span>PostgreSQL</span>
-              <span>SQL Queries</span>
-              <span>Indexing</span>
-            </div>
-          </div>
-
-          <!-- Pillar 4 -->
-          <div class="pillar-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="pillar-icon-box">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h3 class="pillar-title">Security & Full-Stack Integration</h3>
-            <p class="pillar-desc">
-              Implementing stateless JWT authentication, Spring Security filters, and session management. 
-              Integrating backends seamlessly with React client interfaces and Chrome extensions.
-            </p>
-            <div class="pillar-tags">
-              <span>JWT Auth</span>
-              <span>Spring Security</span>
-              <span>React</span>
-              <span>Chrome APIs</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TECHNICAL SKILLS MATRIX -->
-    <section id="skills" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">TECH CONSTELLATION</div>
-          <h2 class="section-title">Technical Skill Matrix</h2>
-          <p class="section-subtitle">Structured by domains and verified directly from hands-on engineering work.</p>
-        </div>
-
-        <div class="skills-grid">
-          <div class="skill-category-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="category-header">
-              <div class="category-icon"><i class="fa-brands fa-java"></i></div>
-              <div>
-                <h3>Languages & Databases</h3>
-                <span class="category-sub">Foundational Backbones</span>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag highlighted" data-tech="Java"><i class="fa-brands fa-java"></i> Java</span>
-              <span class="skill-tag highlighted" data-tech="SQL"><i class="fa-solid fa-database"></i> SQL</span>
-              <span class="skill-tag" data-tech="MySQL"><i class="fa-solid fa-server"></i> MySQL</span>
-              <span class="skill-tag" data-tech="PostgreSQL"><i class="fa-solid fa-cubes"></i> PostgreSQL</span>
-              <span class="skill-tag" data-tech="JavaScript"><i class="fa-brands fa-js"></i> JavaScript</span>
-            </div>
-          </div>
-
-          <div class="skill-category-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="category-header">
-              <div class="category-icon"><i class="fa-solid fa-leaf"></i></div>
-              <div>
-                <h3>Frameworks & Architecture</h3>
-                <span class="category-sub">Enterprise Backend Stack</span>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag highlighted" data-tech="Spring Boot"><i class="fa-solid fa-leaf"></i> Spring Boot</span>
-              <span class="skill-tag highlighted" data-tech="Spring AI"><i class="fa-solid fa-robot"></i> Spring AI</span>
-              <span class="skill-tag" data-tech="Spring Security"><i class="fa-solid fa-lock"></i> Spring Security</span>
-              <span class="skill-tag" data-tech="Lang4j"><i class="fa-solid fa-link"></i> Lang4j</span>
-              <span class="skill-tag" data-tech="REST APIs"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
-              <span class="skill-tag" data-tech="JWT Auth"><i class="fa-solid fa-key"></i> JWT Authentication</span>
-            </div>
-          </div>
-
-          <div class="skill-category-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="category-header">
-              <div class="category-icon"><i class="fa-solid fa-brain"></i></div>
-              <div>
-                <h3>AI & Agentic Systems</h3>
-                <span class="category-sub">Intelligent Workflows</span>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag highlighted" data-tech="AI Agent Dev"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Agent Development</span>
-              <span class="skill-tag" data-tech="LLM Integration"><i class="fa-solid fa-comments"></i> LLM Integration</span>
-              <span class="skill-tag highlighted" data-tech="Function Calling"><i class="fa-solid fa-gears"></i> Tool / Function Calling</span>
-              <span class="skill-tag" data-tech="Prompt Eng"><i class="fa-solid fa-pen-nib"></i> Prompt Engineering</span>
-              <span class="skill-tag" data-tech="RAG"><i class="fa-solid fa-book-bookmark"></i> RAG Patterns</span>
-              <span class="skill-tag" data-tech="Multi-Agent"><i class="fa-solid fa-diagram-project"></i> Multi-Agent Systems</span>
-            </div>
-          </div>
-
-          <div class="skill-category-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="category-header">
-              <div class="category-icon"><i class="fa-solid fa-code"></i></div>
-              <div>
-                <h3>Frontend & Development Tools</h3>
-                <span class="category-sub">Interfaces & DevOps</span>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag" data-tech="React"><i class="fa-brands fa-react"></i> React</span>
-              <span class="skill-tag" data-tech="HTML5"><i class="fa-brands fa-html5"></i> HTML5</span>
-              <span class="skill-tag" data-tech="CSS3"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
-              <span class="skill-tag highlighted" data-tech="Chrome Extension"><i class="fa-brands fa-chrome"></i> Chrome Extension APIs</span>
-              <span class="skill-tag" data-tech="Git"><i class="fa-brands fa-git-alt"></i> Git & GitHub</span>
-              <span class="skill-tag" data-tech="Render"><i class="fa-solid fa-cloud-arrow-up"></i> Render Cloud</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED PROJECTS -->
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">FEATURED WORK</div>
-          <h2 class="section-title">Engineered Projects</h2>
-          <p class="section-subtitle">Production-grade systems built with Java, Spring Boot, AI agents, and modular architecture.</p>
-        </div>
-
-        <div class="projects-container">
-          <!-- Project 1 -->
-          <div class="project-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="project-header">
-              <div class="project-badge-type"><i class="fa-solid fa-wand-magic-sparkles"></i> Spring Boot & Spring AI</div>
-              <div class="project-actions">
-                <button class="btn btn-outline btn-sm view-arch-btn magnetic" data-project="ai-agent">
-                  <i class="fa-solid fa-diagram-project"></i> View Architecture
-                </button>
-                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="proj-link magnetic" title="GitHub Codebase"><i class="fa-brands fa-github"></i> GitHub</a>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">Personal AI Agent</h3>
-              <p class="project-summary">
-                A Spring Boot-based AI agent platform that goes beyond simple Q&A by maintaining persistent conversation memory and autonomously executing real actions through LLM tool calling.
-              </p>
-
-              <div class="project-features">
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Spring AI & Conversation Memory:</strong> Built an AI chat service with session history persisted to MySQL, enabling the assistant to maintain context (user preferences, past requests) across sessions.</span>
+            <div class="editorial-timeline">
+              <!-- Item 1: Codegnan -->
+              <div class="timeline-entry">
+                <div class="timeline-marker"></div>
+                <div class="entry-meta">
+                  <span class="entry-dates">September 2026 – Present</span>
+                  <span class="entry-loc">Hyderabad, Telangana</span>
                 </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Function Calling Tools:</strong> Implemented executable tool integrations (weather lookup, note taking, to-do management) invoked directly by the LLM.</span>
-                </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Modular Architecture:</strong> Engineered a feature-based Spring Boot codebase (auth, chat, memory, tools) structured for clean extension into RAG and MCP protocols.</span>
-                </div>
+                <h4 class="entry-role">Java Full Stack Trainee</h4>
+                <div class="entry-org">Codegnan IT Solutions</div>
+                <ul class="entry-bullets">
+                  <li>Engineered backend applications using Java, Spring Boot, Hibernate/JPA, RESTful APIs, and MySQL through hands-on full-stack projects.</li>
+                  <li>Deepened Data Structures &amp; Algorithms, object-oriented programming paradigms, relational SQL optimization, and structured problem-solving.</li>
+                  <li>Integrated frontend applications using React, JavaScript, HTML5/CSS3, Git, and Maven while building seamless client-backend communication contracts.</li>
+                </ul>
               </div>
 
-              <div class="tech-pill-list">
-                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java</span>
-                <span class="tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot</span>
-                <span class="tech-pill"><i class="fa-solid fa-robot"></i> Spring AI</span>
-                <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
-                <span class="tech-pill"><i class="fa-solid fa-gears"></i> Tool Calling</span>
-                <span class="tech-pill"><i class="fa-solid fa-diagram-project"></i> MCP / RAG Ready</span>
+              <!-- Item 2: Google Cloud GenAI -->
+              <div class="timeline-entry">
+                <div class="timeline-marker"></div>
+                <div class="entry-meta">
+                  <span class="entry-dates">2026</span>
+                  <span class="entry-loc">Cloud Academy</span>
+                </div>
+                <h4 class="entry-role">Generative AI Program Participant</h4>
+                <div class="entry-org">Google Cloud GenAI Program</div>
+                <ul class="entry-bullets">
+                  <li>Completed hands-on Generative AI learning activities using Google Cloud infrastructure and explored practical enterprise applications of generative models.</li>
+                  <li>Gained practical exposure to Gemini, prompt engineering patterns, generative AI fundamentals, and Google Cloud AI services.</li>
+                  <li>Applied generative AI concepts through hands-on cloud labs and deployment exercises.</li>
+                </ul>
+              </div>
+
+              <!-- Item 3: Degree -->
+              <div class="timeline-entry">
+                <div class="timeline-marker"></div>
+                <div class="entry-meta">
+                  <span class="entry-dates">Jul 2022 – Jul 2026</span>
+                  <span class="entry-loc">Hyderabad, Telangana</span>
+                </div>
+                <h4 class="entry-role">Bachelor of Technology (B.Tech) in Computer Science and Engineering</h4>
+                <div class="entry-specialization">Specialization in Cyber Security · CGPA: 7.6 / 10</div>
+                <div class="entry-org">Sri Indu College of Engineering &amp; Technology</div>
+                <p class="entry-note">
+                  Rigorous computer science curriculum focusing on operating systems, database management systems, network security, computer networks, and algorithmic problem-solving.
+                </p>
+              </div>
+
+              <!-- Item 4: Volunteer -->
+              <div class="timeline-entry volunteer">
+                <div class="timeline-marker"></div>
+                <div class="entry-meta">
+                  <span class="entry-dates">Jul – Aug 2025</span>
+                  <span class="entry-loc">Live Arena Events</span>
+                </div>
+                <h4 class="entry-role">Esports Operations &amp; Stage Management Specialist (Volunteer)</h4>
+                <div class="entry-org">NODWIN Gaming</div>
+                <p class="entry-note">
+                  Co-managed high-stakes, large-scale live broadcast tournament operations and player stage synchronization for BGMI, Valorant, and Counter-Strike 2 (CS2), enforcing strict operational timelines and technical stage protocol.
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- Project 2 -->
-          <div class="project-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="project-header">
-              <div class="project-badge-type"><i class="fa-solid fa-cart-shopping"></i> Full-Stack & Spring Boot REST API</div>
-              <div class="project-actions">
-                <button class="btn btn-outline btn-sm view-arch-btn magnetic" data-project="ecommerce">
-                  <i class="fa-solid fa-diagram-project"></i> View Architecture
-                </button>
-                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="proj-link magnetic" title="GitHub Repository"><i class="fa-brands fa-github"></i> GitHub</a>
-                <span class="proj-link live-badge"><i class="fa-solid fa-circle-play"></i> Live App</span>
+          <!-- Right Column: Verified Certifications Ledger -->
+          <div class="certifications-column">
+            <h3 class="timeline-group-heading">VERIFIED CERTIFICATIONS</h3>
+
+            <div class="certifications-ledger">
+              <!-- Cert 1 -->
+              <div class="cert-card">
+                <div class="cert-issuer-badge">ORACLE</div>
+                <h4 class="cert-title">Certified in Oracle Cloud Infrastructure 2025 AI Foundations Associate</h4>
+                <div class="cert-issuer">Oracle University</div>
+                <p class="cert-desc">
+                  Validated foundational knowledge in artificial intelligence, machine learning pipelines, deep learning paradigms, generative AI, and OCI AI infrastructure.
+                </p>
               </div>
-            </div>
 
-            <div class="project-body">
-              <h3 class="project-title">Ecommerce Web Application</h3>
-              <p class="project-summary">
-                Production-ready e-commerce platform built with a high-performance Spring Boot REST API backend and a responsive React frontend, deployed end-to-end in a live environment.
-              </p>
+              <!-- Cert 2 -->
+              <div class="cert-card">
+                <div class="cert-issuer-badge">CISCO</div>
+                <h4 class="cert-title">Accredited in Cybersecurity Essentials</h4>
+                <div class="cert-issuer">Cisco Networking Academy</div>
+                <p class="cert-desc">
+                  Comprehensive grounding in cybersecurity fundamentals, data confidentiality and integrity, network defense, access controls, threat mitigation, and cryptography.
+                </p>
+              </div>
 
-              <div class="project-features">
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>JWT Authentication & Security:</strong> Implemented secure JSON Web Token authentication with role-based access control, safeguarding REST endpoints and user session states.</span>
+              <!-- Cert 3 -->
+              <div class="cert-card">
+                <div class="cert-issuer-badge">SMART INTERVIEWS</div>
+                <h4 class="cert-title">Certified in Data Structures &amp; Algorithms in Java</h4>
+                <div class="cert-issuer">Smart Interviews</div>
+                <p class="cert-desc">
+                  Rigorous algorithmic certification covering asymptotic analysis, recursion, dynamic programming, priority queues, binary trees, graph algorithms, and bit manipulation.
+                </p>
+              </div>
+
+              <!-- Resume Download Callout Box -->
+              <div class="resume-download-callout">
+                <div class="callout-icon"><i class="fa-solid fa-file-shield"></i></div>
+                <div class="callout-content">
+                  <h4>Official Engineering Resume</h4>
+                  <p>Single-page, ATS-optimized software engineering resume with complete academic and project records.</p>
+                  <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span>Download Resume (PDF)</span>
+                  </a>
                 </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Core Commerce Engine:</strong> Engineered product catalog filtering, cart state management, and relational order fulfillment with MySQL persistence.</span>
-                </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Integrated Support Chatbot:</strong> Embedded an intelligent customer support assistant handling order tracking, product FAQs, and real-time backend data querying.</span>
-                </div>
-              </div>
-
-              <div class="tech-pill-list">
-                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java</span>
-                <span class="tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot</span>
-                <span class="tech-pill"><i class="fa-brands fa-react"></i> React</span>
-                <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
-                <span class="tech-pill"><i class="fa-solid fa-lock"></i> JWT Auth</span>
-                <span class="tech-pill"><i class="fa-solid fa-network-wired"></i> REST APIs</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="project-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div class="project-header">
-              <div class="project-badge-type"><i class="fa-solid fa-envelope-open-text"></i> Spring Boot & Chrome Extension</div>
-              <div class="project-actions">
-                <button class="btn btn-outline btn-sm view-arch-btn magnetic" data-project="ai-email">
-                  <i class="fa-solid fa-diagram-project"></i> View Architecture
-                </button>
-                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="proj-link magnetic" title="GitHub Repository"><i class="fa-brands fa-github"></i> GitHub</a>
-                <span class="proj-link live-badge"><i class="fa-solid fa-cloud"></i> Live on Render</span>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">AI Email Generator</h3>
-              <p class="project-summary">
-                Full-stack email drafting productivity system consisting of a Spring Boot backend, an in-context Chrome browser extension, and cloud deployment via Render.
-              </p>
-
-              <div class="project-features">
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Context-Aware LLM Drafts:</strong> Backend calls LLM APIs to generate high-quality, tone-customized email drafts consumed via REST endpoints.</span>
-                </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Chrome Browser Extension:</strong> Directly integrated with browser email clients for one-click contextual reply generation.</span>
-                </div>
-                <div class="feature-bullet">
-                  <i class="fa-solid fa-circle-check feature-check"></i>
-                  <span><strong>Cloud Deployment:</strong> Automated cloud deployment pipeline configured on Render using <code>render.yaml</code> build scripts.</span>
-                </div>
-              </div>
-
-              <div class="tech-pill-list">
-                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java</span>
-                <span class="tech-pill"><i class="fa-solid fa-leaf"></i> Spring Boot</span>
-                <span class="tech-pill"><i class="fa-brands fa-js"></i> JavaScript</span>
-                <span class="tech-pill"><i class="fa-brands fa-chrome"></i> Chrome Extension API</span>
-                <span class="tech-pill"><i class="fa-solid fa-cloud"></i> Render Cloud</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VERTICAL ANIMATED TIMELINE -->
-    <section id="timeline" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">EXPERIENCE & MILESTONES</div>
-          <h2 class="section-title">Engineering Journey</h2>
-          <p class="section-subtitle">A chronological track of academic milestones, certifications, and production systems.</p>
-        </div>
-
-        <div class="timeline-container">
-          <div class="timeline-line"></div>
-
-          <!-- Timeline Item 1 -->
-          <div class="timeline-item left">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card glass-card tilt-card" data-tilt>
-              <div class="card-glare"></div>
-              <span class="timeline-badge">Jul 2022 – Jul 2026</span>
-              <h3>Sri Indu College of Eng & Tech</h3>
-              <div class="timeline-role">B.Tech in Computer Science (CS) • CGPA 7.6 / 10</div>
-              <p class="timeline-desc">
-                Rigorous computer science curriculum covering distributed systems, DBMS, operating systems, compiler design, and object-oriented architectures.
-              </p>
-              <div class="timeline-tags">
-                <span>Core CS</span>
-                <span>Algorithms</span>
-                <span>System Design</span>
-                <span>Database Systems</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline Item 2 -->
-          <div class="timeline-item right">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card glass-card tilt-card" data-tilt>
-              <div class="card-glare"></div>
-              <span class="timeline-badge">2024 Certification</span>
-              <h3>Smart Interviews — DSA in Java</h3>
-              <div class="timeline-role">Algorithmic Problem Solving & Complexity Mastery</div>
-              <p class="timeline-desc">
-                Top performer in advanced algorithmic problem-solving in pure Java. Mastered binary search, graph traversals (BFS/DFS), dynamic programming, and space-time optimization.
-              </p>
-              <div class="timeline-tags">
-                <span>Java 17</span>
-                <span>Data Structures</span>
-                <span>Graph Theory</span>
-                <span>Dynamic Programming</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline Item 3 -->
-          <div class="timeline-item left">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card glass-card tilt-card" data-tilt>
-              <div class="card-glare"></div>
-              <span class="timeline-badge">2024 Certification</span>
-              <h3>GeeksforGeeks — SQL + Java Backend</h3>
-              <div class="timeline-role">Enterprise Backend Architecture & Database Optimization</div>
-              <p class="timeline-desc">
-                Certified in enterprise relational database modeling, complex SQL joins, indexing, ACID transactions, and Spring Boot REST API architectures.
-              </p>
-              <div class="timeline-tags">
-                <span>Enterprise SQL</span>
-                <span>Spring Boot</span>
-                <span>JPA / Hibernate</span>
-                <span>Query Tuning</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline Item 4 -->
-          <div class="timeline-item right">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card glass-card tilt-card" data-tilt>
-              <div class="card-glare"></div>
-              <span class="timeline-badge">2024 – 2025</span>
-              <h3>Production Systems & Deployments</h3>
-              <div class="timeline-role">Full-Stack Architect & AI Agent Engineer</div>
-              <p class="timeline-desc">
-                Architected and deployed 3 live production applications: Personal AI Agent with Spring AI and stateful MySQL memory, Full-Stack E-Commerce with React & JWT security, and AI Email Generator on Render.
-              </p>
-              <div class="timeline-tags">
-                <span>Spring AI</span>
-                <span>REST APIs</span>
-                <span>JWT RBAC</span>
-                <span>Render CI/CD</span>
               </div>
             </div>
           </div>
@@ -637,253 +1066,214 @@
       </div>
     </section>
 
-    <!-- DATA STRUCTURES & ALGORITHMS -->
-    <section id="dsa" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">DATA STRUCTURES & ALGORITHMS</div>
-          <h2 class="section-title">Problem Solving & DSA Mastery</h2>
-          <p class="section-subtitle">Strong algorithmic foundation validated by competitive problem-solving and rigorous coursework.</p>
+    <!-- =====================================================================
+         SECTION 05: ABOUT ME & ENGINEERING ETHOS
+         ===================================================================== -->
+    <section id="about" class="about-section">
+      <div class="section-container">
+        <!-- Section Header -->
+        <div class="section-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">05</span>
+            <span class="tag-sep">//</span>
+            <span>ENGINEERING ETHOS</span>
+          </div>
+          <h2 class="section-title">
+            About Prakash <span class="title-serif">Chakali</span>
+          </h2>
         </div>
 
-        <div class="dsa-layout glass-card tilt-card" data-tilt>
-          <div class="card-glare"></div>
-          <div class="dsa-info">
-            <div class="dsa-badge"><i class="fa-solid fa-medal"></i> Verified Top Performer</div>
-            <h3 class="dsa-title">Smart Interviews — DSA in Java Certified</h3>
-            <p class="dsa-desc">
-              Comprehensive problem-solving track focused on time and space complexity optimization, 
-              rigorous edge-case handling, and efficient algorithm design in pure Java.
-            </p>
-            <div class="dsa-topics-grid">
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Arrays & Two Pointers</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Binary Search & Sorting</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Strings & Sliding Window</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Linked Lists & Stacks/Queues</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Trees & Binary Search Trees</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Graphs & BFS/DFS</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Dynamic Programming</div>
-              <div class="dsa-topic-item"><i class="fa-solid fa-check"></i> Time/Space Optimization</div>
+        <div class="about-editorial-layout">
+          <!-- Left Column: Portrait Statement & Quick Facts -->
+          <div class="about-portrait-card">
+            <div class="portrait-header">
+              <span class="portrait-badge">ENGINEERING PROFILE</span>
+              <span class="portrait-coord">17.3850° N, 78.4867° E</span>
             </div>
-          </div>
-
-          <div class="dsa-visual">
-            <div class="algo-node-box">
-              <div class="algo-node root">Tree / Graph Root</div>
-              <div class="algo-connector-row">
-                <span class="algo-line"></span>
-                <span class="algo-line"></span>
-              </div>
-              <div class="algo-children-row">
-                <div class="algo-node">O(log N) Search</div>
-                <div class="algo-node">O(N) Traversal</div>
-              </div>
-              <div class="algo-metric-badge">
-                <i class="fa-solid fa-bolt"></i> Optimized Java Solutions
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS & ENDORSEMENTS MARQUEE -->
-    <section id="testimonials" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">PEER REVIEWS & ENDORSEMENTS</div>
-          <h2 class="section-title">What Collaborators Say</h2>
-          <p class="section-subtitle">Feedback from engineering peers, academic mentors, and collaborative project teammates.</p>
-        </div>
-      </div>
-
-      <div class="marquee-wrapper">
-        <div class="marquee-track">
-          <!-- Card 1 -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
-                <div>
-                  <div class="testimonial-author">Project Mentor</div>
-                  <div class="testimonial-role">Senior Java Backend Architect</div>
-                </div>
-              </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Prakash demonstrates remarkable mastery of Spring Boot and relational database design. His Controller-Service-Repository architecture on the Ecommerce and AI Agent projects is clean, decoupled, and production-ready."
+            
+            <div class="portrait-quote-box">
+              <span class="quote-mark">“</span>
+              <p class="quote-text">
+                Reliable software is not an accident of frameworks. It is the deliberate result of understanding memory models, database locking constraints, and architectural boundaries.
               </p>
             </div>
-          </div>
 
-          <!-- Card 2 -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-laptop-code"></i></div>
-                <div>
-                  <div class="testimonial-author">Full-Stack Collaborator</div>
-                  <div class="testimonial-role">React Frontend Engineer</div>
-                </div>
+            <div class="portrait-facts">
+              <div class="fact-row">
+                <span class="fact-label">DEGREE</span>
+                <span class="fact-value">B.Tech in CSE (Cyber Security)</span>
               </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Working with Prakash is effortless. His RESTful APIs are strictly typed, well-documented, and error responses are always predictable. His integration of JWT security filters is rock-solid."
-              </p>
+              <div class="fact-row">
+                <span class="fact-label">COLLEGE</span>
+                <span class="fact-value">Sri Indu College of Engg &amp; Tech</span>
+              </div>
+              <div class="fact-row">
+                <span class="fact-label">CGPA</span>
+                <span class="fact-value">7.6 / 10.0</span>
+              </div>
+              <div class="fact-row">
+                <span class="fact-label">LOCATION</span>
+                <span class="fact-value">Hyderabad, Telangana, India</span>
+              </div>
+              <div class="fact-row">
+                <span class="fact-label">PRIMARY LANGUAGE</span>
+                <span class="fact-value">Java 21 LTS (Modern Idioms)</span>
+              </div>
             </div>
           </div>
 
-          <!-- Card 3 -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-brain"></i></div>
-                <div>
-                  <div class="testimonial-author">AI Systems Peer</div>
-                  <div class="testimonial-role">Machine Learning Engineer</div>
-                </div>
-              </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Prakash was among the first in our circle to engineer autonomous agent tool calling using Spring AI with stateful MySQL memory. His problem-solving speed in Java is exceptional."
+          <!-- Right Column: Editorial Narrative -->
+          <div class="about-narrative">
+            <h3 class="about-heading">
+              A backend engineer driven by architectural discipline and algorithmic curiosity.
+            </h3>
+
+            <div class="about-paragraphs">
+              <p>
+                I am a Computer Science graduate specializing in Cyber Security from Sri Indu College of Engineering &amp; Technology, Hyderabad. My engineering journey is rooted in building secure, reliable backend applications using Java, Spring Boot, Hibernate/JPA, and MySQL, with hands-on full-stack capability in modern React.
+              </p>
+              <p>
+                Rather than treating frameworks as opaque black boxes, I enjoy deconstructing what happens beneath the abstraction layer. When building <strong>MysteryStay</strong>, this meant analyzing MySQL row-level lock contention (<code>SELECT ... FOR UPDATE</code>) across competing threads and replacing brute-force TimSort with an optimal $O(N \log K)$ Bounded Min-Heap. When exploring database architecture, I created <strong>MiniDB</strong> entirely from scratch in pure Java to master tokenizer lexical analysis, primary key indexing, and immutable record modeling without external dependencies.
+              </p>
+              <p>
+                I am actively seeking an entry-level <strong>Java Backend Developer</strong> or <strong>Software Engineer</strong> role where I can contribute to mission-critical distributed services, uphold high engineering standards, and collaborate with teams that prioritize clean, resilient code.
               </p>
             </div>
-          </div>
 
-          <!-- Card 4 (Duplicate for infinite seamless loop) -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-graduation-cap"></i></div>
-                <div>
-                  <div class="testimonial-author">Academic Instructor</div>
-                  <div class="testimonial-role">Department of Computer Science</div>
-                </div>
+            <div class="about-pillars">
+              <div class="pillar-item">
+                <span class="pillar-num">01</span>
+                <h4>Clean Boundaries</h4>
+                <p>Favoring clear bounded contexts and modular monoliths over premature microservice distribution.</p>
               </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Prakash has maintained academic excellence with a 7.6 CGPA while consistently developing practical production systems. His algorithmic rigor in Data Structures & Algorithms stands out."
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 5 (Duplicate for loop) -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
-                <div>
-                  <div class="testimonial-author">Project Mentor</div>
-                  <div class="testimonial-role">Senior Java Backend Architect</div>
-                </div>
+              <div class="pillar-item">
+                <span class="pillar-num">02</span>
+                <h4>ACID &amp; Concurrency</h4>
+                <p>Preventing race conditions through intentional database row locks and optimistic versioning.</p>
               </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Prakash demonstrates remarkable mastery of Spring Boot and relational database design. His Controller-Service-Repository architecture on the Ecommerce and AI Agent projects is clean, decoupled, and production-ready."
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 6 (Duplicate for loop) -->
-          <div class="testimonial-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <div>
-              <div class="testimonial-header">
-                <div class="testimonial-avatar"><i class="fa-solid fa-laptop-code"></i></div>
-                <div>
-                  <div class="testimonial-author">Full-Stack Collaborator</div>
-                  <div class="testimonial-role">React Frontend Engineer</div>
-                </div>
+              <div class="pillar-item">
+                <span class="pillar-num">03</span>
+                <h4>Algorithmic Efficiency</h4>
+                <p>Selecting appropriate data structures (Heaps, Inverted Indexes, Sets) to reduce execution complexity.</p>
               </div>
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="testimonial-text">
-                "Working with Prakash is effortless. His RESTful APIs are strictly typed, well-documented, and error responses are always predictable. His integration of JWT security filters is rock-solid."
-              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">START A CONVERSATION</div>
-          <h2 class="section-title">Let's build something great.</h2>
-          <p class="section-subtitle">Open for Java Software Engineer, Backend Developer, and Full-Stack opportunities.</p>
+    <!-- =====================================================================
+         SECTION 06: CONTACT & DIALOGUE INITIATION
+         ===================================================================== -->
+    <section id="contact" class="contact-section">
+      <div class="section-container">
+        <!-- Section Header -->
+        <div class="section-editorial-header">
+          <div class="editorial-meta-tag">
+            <span class="num-highlight">06</span>
+            <span class="tag-sep">//</span>
+            <span>COMMENCE DIALOGUE</span>
+          </div>
+          <h2 class="section-title">
+            Initiate Contact <span class="title-serif">&amp; Discussion</span>
+          </h2>
+          <p class="section-subtitle">
+            Whether you have an engineering opening, a technical query regarding MysteryStay, or a project collaboration, my inbox is open.
+          </p>
         </div>
 
-        <div class="contact-layout">
-          <!-- Direct Info Card -->
-          <div class="contact-info-card glass-card tilt-card" data-tilt>
-            <div class="card-glare"></div>
-            <h3>Direct Contact</h3>
-            <p>I respond promptly to emails, phone calls, and technical discussions.</p>
-
-            <div class="contact-details-list">
-              <a href="mailto:prakashchakali6216@gmail.com" class="contact-row magnetic">
-                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                <div>
-                  <span class="contact-label">Email</span>
-                  <span class="contact-val">prakashchakali6216@gmail.com</span>
-                </div>
+        <div class="contact-editorial-layout">
+          <!-- Left Column: Direct Communication Coordinates -->
+          <div class="contact-coordinates">
+            <div class="coord-block">
+              <span class="coord-eyebrow">DIRECT EMAIL</span>
+              <a href="mailto:prakashchakali6216@gmail.com" class="coord-primary-link">
+                prakashchakali6216@gmail.com
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
+              <span class="coord-note">Guaranteed response within 24 business hours.</span>
+            </div>
 
-              <a href="tel:+916302714896" class="contact-row magnetic">
-                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                <div>
-                  <span class="contact-label">Phone</span>
-                  <span class="contact-val">+91 6302714896</span>
-                </div>
+            <div class="coord-block">
+              <span class="coord-eyebrow">TELEPHONE / WHATSAPP</span>
+              <a href="tel:+916302714896" class="coord-secondary-link">
+                +91 6302714896
               </a>
+            </div>
 
-              <div class="contact-row">
-                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div>
-                  <span class="contact-label">Location</span>
-                  <span class="contact-val">Hyderabad, Telangana, India</span>
-                </div>
+            <div class="coord-block">
+              <span class="coord-eyebrow">PRIMARY BASE</span>
+              <div class="coord-text">Hyderabad, Telangana, India</div>
+              <div class="coord-timezone">
+                <span class="pulse-dot"></span>
+                <span>Indian Standard Time (UTC +5:30)</span>
               </div>
             </div>
 
-            <div class="social-links-row">
-              <a href="mailto:prakashchakali6216@gmail.com" class="social-btn magnetic" title="Email Prakash"><i class="fa-solid fa-envelope"></i></a>
-              <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="social-btn magnetic" title="GitHub (@Chakaliprakash)"><i class="fa-brands fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/prakashchakali" target="_blank" rel="noopener noreferrer" class="social-btn magnetic" title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
+            <div class="coord-block">
+              <span class="coord-eyebrow">PROFESSIONAL CHANNELS</span>
+              <div class="social-links-grid">
+                <a href="https://github.com/Chakaliprakash" target="_blank" rel="noopener noreferrer" class="social-btn">
+                  <i class="fa-brands fa-github"></i>
+                  <span>GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/prakash-chakali-753b82292/" target="_blank" rel="noopener noreferrer" class="social-btn">
+                  <i class="fa-brands fa-linkedin"></i>
+                  <span>LinkedIn</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="social-btn highlight">
+                  <i class="fa-solid fa-file-pdf"></i>
+                  <span>Resume PDF</span>
+                  <i class="fa-solid fa-arrow-down"></i>
+                </a>
+              </div>
             </div>
           </div>
 
-          <!-- Contact Form Card with Floating Labels -->
-          <div class="contact-form-card glass-card">
-            <h3>Send a Direct Message</h3>
-            <form id="contact-form" onsubmit="event.preventDefault(); handleContactSubmit();">
+          <!-- Right Column: Asynchronous Web3Forms Contact Form -->
+          <div class="contact-form-card">
+            <div class="form-header">
+              <h3 class="form-heading">Send a Direct Message</h3>
+              <p class="form-subheading">Delivered straight to my inbox via secure webhook.</p>
+            </div>
+
+            <form id="contact-form" class="editorial-form" novalidate>
+              <!-- Web3Forms Access Key -->
               <input type="hidden" name="access_key" id="web3forms-access-key" value="c8a15ed7-da53-4630-bb9c-9f17f0313d1c">
+              <input type="hidden" name="subject" value="New Portfolio Contact Submission — Prakash Chakali">
+              <input type="checkbox" name="botcheck" class="hidden-honeypot" style="display:none">
 
-              <div class="form-floating">
-                <input type="text" id="name" required placeholder=" " autocomplete="name">
-                <label for="name">Your Name</label>
+              <div class="form-group">
+                <label for="contact-name" class="form-label">YOUR FULL NAME <span class="required">*</span></label>
+                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Henderson" required autocomplete="name">
+                <span class="field-error" id="name-error"></span>
               </div>
 
-              <div class="form-floating">
-                <input type="email" id="email" required placeholder=" " autocomplete="email">
-                <label for="email">Your Email Address</label>
+              <div class="form-group">
+                <label for="contact-email" class="form-label">YOUR EMAIL ADDRESS <span class="required">*</span></label>
+                <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. alex@company.com" required autocomplete="email">
+                <span class="field-error" id="email-error"></span>
               </div>
 
-              <div class="form-floating">
-                <textarea id="message" rows="4" required placeholder=" "></textarea>
-                <label for="message">Your Message or Project Details</label>
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">SUBJECT OR ROLE</label>
+                <input type="text" id="contact-subject" name="custom_subject" class="form-input" placeholder="e.g. Java Backend Engineer Opportunity">
               </div>
 
-              <button type="submit" id="submit-btn" class="btn btn-primary btn-block magnetic">
-                <i class="fa-solid fa-paper-plane"></i> Send Message
+              <div class="form-group">
+                <label for="contact-message" class="form-label">YOUR MESSAGE <span class="required">*</span></label>
+                <textarea id="contact-message" name="message" class="form-textarea" rows="5" placeholder="Share role details, engineering collaboration ideas, or project questions..." required></textarea>
+                <span class="field-error" id="message-error"></span>
+              </div>
+
+              <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-block">
+                <span id="submit-btn-text">Transmit Message</span>
+                <i class="fa-solid fa-paper-plane" id="submit-btn-icon"></i>
               </button>
-              <div id="form-feedback" class="form-feedback"></div>
+
+              <div id="form-feedback" class="form-feedback" aria-live="polite"></div>
             </form>
           </div>
         </div>
@@ -891,67 +1281,72 @@
     </section>
   </main>
 
-  <!-- ARCHITECTURE MODAL -->
-  <div id="arch-modal" class="modal-backdrop">
-    <div class="modal-container glass-card">
-      <div class="modal-header">
-        <div class="modal-title-box">
-          <i class="fa-solid fa-diagram-project modal-icon"></i>
-          <h3 id="arch-modal-title">System Architecture</h3>
+  <!-- =====================================================================
+       COLOPHON & SITE FOOTER
+       ===================================================================== -->
+  <footer class="editorial-footer">
+    <div class="footer-container">
+      <div class="footer-top-row">
+        <div class="footer-col-identity">
+          <div class="footer-brand">
+            <span class="brand-monogram">PC</span>
+            <span class="footer-name">Prakash Chakali</span>
+          </div>
+          <p class="footer-bio">
+            Java Backend Developer &amp; Software Engineer. B.Tech Computer Science graduate from Sri Indu College of Engineering &amp; Technology. Focused on building high-performance, concurrency-safe software systems.
+          </p>
         </div>
-        <button class="modal-close-btn" id="arch-modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body" id="arch-modal-body"></div>
-    </div>
-  </div>
 
-  <!-- DEVELOPER CLI TERMINAL MODAL -->
-  <div id="terminal-modal" class="terminal-modal">
-    <div class="terminal-container">
-      <div class="terminal-header">
-        <div class="terminal-dots">
-          <span class="term-dot close" id="term-close-btn"></span>
-          <span class="term-dot min"></span>
-          <span class="term-dot max"></span>
+        <div class="footer-col-nav">
+          <span class="col-title">NAVIGATION</span>
+          <ul class="footer-links">
+            <li><a href="#hero">00 / Top</a></li>
+            <li><a href="#flagship">01 / MysteryStay Flagship</a></li>
+            <li><a href="#systems">02 / Production Projects</a></li>
+            <li><a href="#competencies">03 / Skills &amp; DSA</a></li>
+            <li><a href="#experience">04 / Experience &amp; Education</a></li>
+            <li><a href="#about">05 / About Me</a></li>
+            <li><a href="#contact">06 / Contact</a></li>
+          </ul>
         </div>
-        <div class="terminal-title">prakash@backend-node:~ (zsh)</div>
-        <div class="terminal-actions">
-          <button class="term-action-btn" id="term-clear-btn" title="Clear"><i class="fa-solid fa-eraser"></i></button>
+
+        <div class="footer-col-nav">
+          <span class="col-title">PROJECT REPOSITORIES</span>
+          <ul class="footer-links">
+            <li><a href="https://github.com/ChakaliPrakash/MysteryStay.git" target="_blank" rel="noopener noreferrer">MysteryStay (Java 21 + Spring Boot)</a></li>
+            <li><a href="https://github.com/Chakaliprakash/MiniDB.git" target="_blank" rel="noopener noreferrer">MiniDB Relational Engine</a></li>
+            <li><a href="https://github.com/Chakaliprakash/Dsa_Java.git" target="_blank" rel="noopener noreferrer">Dsa_Java Algorithm Solutions</a></li>
+            <li><a href="https://github.com/Chakaliprakash/Portfolio.git" target="_blank" rel="noopener noreferrer">Portfolio Repository</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-colophon">
+          <span class="col-title">COLOPHON</span>
+          <div class="colophon-text">
+            Crafted with semantic HTML5, modern CSS3 custom properties, and vanilla ES6+. Zero heavy framework overhead. Deployed seamlessly to GitHub Pages.
+          </div>
+          <div class="colophon-specs">
+            <span>Grid: Asymmetric 12-Column</span>
+            <span>Type: Syne + Instrument Serif + Plus Jakarta Sans + JetBrains Mono</span>
+          </div>
         </div>
       </div>
-      <div class="terminal-body" id="terminal-body">
-        <div class="term-line output">Java Backend CLI Initialized [Spring Boot 3.x Environment]</div>
-        <div class="term-line output">Type <span class="term-cmd-highlight">'help'</span> for available commands or <span class="term-cmd-highlight">'skills'</span>, <span class="term-cmd-highlight">'projects'</span>, <span class="term-cmd-highlight">'timeline'</span>, <span class="term-cmd-highlight">'contact'</span>.</div>
-      </div>
-      <div class="terminal-input-row">
-        <span class="term-prompt">prakash@dev:~$ </span>
-        <input type="text" id="terminal-input" placeholder="type a command (e.g. skills, projects, contact)..." autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-  </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="toast">
-    <i class="fa-solid fa-circle-check"></i>
-    <span id="toast-message">Copied to clipboard!</span>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-left">
-        <p><strong>Prakash Chakali</strong> — Java Software Engineer & Backend Architect</p>
-        <p class="footer-sub">Engineered with Java principles, Three.js 3D depth & studio design system.</p>
-      </div>
-      <div class="footer-right">
-        <span id="copyright-year">© 2026 Prakash Chakali. All rights reserved.</span>
-        <a href="#hero" class="back-to-top magnetic"><i class="fa-solid fa-arrow-up"></i> Top</a>
+      <div class="footer-bottom-row">
+        <div class="footer-copyright">
+          &copy; 2026 Prakash Chakali. All rights reserved. Hyderabad, Telangana, India.
+        </div>
+        <div class="footer-back-to-top">
+          <a href="#hero" class="back-to-top-btn" aria-label="Back to top">
+            <span>Back to top</span>
+            <i class="fa-solid fa-arrow-up"></i>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="js/three-scene.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

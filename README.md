@@ -1,23 +1,18 @@
-# 🌐 Modern Creative Studio & 3D Java Developer Portfolio — Prakash Chakali
+# Prakash Chakali — Java Backend Developer & Software Engineer Portfolio
 
-An interactive, production-grade 3D developer portfolio website engineered for **Prakash Chakali** (Java Software Engineer & Backend Architect). Built with **Three.js**, **Web Audio API**, and a modern design studio aesthetic.
+> **Live Digital Experience**: [https://chakaliprakash.github.io/Portfolio/](https://chakaliprakash.github.io/Portfolio/)  
+> **Creative Direction**: Editorial Typography meets Deep Backend Engineering Systems.
 
 ---
 
-## ✨ Features & Architecture
+## 🏛️ Creative Direction & Visual Architecture
 
-- **Dedicated Interactive 3D Hero Centerpiece**: Powered by **Three.js** featuring a faceted geometric polyhedron with an inner pulsating energy sphere, intersecting orbital rings, and satellite data nodes that respond interactively to mouse drag and inertia.
-- **Ambient Background Constellation**: Real-time particle field with dynamic line connections and smooth scroll/cursor parallax.
-- **Professional Generative Ambient Music Engine**: Native **Web Audio API** synthesizer delivering warm analog chord voicings (Ebmaj9, Cm9, Fm9 progressions), gentle ambient chime bells, and an animated audio equalizer in the navbar with zero external audio file latency.
-- **Dark & Light Mode System**: Dark mode by default (`#07090e`) with a subtle, high-contrast Light Mode (`#f8fafc`) switcher persisted via `localStorage`.
-- **Studio Typography**: Bold **Space Grotesk** display typography for headings paired with **Inter** for readable body text and **JetBrains Mono** for code and technical badges.
-- **Vertical Animated Timeline**: Chronological track of academic milestones (B.Tech CS @ Sri Indu, CGPA 7.6), certifications (Smart Interviews DSA, GeeksforGeeks SQL+Java Backend), and production deployments.
-- **Endorsements Sliding Marquee**: Smooth infinite CSS marquee showcasing feedback from mentors, engineering peers, and collaborators.
-- **Dynamic 3D Tilt & Specular Glare**: Physics-based 3D perspective transforms with cursor-following specular light reflections across project cards.
-- **Interactive Architecture Modals**: Real-time data pipeline diagrams for *Personal AI Agent*, *Ecommerce Web App*, and *AI Email Generator*.
-- **Interactive Developer CLI Terminal**: Modal terminal with commands (`help`, `about`, `skills`, `projects`, `timeline`, `dsa`, `music`, `theme`, `contact`, `whoami`).
-- **Floating Label Contact Form**: Modern floating labels with real-time validation and asynchronous Web3Forms delivery.
-- **Automated GitHub Pages Deployment**: Pre-configured CI/CD workflow (`.github/workflows/deploy.yml`).
+- **Editorial Typographic System**: Archival light theme (`#FAF9F5`) with ink charcoal (`#121316`), stone hairline dividers (`rgba(18,19,22,0.08)`), and an architectural terracotta accent (`#D94625`) paired with **Plus Jakarta Sans**, **Instrument Serif**, **Inter**, and **JetBrains Mono**.
+- **Dark Theater Showcase for MysteryStay**: Deep carbon obsidian (`#090A0D`) presentation for the flagship project with blueprint schematics, interactive DSA calculators, and masked booking reveals.
+- **Interactive Spring Boot Concurrency & Request Pipeline Simulator**: Real-time canvas demonstrating client HTTP dispatch, stateless JWT filter chain, Service Layer, and MySQL InnoDB Pessimistic Write locks (`SELECT ... FOR UPDATE`).
+- **In-Memory MiniDB Interactive SQL Shell**: In-browser emulation of Prakash's custom Java 21 regex SQL parser with $O(1)$ Hash table index lookups.
+- **Developer CLI Terminal**: Interactive shell supporting commands (`help`, `mystery`, `minidb`, `kanban`, `bidding`, `skills`, `education`, `certs`, `contact`, `resume`).
+- **Verified Factuality**: Sourced directly from academic credentials (Sri Indu College CS B.Tech, 7.6 CGPA, Class X 100%), verified repositories, and official industry certifications.
 
 ---
 
@@ -27,39 +22,31 @@ An interactive, production-grade 3D developer portfolio website engineered for *
 Portfolio/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml    # Automated GitHub Pages deployment pipeline
-├── index.html            # Main semantic HTML structure
+│       └── deploy.yml              # Automated GitHub Actions deployment pipeline
+├── assets/
+│   └── Prakash_Chakali_Resume.pdf  # Verified high-res resume document
 ├── css/
-│   └── style.css         # Modern design system, themes, typography & animations
+│   └── style.css                   # Editorial design system, tokens & responsive layouts
 ├── js/
-│   ├── three-scene.js    # Three.js background constellation & interactive 3D centerpiece
-│   └── main.js           # Ambient music engine, theme toggle, 3D tilt, terminal & forms
-├── src/
-│   └── Main.java         # Starter Java application
-└── README.md             # Project documentation
+│   └── main.js                     # IST clock, pipeline simulator, DSA calculator & MiniDB shell
+├── index.html                      # Semantic, accessible HTML5 structure
+└── README.md                       # Documentation
 ```
 
 ---
 
-## 🚀 How to Push to GitHub & Deploy
+## 🚀 Deployment
 
-### Step 1: Push Changes
-```powershell
-git add .
-git commit -m "feat: overhaul portfolio to modern design studio specifications with 3D centerpiece and ambient music"
-git push
-```
-
-### Step 2: Live Deployment
-The automated GitHub Actions workflow will build and deploy your live portfolio:
-- **Live URL**: `https://<YOUR_GITHUB_USERNAME>.github.io/Portfolio/`
-- *(Go to your repository's **Settings** $\rightarrow$ **Pages** $\rightarrow$ Build and deployment Source: **GitHub Actions**)*.
+The portfolio is deployed via GitHub Actions on every push to `main` at:  
+👉 **https://chakaliprakash.github.io/Portfolio/**
 
 ---
 
 ## 📬 Contact Information
+
 - **Developer**: Prakash Chakali
 - **Email**: `prakashchakali6216@gmail.com`
 - **Phone**: `+91 6302714896`
+- **LinkedIn**: [linkedin.com/in/prakash-chakali-753b82292](https://www.linkedin.com/in/prakash-chakali-753b82292/)
 - **GitHub**: [@Chakaliprakash](https://github.com/Chakaliprakash)
 - **Location**: Hyderabad, Telangana, India
