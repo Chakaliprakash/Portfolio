@@ -18,7 +18,7 @@
   <meta property="twitter:description" content="Engineering ideas into systems that scale.">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23141518'/><text x='16' y='21' font-size='15' font-family='sans-serif' font-weight='bold' fill='%23DE5326' text-anchor='middle'>PC</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111215'/><text x='16' y='21' font-size='15' font-family='sans-serif' font-weight='bold' fill='%23DE4B26' text-anchor='middle'>PC</text></svg>">
 
   <!-- Typography: Syne (Display), Instrument Serif (Editorial Accent), Plus Jakarta Sans (Body & UI), JetBrains Mono (Technical Spec) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,15 +35,17 @@
   <!-- Reading Progress Bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Custom Architectural Cursor (Enabled on fine pointers) -->
+  <!-- Custom Architectural Cursor -->
   <div class="editorial-cursor" id="editorial-cursor" aria-hidden="true">
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
   </div>
 
-  <!-- SITE HEADER / EDITORIAL NAVBAR -->
+  <!-- ========================================================================
+       01. SITE HEADER & EDITORIAL NAVBAR
+       ======================================================================== -->
   <header class="editorial-nav" id="site-header">
-    <div class="nav-inner">
+    <div class="container-wide nav-inner">
       <!-- Identity Brandmark -->
       <a href="#hero" class="brandmark" aria-label="Prakash Chakali — Back to top">
         <span class="brand-monogram">PC</span>
@@ -143,15 +145,16 @@
 
   <main id="main-content">
     <!-- =====================================================================
-         HERO SECTION: MONUMENTAL EDITORIAL COMPOSITION
+         02. HERO SECTION: MONUMENTAL ASYMMETRIC COMPOSITION
          ===================================================================== -->
     <section id="hero" class="hero-section">
-      <!-- Background Grid & Micro Coordinates -->
-      <div class="hero-grid-canvas" aria-hidden="true"></div>
-
-      <div class="hero-container">
+      <div class="container">
         <!-- Top Editorial Meta Bar -->
         <div class="hero-meta-strip">
+          <div class="meta-tag">
+            <span class="meta-label">IDENTITY</span>
+            <span class="meta-val">Prakash Chakali</span>
+          </div>
           <div class="meta-tag">
             <span class="meta-label">ROLE</span>
             <span class="meta-val">Java Backend Developer · Software Engineer · Full Stack</span>
@@ -161,22 +164,22 @@
             <span class="meta-val">Hyderabad, India (17.3850° N, 78.4867° E)</span>
           </div>
           <div class="meta-tag hide-mobile">
-            <span class="meta-label">FOCUS</span>
-            <span class="meta-val">Spring Boot 3.x · Distributed Systems · ACID &amp; Concurrency</span>
+            <span class="meta-label">ACID &amp; CONCURRENCY</span>
+            <span class="meta-val">Pessimistic DB Locks &amp; Modular Monoliths</span>
           </div>
         </div>
 
-        <!-- Asymmetrical Hero Grid: Left Typography, Right Interactive Topology -->
+        <!-- Asymmetrical Hero Grid: Left Typography, Right Kinetic Topology -->
         <div class="hero-editorial-grid">
           <!-- Left Column: Typography & Narrative -->
           <div class="hero-narrative">
             <div class="hero-identity-tag">
               <span class="tag-accent">//</span>
-              <span>ENGINEERING PORTFOLIO — 2026</span>
+              <span>SOFTWARE ARCHITECTURE &amp; SYSTEMS</span>
             </div>
 
             <h1 class="hero-headline">
-              Engineering <span class="headline-serif">ideas</span> into <span class="headline-contrast">systems</span> that <span class="headline-accent">scale.</span>
+              Engineering <span class="headline-serif">ideas</span> into <span class="headline-contrast">systems</span> that scale.
             </h1>
 
             <p class="hero-description">
@@ -186,31 +189,31 @@
             <!-- Hero Action Cluster -->
             <div class="hero-actions">
               <a href="#flagship" class="btn btn-primary">
-                <span>Inspect Flagship Project</span>
+                <span>Explore MysteryStay Case Study</span>
                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
-              <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-outline" id="hero-resume-btn">
+              <a href="assets/Prakash_Chakali_Resume.pdf" download="Prakash_Chakali_Resume.pdf" class="btn btn-secondary" id="hero-resume-btn">
                 <i class="fa-regular fa-file-pdf" aria-hidden="true"></i>
                 <span>Download Resume</span>
               </a>
-              <a href="#contact" class="btn btn-ghost">
-                <span>Get in Touch</span>
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                <span>Contact Me</span>
               </a>
             </div>
 
             <!-- Verified Tech Ticker -->
             <div class="hero-stack-index">
-              <span class="stack-index-label">CORE TECHNOLOGIES</span>
+              <span class="stack-index-label">CORE ENGINEERING STACK</span>
               <div class="stack-badges">
-                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java 21</span>
+                <span class="tech-pill"><i class="fa-brands fa-java"></i> Java 21 LTS</span>
                 <span class="tech-pill">Spring Boot 3.3.5</span>
                 <span class="tech-pill">Spring Security</span>
-                <span class="tech-pill">Hibernate/JPA</span>
-                <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
+                <span class="tech-pill">Hibernate / JPA</span>
+                <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL 8.4</span>
                 <span class="tech-pill">Redis</span>
                 <span class="tech-pill"><i class="fa-brands fa-react"></i> React 18</span>
-                <span class="tech-pill">WebSockets</span>
+                <span class="tech-pill">WebSockets (STOMP)</span>
                 <span class="tech-pill">Spring AI</span>
               </div>
             </div>
@@ -234,7 +237,7 @@
               <div class="canvas-wrapper">
                 <canvas id="topology-canvas" width="600" height="420" aria-label="Interactive transactional nodes and concurrent packets simulation"></canvas>
                 <div class="canvas-hint">
-                  <i class="fa-solid fa-hand-pointer"></i> Move cursor across canvas to modulate thread pressure
+                  <i class="fa-solid fa-hand-pointer"></i> Hover across canvas to perturb node physics
                 </div>
               </div>
 
@@ -260,19 +263,19 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Scroll Invitation Indicator -->
-      <div class="hero-scroll-cue">
-        <a href="#flagship" class="scroll-cue-link" aria-label="Scroll to Flagship Project">
-          <span class="cue-text">EXPLORE ARCHITECTURE</span>
-          <span class="cue-line"></span>
-        </a>
+        <!-- Scroll Invitation Indicator -->
+        <div class="hero-scroll-cue">
+          <a href="#flagship" class="scroll-cue-link" aria-label="Scroll to Flagship Project">
+            <span class="cue-text">EXPLORE FLAGSHIP ARCHITECTURE</span>
+            <span class="cue-line"></span>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         SECTION 01: FLAGSHIP PROJECT — MYSTERYSTAY (CINEMATIC DARK PRESENTATION)
+         03. FLAGSHIP PROJECT: MYSTERYSTAY (CINEMATIC DARK THEATER PRESENTATION)
          ===================================================================== -->
     <section id="flagship" class="flagship-section">
       <div class="flagship-container">
@@ -301,6 +304,7 @@
               <span class="pill-dark">Spring Boot 3.3.5</span>
               <span class="pill-dark">Modular Monolith</span>
               <span class="pill-dark">MySQL 8.4</span>
+              <span class="pill-dark">Redis</span>
               <span class="pill-dark">React 18</span>
             </div>
 
@@ -446,7 +450,7 @@
                   <i class="fa-solid fa-play"></i>
                   <span>Simulate 10 Concurrent Requests</span>
                 </button>
-                <button id="reset-concurrency-sim" class="btn btn-ghost-light btn-sm">
+                <button id="reset-concurrency-sim" class="btn btn-outline-light btn-sm">
                   <i class="fa-solid fa-rotate-right"></i>
                   <span>Reset</span>
                 </button>
@@ -559,15 +563,15 @@
     </section>
 
     <!-- =====================================================================
-         SECTION 02: OTHER PRODUCTION PROJECTS & TECHNICAL CASE STUDIES
+         04. PRODUCTION SYSTEMS & CASE STUDIES (ALTERNATING EDITORIAL LAYOUT)
          ===================================================================== -->
     <section id="systems" class="systems-section">
       <div class="section-container">
         <!-- Section Header -->
         <div class="section-editorial-header">
-          <div class="editorial-meta-tag">
-            <span class="num-highlight">02</span>
-            <span class="tag-sep">//</span>
+          <div class="section-marker">
+            <span class="marker-index">02</span>
+            <span class="marker-line"></span>
             <span>PRODUCTION SYSTEMS &amp; ENGINES</span>
           </div>
           <h2 class="section-title">
@@ -578,7 +582,7 @@
           </p>
         </div>
 
-        <!-- Project Cards Grid -->
+        <!-- Project Cards Grid with Alternating Layouts -->
         <div class="projects-editorial-list">
           <!-- ==========================================
                PROJECT 1: REAL-TIME COLLABORATIVE KANBAN
@@ -830,15 +834,15 @@ Type or choose a query above to execute against MiniDB engine.</div>
     </section>
 
     <!-- =====================================================================
-         SECTION 03: TECHNICAL COMPETENCIES & DSA SPECIFICATION
+         05. TECHNICAL COMPETENCIES & ARCHITECTURE TAXONOMY
          ===================================================================== -->
     <section id="competencies" class="competencies-section">
       <div class="section-container">
         <!-- Section Header -->
         <div class="section-editorial-header">
-          <div class="editorial-meta-tag">
-            <span class="num-highlight">03</span>
-            <span class="tag-sep">//</span>
+          <div class="section-marker">
+            <span class="marker-index">03</span>
+            <span class="marker-line"></span>
             <span>CORE TECHNICAL MATRIX</span>
           </div>
           <h2 class="section-title">
@@ -925,15 +929,15 @@ Type or choose a query above to execute against MiniDB engine.</div>
     </section>
 
     <!-- =====================================================================
-         SECTION 04: EXPERIENCE, EDUCATION & CERTIFICATIONS
+         06. EXPERIENCE, EDUCATION & CERTIFICATIONS
          ===================================================================== -->
     <section id="experience" class="experience-section">
       <div class="section-container">
         <!-- Section Header -->
         <div class="section-editorial-header">
-          <div class="editorial-meta-tag">
-            <span class="num-highlight">04</span>
-            <span class="tag-sep">//</span>
+          <div class="section-marker">
+            <span class="marker-index">04</span>
+            <span class="marker-line"></span>
             <span>TRAJECTORY &amp; CREDENTIALS</span>
           </div>
           <h2 class="section-title">
@@ -1067,15 +1071,15 @@ Type or choose a query above to execute against MiniDB engine.</div>
     </section>
 
     <!-- =====================================================================
-         SECTION 05: ABOUT ME & ENGINEERING ETHOS
+         07. ABOUT ME & ENGINEERING ETHOS
          ===================================================================== -->
     <section id="about" class="about-section">
       <div class="section-container">
         <!-- Section Header -->
         <div class="section-editorial-header">
-          <div class="editorial-meta-tag">
-            <span class="num-highlight">05</span>
-            <span class="tag-sep">//</span>
+          <div class="section-marker">
+            <span class="marker-index">05</span>
+            <span class="marker-line"></span>
             <span>ENGINEERING ETHOS</span>
           </div>
           <h2 class="section-title">
@@ -1163,15 +1167,15 @@ Type or choose a query above to execute against MiniDB engine.</div>
     </section>
 
     <!-- =====================================================================
-         SECTION 06: CONTACT & DIALOGUE INITIATION
+         08. CONTACT & DIALOGUE INITIATION
          ===================================================================== -->
     <section id="contact" class="contact-section">
       <div class="section-container">
         <!-- Section Header -->
         <div class="section-editorial-header">
-          <div class="editorial-meta-tag">
-            <span class="num-highlight">06</span>
-            <span class="tag-sep">//</span>
+          <div class="section-marker">
+            <span class="marker-index">06</span>
+            <span class="marker-line"></span>
             <span>COMMENCE DIALOGUE</span>
           </div>
           <h2 class="section-title">
@@ -1282,7 +1286,7 @@ Type or choose a query above to execute against MiniDB engine.</div>
   </main>
 
   <!-- =====================================================================
-       COLOPHON & SITE FOOTER
+       09. COLOPHON & SITE FOOTER
        ===================================================================== -->
   <footer class="editorial-footer">
     <div class="footer-container">
