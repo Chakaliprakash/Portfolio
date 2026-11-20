@@ -3101,3 +3101,219 @@ footer[id] {
     text-decoration: underline;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   17. AMBIENT MOTION LAYER — EDITORIAL COPPER / INK
+   -------------------------------------------------------------------------- */
+body {
+  isolation: isolate;
+}
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background:
+    radial-gradient(ellipse at 12% 12%, rgba(222, 75, 38, 0.055), transparent 34%),
+    radial-gradient(ellipse at 88% 42%, rgba(2, 132, 199, 0.035), transparent 31%),
+    var(--bg-page);
+  transition: background-color var(--trans-medium);
+}
+.ambient-background canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.62;
+}
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(to right, var(--border-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-hairline) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, black, transparent 86%);
+}
+.ambient-orb {
+  position: absolute;
+  display: block;
+  width: clamp(220px, 34vw, 480px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.09;
+  will-change: transform;
+  animation: ambient-drift 24s ease-in-out infinite alternate;
+}
+.ambient-orb-one {
+  top: 5%;
+  left: -13%;
+  background: var(--accent);
+}
+.ambient-orb-two {
+  top: 46%;
+  right: -17%;
+  width: clamp(240px, 30vw, 420px);
+  background: #2785A8;
+  animation-duration: 31s;
+  animation-delay: -9s;
+}
+@keyframes ambient-drift {
+  0% { transform: translate3d(0, 0, 0) scale(0.92); }
+  50% { transform: translate3d(8vw, 5vh, 0) scale(1.08); }
+  100% { transform: translate3d(-2vw, 12vh, 0) scale(0.98); }
+}
+
+/* Keep the existing content above the decorative canvas. */
+body > *:not(.ambient-background) {
+  z-index: 1;
+}
+.editorial-nav,
+.mobile-drawer,
+#scroll-progress,
+.editorial-cursor {
+  z-index: 20;
+}
+#scroll-progress { z-index: 9999; }
+.editorial-cursor { z-index: 10000; }
+.mobile-drawer { z-index: 1000; }
+
+/* Cards feel tactile without changing the editorial geometry. */
+.project-editorial-card,
+.project-side-card,
+.spec-card,
+.info-card,
+.lab-card,
+.cert-card,
+.telemetry-stat,
+.about-portrait-card,
+.contact-form-card,
+.flagship-spec-grid > * {
+  --tile-lift: 0px;
+  position: relative;
+  transform: translate3d(0, var(--tile-lift), 0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition:
+    transform 420ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    border-color 320ms ease,
+    box-shadow 420ms ease,
+    background-color 320ms ease;
+}
+.project-editorial-card::after,
+.project-side-card::after,
+.spec-card::after,
+.info-card::after,
+.lab-card::after,
+.cert-card::after,
+.telemetry-stat::after,
+.contact-form-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(125deg, rgba(222,75,38,0.09), transparent 42%, rgba(255,255,255,0.04));
+  transition: opacity 360ms ease;
+}
+.project-editorial-card:hover,
+.project-side-card:hover,
+.spec-card:hover,
+.info-card:hover,
+.lab-card:hover,
+.cert-card:hover,
+.telemetry-stat:hover,
+.about-portrait-card:hover,
+.contact-form-card:hover,
+.flagship-spec-grid > *:hover {
+  --tile-lift: -5px;
+  box-shadow: 0 18px 42px rgba(18, 19, 22, 0.09);
+}
+[data-theme="dark"] .project-editorial-card:hover,
+[data-theme="dark"] .project-side-card:hover,
+[data-theme="dark"] .spec-card:hover,
+[data-theme="dark"] .info-card:hover,
+[data-theme="dark"] .lab-card:hover,
+[data-theme="dark"] .cert-card:hover,
+[data-theme="dark"] .telemetry-stat:hover,
+[data-theme="dark"] .contact-form-card:hover {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+}
+.project-editorial-card:hover::after,
+.project-side-card:hover::after,
+.spec-card:hover::after,
+.info-card:hover::after,
+.lab-card:hover::after,
+.cert-card:hover::after,
+.telemetry-stat:hover::after,
+.contact-form-card:hover::after {
+  opacity: 1;
+}
+
+/* Scroll reveal: a restrained entrance, never a content gate. */
+.motion-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 680ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 680ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.motion-reveal.motion-reveal-left {
+  transform: translate3d(-24px, 0, 0);
+}
+.motion-reveal.motion-reveal-left.is-visible {
+  transform: translate3d(0, 0, 0);
+}
+.motion-reveal.motion-reveal-scale {
+  transform: translate3d(0, 14px, 0) scale(0.975);
+}
+.motion-reveal.motion-reveal-scale.is-visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-editorial-card,
+  .spec-card,
+  .info-card,
+  .lab-card,
+  .cert-card,
+  .telemetry-stat {
+    will-change: transform;
+  }
+}
+@media (max-width: 760px) {
+  .ambient-grid { background-size: 54px 54px; opacity: 0.12; }
+  .ambient-orb { filter: blur(54px); opacity: 0.07; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb { animation: none !important; }
+  .motion-reveal,
+  .motion-reveal.motion-reveal-left,
+  .motion-reveal.motion-reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .project-editorial-card,
+  .project-side-card,
+  .spec-card,
+  .info-card,
+  .lab-card,
+  .cert-card,
+  .telemetry-stat,
+  .about-portrait-card,
+  .contact-form-card,
+  .flagship-spec-grid > * {
+    transform: none !important;
+    transition: none !important;
+  }
+}
