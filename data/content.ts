@@ -27,7 +27,7 @@ export const profile = {
   github: "https://github.com/Chakaliprakash",
   linkedin: "https://www.linkedin.com/in/prakash-chakali-753b82292/",
   x: "",
-  resume: "/assets/Prakash_Chakali_Resume.pdf",
+  resume: "assets/Prakash_Chakali_Resume.pdf",
   availability: "Open to entry-level Java Backend Developer and Software Engineer opportunities",
   education: {
     degree: "B.Tech · Computer Science & Engineering (Cyber Security)",
