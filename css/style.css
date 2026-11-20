@@ -3196,7 +3196,7 @@ body > *:not(.ambient-background) {
 .flagship-spec-grid > * {
   --tile-lift: 0px;
   position: relative;
-  transform: translate3d(0, var(--tile-lift), 0);
+  transform: perspective(900px) rotateX(var(--tile-rotate-x, 0deg)) rotateY(var(--tile-rotate-y, 0deg)) translate3d(0, var(--tile-lift), 0);
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition:
