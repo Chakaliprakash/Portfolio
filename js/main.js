@@ -929,4 +929,160 @@
     });
   }
 
+
+  /* 12. Ambient background particles, scroll reveals and interactive tiles */
+  const ambientCanvas = document.getElementById('ambient-canvas');
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  if (ambientCanvas) {
+    const ctx = ambientCanvas.getContext('2d', { alpha: true });
+    let width = 0, height = 0, frame = null, visible = true;
+    let particles = [];
+    const pointer = { x: -1000, y: -1000, active: false };
+
+    function drawAmbient() {
+      ctx.clearRect(0, 0, width, height);
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const copper = dark ? '229,87,47' : '190,69,39';
+      const distanceLimit = width < 640 ? 92 : 138;
+
+      particles.forEach((p, i) => {
+        if (!motionPreference.matches && visible && !document.hidden) {
+          p.x += p.vx; p.y += p.vy; p.phase += 0.012;
+          if (p.x < -8) p.x = width + 8;
+          if (p.x > width + 8) p.x = -8;
+          if (p.y < -8) p.y = height + 8;
+          if (p.y > height + 8) p.y = -8;
+        }
+        let x = p.x, y = p.y;
+        if (pointer.active && finePointer.matches) {
+          const dx = x - pointer.x, dy = y - pointer.y, d = Math.hypot(dx, dy);
+          if (d > 0 && d < 115) {
+            const force = (115 - d) / 115;
+            x += dx / d * force * 8; y += dy / d * force * 8;
+          }
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${copper}, ${0.19 + Math.sin(p.phase) * 0.06})`;
+        ctx.fill();
+
+        for (let n = i + 1; n < particles.length; n++) {
+          const q = particles[n], d = Math.hypot(x - q.x, y - q.y);
+          if (d < distanceLimit) {
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${copper}, ${(1 - d / distanceLimit) * (dark ? 0.10 : 0.07)})`;
+            ctx.lineWidth = 0.7; ctx.stroke();
+          }
+        }
+      });
+
+      if (!motionPreference.matches && visible && !document.hidden) frame = requestAnimationFrame(drawAmbient);
+      else frame = null;
+    }
+
+    function startAmbient() {
+      if (!frame && visible && !document.hidden && !motionPreference.matches) frame = requestAnimationFrame(drawAmbient);
+      else if (motionPreference.matches) drawAmbient();
+    }
+    function stopAmbient() {
+      if (frame) cancelAnimationFrame(frame);
+      frame = null;
+    }
+    function resizeAmbient() {
+      const rect = ambientCanvas.getBoundingClientRect();
+      width = rect.width; height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.35);
+      ambientCanvas.width = Math.max(1, Math.round(width * dpr));
+      ambientCanvas.height = Math.max(1, Math.round(height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(64, Math.max(22, Math.round(width * height / 26000)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width, y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+        radius: 0.7 + Math.random() * 1.2, phase: Math.random() * Math.PI * 2
+      }));
+      drawAmbient();
+    }
+
+    if (finePointer.matches) {
+      window.addEventListener('pointermove', (e) => {
+        pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = true;
+      }, { passive: true });
+      document.addEventListener('pointerleave', () => { pointer.active = false; });
+    }
+    document.addEventListener('visibilitychange', () => {
+      visible = !document.hidden;
+      if (visible) startAmbient(); else stopAmbient();
+    });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting && !document.hidden;
+        if (visible) startAmbient(); else stopAmbient();
+      });
+      observer.observe(ambientCanvas);
+    }
+    window.addEventListener('resize', resizeAmbient, { passive: true });
+    if (motionPreference.addEventListener) {
+      motionPreference.addEventListener('change', () => {
+        if (motionPreference.matches) { stopAmbient(); drawAmbient(); }
+        else startAmbient();
+      });
+    }
+    resizeAmbient();
+    startAmbient();
+  }
+
+  // Staggered entrances for section headings and key editorial elements.
+  const revealTargets = document.querySelectorAll(
+    '.hero-identity-tag, .hero-headline, .hero-description, .hero-actions, .hero-info-grid, ' +
+    '.section-marker, .section-headline, .section-sublead, .topology-frame, ' +
+    '.project-header-row, .about-narrative, .contact-coordinates'
+  );
+  if ('IntersectionObserver' in window && !motionPreference.matches) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -42px 0px' });
+    revealTargets.forEach((el, index) => {
+      el.classList.add('motion-reveal');
+      el.style.setProperty('--reveal-delay', `${(index % 4) * 75}ms`);
+      revealObserver.observe(el);
+    });
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // Small 3D perspective follows the pointer on desktop tiles only.
+  if (finePointer.matches && !motionPreference.matches) {
+    document.querySelectorAll(
+      '.project-editorial-card, .project-side-card, .spec-card, .info-card, ' +
+      '.lab-card, .cert-card, .telemetry-stat, .contact-form-card'
+    ).forEach((tile) => {
+      let rect = null;
+      tile.addEventListener('pointerenter', () => {
+        rect = tile.getBoundingClientRect();
+        tile.style.transition = 'transform 120ms ease-out, box-shadow 320ms ease';
+      });
+      tile.addEventListener('pointermove', (e) => {
+        if (!rect) rect = tile.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        tile.style.setProperty('--tile-rotate-y', `${((x - 0.5) * 5.5).toFixed(2)}deg`);
+        tile.style.setProperty('--tile-rotate-x', `${((0.5 - y) * 4.5).toFixed(2)}deg`);
+      });
+      tile.addEventListener('pointerleave', () => {
+        rect = null;
+        tile.style.setProperty('--tile-rotate-x', '0deg');
+        tile.style.setProperty('--tile-rotate-y', '0deg');
+        tile.style.transition = '';
+      });
+    });
+  }
+
 })();
