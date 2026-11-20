@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chakaliprakash.github.io/Portfolio/sitemap.xml
