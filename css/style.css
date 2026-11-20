@@ -2918,3 +2918,186 @@ body.cursor-hover .cursor-ring {
     font-size: 0.88rem;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   16. ACCESSIBILITY, PERFORMANCE & FINAL RESPONSIVE POLISH
+   -------------------------------------------------------------------------- */
+
+/* Keyboard users can bypass repeated navigation. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10001;
+  padding: 12px 18px;
+  border-radius: 6px;
+  background: var(--text-title);
+  color: var(--bg-page);
+  font-weight: 700;
+  transform: translateY(-160%);
+  transition: transform var(--trans-fast);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* A clear, consistent keyboard focus indicator across the entire site. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+.form-input:focus-visible,
+.form-textarea:focus-visible {
+  border-color: var(--accent);
+  outline-offset: 2px;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Keep anchored content visible below the sticky navigation. */
+main section[id],
+footer[id] {
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+.mobile-drawer {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: max(28px, env(safe-area-inset-bottom));
+}
+.menu-toggle-btn,
+.drawer-close-btn,
+.control-btn {
+  min-width: 40px;
+  min-height: 40px;
+}
+.form-input,
+.form-textarea {
+  min-height: 48px;
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+
+/* Prevent long technical labels and URLs from breaking narrow layouts. */
+:where(.info-val, .card-text, .project-description, .coord-primary-link,
+       .coord-secondary-link, .footer-bio, .t-stat-val) {
+  overflow-wrap: anywhere;
+}
+.topology-frame,
+.spec-card,
+.project-editorial-card,
+.contact-form-card {
+  min-width: 0;
+}
+
+/* Respect operating-system motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .editorial-cursor {
+    display: none !important;
+  }
+}
+
+/* Improve layout at compact phones without changing the desktop art direction. */
+@media (max-width: 600px) {
+  :root {
+    --container-pad: 20px;
+    --section-pad-y: 76px;
+  }
+  .mobile-drawer {
+    max-width: min(100%, 420px);
+    padding: 24px 22px;
+  }
+  .canvas-wrapper {
+    height: clamp(230px, 68vw, 320px);
+  }
+  .topology-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topology-title {
+    font-size: 0.62rem;
+  }
+  .topology-mode {
+    flex-wrap: wrap;
+  }
+  .canvas-hint {
+    max-width: calc(100% - 24px);
+    width: max-content;
+    text-align: center;
+    font-size: 0.6rem;
+  }
+  .footer-bottom-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .coord-primary-link {
+    font-size: clamp(1.05rem, 5vw, 1.4rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-inner {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .brand-name {
+    font-size: 0.8rem;
+  }
+  .topology-telemetry {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px;
+  }
+  .t-stat-val {
+    font-size: 0.68rem;
+  }
+}
+
+/* Keep printed and saved-to-PDF pages readable. */
+@media print {
+  .editorial-nav,
+  .mobile-drawer,
+  .editorial-cursor,
+  #scroll-progress,
+  .hero-scroll-cue,
+  .sound-btn,
+  .menu-toggle-btn,
+  .contact-form-card,
+  .back-to-top-btn {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .section-editorial,
+  .hero-section,
+  .flagship-section,
+  .contact-section {
+    padding: 24px 0 !important;
+    break-inside: avoid;
+  }
+  a {
+    color: #111 !important;
+    text-decoration: underline;
+  }
+}
