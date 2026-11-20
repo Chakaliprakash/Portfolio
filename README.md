@@ -9,7 +9,7 @@ A dark editorial engineering portfolio built with Next.js App Router, TypeScript
 - Framer Motion for restrained reveal and route-adjacent interactions
 - lucide-react icons, next/font, static case-study routes
 - CSS architectural hero illustration (no heavy 3D runtime; keeps the hero light and readable)
-- Static export for GitHub Pages and Vercel
+- Native Next.js runtime on Vercel (not `output: "export"`)
 
 ## Run locally
 
@@ -39,16 +39,20 @@ The contact section includes a working form. Create a Formspree form and set `NE
 
 ## Deployment
 
-### Vercel (recommended)
+### Vercel (production)
 
-1. Import `Chakaliprakash/Portfolio` into Vercel.
-2. Keep the framework preset as Next.js and the root directory as `./`.
-3. Build command: `npm run build`.
-4. Deploy. No environment variables are required for the portfolio's current functionality.
+1. Import or connect `Chakaliprakash/Portfolio` in Vercel.
+2. Framework preset: Next.js; root directory: `./`.
+3. Build command and install command: let Vercel auto-detect (`npm run build`).
+4. Use Node.js 22.x.
+5. Set `NEXT_PUBLIC_SITE_URL` to the production domain if you use a custom domain. The default is the Vercel project domain.
+6. Push to `main`; Vercel automatically builds and deploys production.
 
-### GitHub Pages
+The app deliberately uses the normal Next.js runtime. Do not set `output: "export"`: generated Open Graph image and metadata routes need the Next.js deployment runtime.
 
-The repository workflow exports the site to `out/` with `GITHUB_PAGES=true` and deploys it to GitHub Pages under `/Portfolio`. The Next config uses the base path only in that workflow; Vercel uses the root path.
+### GitHub Actions
+
+The GitHub Actions workflow runs typecheck, ESLint, and a normal production Next.js build. It is a quality gate only; Vercel owns production deployment.
 
 ## Quality checks
 
@@ -57,8 +61,6 @@ npm run lint
 npm run typecheck
 npm run build
 ```
-
-The GitHub Actions workflow runs the static export before publishing. Run the three checks locally before merging future changes.
 
 ## Known content gaps to complete
 

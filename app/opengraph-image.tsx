@@ -16,7 +16,7 @@ export default function OpenGraphImage() {
         <div style={{ fontSize: 25, color: "#a0a69a" }}>Java Backend Developer · Software Engineer · Hyderabad, India</div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #3a4035", paddingTop: "22px", color: "#c6e56a", fontSize: 16, letterSpacing: "3px" }}>
-        <span>JAVA / SPRING / DATA / SYSTEMS</span><span>CHAKALIPRAKASH.GITHUB.IO</span>
+        <span>JAVA / SPRING / DATA / SYSTEMS</span><span>PERSONAL PORTFOLIO</span>
       </div>
     </div>,
     { ...size }

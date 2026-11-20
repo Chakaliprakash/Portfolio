@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
-const isGithubPages = process.env.GITHUB_PAGES === "true";
-
+// Vercel runs the full Next.js runtime. Do not enable static export here:
+// generated metadata routes (including the Open Graph image) need Next.js routing.
 const nextConfig: NextConfig = {
-  output: "export",
   trailingSlash: true,
-  images: { unoptimized: true },
-  ...(isGithubPages ? { basePath: "/Portfolio", assetPrefix: "/Portfolio/" } : {}),
 };
 
 export default nextConfig;
