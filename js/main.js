@@ -22,7 +22,8 @@
   const themeLabel = document.getElementById('theme-label');
 
   function initTheme() {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem(THEME_STORAGE_KEY); } catch (_) { /* Storage may be unavailable in private contexts. */ }
     if (savedTheme === 'dark' || savedTheme === 'light') {
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateThemeLabel(savedTheme);
@@ -44,7 +45,7 @@
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const target = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', target);
-      localStorage.setItem(THEME_STORAGE_KEY, target);
+      try { localStorage.setItem(THEME_STORAGE_KEY, target); } catch (_) { /* Theme still works for this session. */ }
       updateThemeLabel(target);
     });
   }
@@ -74,7 +75,7 @@
     }
   }
 
-  setInterval(updateClock, 1000);
+  setInterval(updateClock, 30000);
   updateClock();
 
   /* --------------------------------------------------------------------------
@@ -112,7 +113,15 @@
     });
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  let scrollFrame = 0;
+  window.addEventListener('scroll', () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      handleScroll();
+      scrollFrame = 0;
+    });
+  }, { passive: true });
+  handleScroll();
 
   /* --------------------------------------------------------------------------
      4. EDITORIAL CURSOR (FINE POINTERS ONLY)
@@ -121,27 +130,31 @@
   const cursorDot = cursor ? cursor.querySelector('.cursor-dot') : null;
   const cursorRing = cursor ? cursor.querySelector('.cursor-ring') : null;
 
-  if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let ringX = mouseX;
     let ringY = mouseY;
 
+    let cursorFrame = 0;
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+      if (Math.abs(mouseX - ringX) > 0.5 || Math.abs(mouseY - ringY) > 0.5) {
+        cursorFrame = requestAnimationFrame(renderCursor);
+      } else {
+        cursorFrame = 0;
+      }
+    }
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursorDot.style.left = `${mouseX}px`;
       cursorDot.style.top = `${mouseY}px`;
-    });
-
-    function renderCursor() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-      requestAnimationFrame(renderCursor);
-    }
-    renderCursor();
+      if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
+    }, { passive: true });
 
     const interactives = document.querySelectorAll('a, button, input, textarea, select, .preset-btn, .thread-chip');
     interactives.forEach((el) => {
@@ -164,6 +177,7 @@
       mobileDrawer.setAttribute('aria-hidden', 'false');
       if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (drawerClose) drawerClose.focus();
     }
   }
 
@@ -171,7 +185,10 @@
     if (mobileDrawer) {
       mobileDrawer.classList.remove('open');
       mobileDrawer.setAttribute('aria-hidden', 'true');
-      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.focus();
+      }
       document.body.style.overflow = '';
     }
   }
@@ -195,16 +212,18 @@
     let width = 0;
     let height = 0;
     let animFrameId = null;
-    let isVisible = true;
+    let isVisible = !document.hidden;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let mouse = { x: -1000, y: -1000, active: false };
 
     function resizeCanvas() {
       const rect = topologyCanvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      topologyCanvas.width = width * window.devicePixelRatio;
-      topologyCanvas.height = height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      topologyCanvas.width = Math.max(1, Math.round(width * dpr));
+      topologyCanvas.height = Math.max(1, Math.round(height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     resizeCanvas();
@@ -368,10 +387,41 @@
         ctx.fillText(n.label, nx, ny + n.radius + 14);
       });
 
-      animFrameId = requestAnimationFrame(renderTopology);
+      if (isVisible && !prefersReducedMotion) {
+        animFrameId = requestAnimationFrame(renderTopology);
+      }
     }
 
-    animFrameId = requestAnimationFrame(renderTopology);
+    function syncTopologyAnimation() {
+      isVisible = !document.hidden && topologyCanvas.getBoundingClientRect().bottom > 0 && topologyCanvas.getBoundingClientRect().top < window.innerHeight;
+      if (isVisible && !prefersReducedMotion && !animFrameId) {
+        animFrameId = requestAnimationFrame(renderTopology);
+      } else if ((!isVisible || prefersReducedMotion) && animFrameId) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+        renderTopology();
+      }
+    }
+
+    if ('IntersectionObserver' in window) {
+      const topologyObserver = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting && !document.hidden;
+        if (isVisible && !prefersReducedMotion && !animFrameId) {
+          animFrameId = requestAnimationFrame(renderTopology);
+        } else if (!isVisible && animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+      }, { threshold: 0.05 });
+      topologyObserver.observe(topologyCanvas);
+    }
+    document.addEventListener('visibilitychange', syncTopologyAnimation);
+    window.addEventListener('resize', syncTopologyAnimation, { passive: true });
+    if (!prefersReducedMotion && isVisible) {
+      animFrameId = requestAnimationFrame(renderTopology);
+    } else {
+      renderTopology();
+    }
   }
 
   /* --------------------------------------------------------------------------
