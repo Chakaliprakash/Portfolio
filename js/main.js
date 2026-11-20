@@ -945,7 +945,7 @@
       ctx.clearRect(0, 0, width, height);
       const dark = document.documentElement.getAttribute('data-theme') === 'dark';
       const copper = dark ? '229,87,47' : '190,69,39';
-      const distanceLimit = width < 640 ? 92 : 138;
+      const distanceLimit = width < 640 ? 112 : 168;
 
       particles.forEach((p, i) => {
         if (!motionPreference.matches && visible && !document.hidden) {
@@ -965,14 +965,14 @@
         }
         ctx.beginPath();
         ctx.arc(x, y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${copper}, ${0.19 + Math.sin(p.phase) * 0.06})`;
+        ctx.fillStyle = `rgba(${copper}, ${0.38 + Math.sin(p.phase) * 0.13})`;
         ctx.fill();
 
         for (let n = i + 1; n < particles.length; n++) {
           const q = particles[n], d = Math.hypot(x - q.x, y - q.y);
           if (d < distanceLimit) {
             ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(${copper}, ${(1 - d / distanceLimit) * (dark ? 0.10 : 0.07)})`;
+            ctx.strokeStyle = `rgba(${copper}, ${(1 - d / distanceLimit) * (dark ? 0.24 : 0.19)})`;
             ctx.lineWidth = 0.7; ctx.stroke();
           }
         }
@@ -997,11 +997,11 @@
       ambientCanvas.width = Math.max(1, Math.round(width * dpr));
       ambientCanvas.height = Math.max(1, Math.round(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(64, Math.max(22, Math.round(width * height / 26000)));
+      const count = Math.min(112, Math.max(42, Math.round(width * height / 15500)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width, y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
-        radius: 0.7 + Math.random() * 1.2, phase: Math.random() * Math.PI * 2
+        vx: (Math.random() - 0.5) * 0.42, vy: (Math.random() - 0.5) * 0.42,
+        radius: 1.0 + Math.random() * 1.6, phase: Math.random() * Math.PI * 2
       }));
       drawAmbient();
     }
