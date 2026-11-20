@@ -7,6 +7,13 @@
   <meta name="description" content="Portfolio of Prakash Chakali — Java Backend Developer, Software Engineer &amp; Full Stack Developer specializing in Java 21, Spring Boot 3.x, MySQL, Concurrency, and Scalable Backend Architectures. Hyderabad, India.">
   <meta name="keywords" content="Prakash Chakali, Java Developer, Spring Boot, Backend Engineer, Full Stack Developer, Hyderabad, MysteryStay, MiniDB, Java 21, MySQL, REST API, WebSockets">
   <meta name="author" content="Prakash Chakali">
+  <meta name="theme-color" content="#FAF8F5">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://chakaliprakash.github.io/Portfolio/">
+  <meta property="og:site_name" content="Prakash Chakali — Portfolio">
+  <meta property="og:locale" content="en_IN">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="twitter:creator" content="@Chakaliprakash">
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
@@ -20,6 +27,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111215'/><text x='16' y='21' font-size='15' font-family='sans-serif' font-weight='bold' fill='%23DE4B26' text-anchor='middle'>PC</text></svg>">
 
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Prakash Chakali","url":"https://chakaliprakash.github.io/Portfolio/","jobTitle":"Java Backend Developer","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressRegion":"Telangana","addressCountry":"IN"},"email":"mailto:prakashchakali6216@gmail.com","sameAs":["https://github.com/Chakaliprakash","https://www.linkedin.com/in/prakash-chakali-753b82292/"],"knowsAbout":["Java","Spring Boot","MySQL","REST APIs","Concurrency","Data Structures and Algorithms"]}</script>
+
   <!-- Typography: Syne (Display), Instrument Serif (Editorial Accent), Plus Jakarta Sans (Body & UI), JetBrains Mono (Technical Spec) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,9 +38,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Primary Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261120-2">
+  <link rel="stylesheet" href="css/style.css?v=20261120-3">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <!-- Reading Progress Bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
@@ -97,7 +107,7 @@
         </a>
 
         <!-- Mobile Menu Toggle Button -->
-        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Open mobile navigation menu" aria-expanded="false">
+        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Open mobile navigation menu" aria-controls="mobile-drawer" aria-expanded="false">
           <span class="burger-bar"></span>
           <span class="burger-bar"></span>
         </button>
@@ -123,7 +133,7 @@
         <span class="pill-divider">/</span>
         <span class="live-clock" id="live-ist-clock">IST --:--:--</span>
       </div>
-      <nav class="drawer-nav">
+      <nav class="drawer-nav" aria-label="Mobile navigation">
         <a href="#flagship" class="drawer-link"><span class="drawer-num">01</span><span>Flagship: MysteryStay</span></a>
         <a href="#systems" class="drawer-link"><span class="drawer-num">02</span><span>Production Projects</span></a>
         <a href="#competencies" class="drawer-link"><span class="drawer-num">03</span><span>Technical Skills &amp; DSA</span></a>
@@ -1254,13 +1264,13 @@ Type or choose a query above to execute against MiniDB engine.</div>
               <div class="form-group">
                 <label for="contact-name" class="form-label">YOUR FULL NAME <span class="required">*</span></label>
                 <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Henderson" required autocomplete="name">
-                <span class="field-error" id="name-error"></span>
+                <span class="field-error" id="name-error" aria-live="polite"></span>
               </div>
 
               <div class="form-group">
                 <label for="contact-email" class="form-label">YOUR EMAIL ADDRESS <span class="required">*</span></label>
                 <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. alex@company.com" required autocomplete="email">
-                <span class="field-error" id="email-error"></span>
+                <span class="field-error" id="email-error" aria-live="polite"></span>
               </div>
 
               <div class="form-group">
@@ -1271,7 +1281,7 @@ Type or choose a query above to execute against MiniDB engine.</div>
               <div class="form-group">
                 <label for="contact-message" class="form-label">YOUR MESSAGE <span class="required">*</span></label>
                 <textarea id="contact-message" name="message" class="form-textarea" rows="5" placeholder="Share role details, engineering collaboration ideas, or project questions..." required></textarea>
-                <span class="field-error" id="message-error"></span>
+                <span class="field-error" id="message-error" aria-live="polite"></span>
               </div>
 
               <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-block">
@@ -1353,6 +1363,6 @@ Type or choose a query above to execute against MiniDB engine.</div>
   </footer>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=20261120-2"></script>
+  <script src="js/main.js?v=20261120-3" defer></script>
 </body>
 </html>
