@@ -1,58 +1,67 @@
-# Prakash Chakali — Java Backend Developer & Software Engineer Portfolio
+# Prakash Chakali — Developer Portfolio
 
-> **Live Digital Experience**: [https://chakaliprakash.github.io/Portfolio/](https://chakaliprakash.github.io/Portfolio/)  
-> **Creative Direction**: Editorial Typography meets Deep Backend Engineering Systems.
+Live portfolio: https://chakaliprakash.github.io/Portfolio/  
+GitHub: https://github.com/Chakaliprakash
 
----
+A responsive, static portfolio focused on Java backend engineering, full-stack projects, and data-structures-and-algorithms practice.
 
-## 🏛️ Creative Direction & Visual Architecture
+## Experience
 
-An award-winning, editorial digital portfolio experience engineered for **Prakash Chakali** (Java Backend Developer, Software Engineer, Full Stack Developer):
+- Responsive layout with desktop navigation and a mobile menu.
+- Project showcases linked to their source repositories.
+- Skills, learning journey, DSA practice, about, and contact sections.
+- Live public GitHub profile statistics (repository count, followers, and stars).
+- Codeforces accepted-problem count sourced from the public submissions API.
+- Resume link served from the repository's `assets/` directory.
+- Keyboard skip link, visible focus states, and reduced-motion support.
 
-- **Editorial Typographic System**: Archival light theme (`#FAF8F5`) with deep ink charcoal (`#111215`), hairline stone dividers (`rgba(20,22,26,0.08)`), and an architectural terracotta accent (`#DE5326`) paired with **Syne**, **Instrument Serif**, **Plus Jakarta Sans**, and **JetBrains Mono**.
-- **Cinematic Flagship Presentation for MysteryStay**: Full-width deep carbon obsidian (`#0C0E12`) presentation for the flagship project, detailing the Modular Monolith architecture, OTA rate-parity protection, pessimistic row locking (`SELECT ... FOR UPDATE`), and automated 15-minute hold sweeper.
-- **Interactive Concurrency & Double-Booking Lab**: Live in-browser multi-threaded simulator demonstrating database serialization across 10 competing customer threads.
-- **Interactive Top-K DSA Benchmark Engine**: Live comparison calculator proving $O(N \log K)$ Bounded Min-Heap efficiency against $O(N \log N)$ TimSort.
-- **In-Memory MiniDB Interactive SQL Terminal**: Interactive browser sandbox emulating Prakash's hand-crafted pure Java 21 regex SQL parser with $O(1)$ Hash table primary key lookups.
-- **Technical Case Studies**: Real-Time Collaborative Kanban Board (WebSockets / STOMP + floating position indexing) and Secure E-Bidding REST API (JPA Optimistic Locking `@Version` + JWT).
-- **Verified Credentials**: Documented factual academic achievements from Sri Indu College of Engineering & Technology (B.Tech in CSE Cyber Security, CGPA 7.6/10), Codegnan IT Solutions, Google Cloud GenAI Program, NODWIN Gaming, OCI 2025 AI Foundations, Cisco Cybersecurity Essentials, and Smart Interviews DSA in Java.
+## Featured projects
 
----
+| Project | Focus | Repository |
+|---|---|---|
+| MysteryStay | Masked hotel inventory and booking workflows | [Source](https://github.com/Chakaliprakash/MysteryStay) |
+| Finix Banking | Account operations and transaction history | [Source](https://github.com/Chakaliprakash/Finix_BankingFInancialTransaction) |
+| MiniDB | Educational in-memory relational database | [Source](https://github.com/Chakaliprakash/MiniDB) |
+| LogSentry | Java log analysis and concurrent processing | [Source](https://github.com/Chakaliprakash/LogSentry) |
+| SpringAI | Java and Spring AI integration exploration | [Source](https://github.com/Chakaliprakash/SpringAI) |
+| AI Email Generator | AI-assisted email drafting application | [Source](https://github.com/Chakaliprakash/AI-Email-Generator) |
+| Secure Digital Wallet | Spring Boot wallet and transaction API | [Source](https://github.com/Chakaliprakash/Secure-Digital-Wallet--Banking-API) |
+| E-commerce | Full-stack shopping application | [Source](https://github.com/Chakaliprakash/Ecommerce) |
 
-## 📁 Repository Structure
+Project descriptions are concise summaries; open each repository for its implementation, setup instructions, and current state.
 
+## Technology
+
+- **Languages:** Java, JavaScript, SQL, HTML, CSS
+- **Backend:** Spring Boot, REST APIs, Spring Security, Spring Data JPA
+- **Data:** MySQL, PostgreSQL, H2, JDBC
+- **Frontend:** React, HTML, CSS, JavaScript
+- **Tools:** Git, GitHub, Maven, Docker, IntelliJ IDEA, Postman
+- **Problem solving:** Data structures and algorithms in Java
+
+## Run locally
+
+No frontend build step is required.
+
+```bash
+git clone https://github.com/Chakaliprakash/Portfolio.git
+cd Portfolio
+python -m http.server 5500
 ```
-Portfolio/
-├── .agents/
-│   └── skills/
-│       └── frontend-design/        # Installed Anthropic frontend design skill
-├── .github/
-│   └── workflows/
-│       └── deploy.yml              # Automated GitHub Pages CI/CD pipeline
-├── assets/
-│   └── Prakash_Chakali_Resume.pdf  # Verified official software engineer resume
-├── css/
-│   └── style.css                   # Editorial design system tokens, typography & responsive layouts
-├── js/
-│   └── main.js                     # Concurrency simulator, DSA benchmark, MiniDB shell, audio & theme
-├── index.html                      # Semantic, accessible HTML5 digital experience
-└── README.md                       # Documentation
-```
 
----
+Open http://localhost:5500 in your browser.
 
-## 🚀 Live Deployment
+The GitHub and Codeforces counters use public APIs. If either service is unavailable or rate-limited, the rest of the portfolio remains usable.
 
-The portfolio is deployed via automated GitHub Actions on every push to `main` at:  
-👉 **[https://chakaliprakash.github.io/Portfolio/](https://chakaliprakash.github.io/Portfolio/)**
+## Deployment
 
----
+The repository includes a GitHub Actions workflow that deploys the static site to GitHub Pages when changes are pushed to `main`.
 
-## 📬 Contact Information
+Live site: https://chakaliprakash.github.io/Portfolio/
 
-- **Developer**: Prakash Chakali
-- **Email**: [prakashchakali6216@gmail.com](mailto:prakashchakali6216@gmail.com)
-- **Phone**: `+91 6302714896`
-- **LinkedIn**: [linkedin.com/in/prakash-chakali-753b82292](https://www.linkedin.com/in/prakash-chakali-753b82292/)
-- **GitHub**: [@Chakaliprakash](https://github.com/Chakaliprakash)
-- **Location**: Hyderabad, Telangana, India
+## Contact
+
+- Email: prakashchakali6216@gmail.com
+- GitHub: https://github.com/Chakaliprakash
+- LinkedIn: https://www.linkedin.com/in/prakash-chakali-753b82292/
+- Location: Hyderabad, India
