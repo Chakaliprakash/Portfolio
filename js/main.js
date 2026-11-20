@@ -175,6 +175,7 @@
     if (mobileDrawer) {
       mobileDrawer.classList.add('open');
       mobileDrawer.setAttribute('aria-hidden', 'false');
+      mobileDrawer.inert = false;
       if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
       if (drawerClose) drawerClose.focus();
@@ -185,6 +186,7 @@
     if (mobileDrawer) {
       mobileDrawer.classList.remove('open');
       mobileDrawer.setAttribute('aria-hidden', 'true');
+      mobileDrawer.inert = true;
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.focus();
@@ -198,8 +200,23 @@
   drawerLinks.forEach((link) => link.addEventListener('click', closeDrawer));
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+    if (!mobileDrawer || !mobileDrawer.classList.contains('open')) return;
+    if (e.key === 'Escape') {
       closeDrawer();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = [...mobileDrawer.querySelectorAll('a[href], button:not([disabled])')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
